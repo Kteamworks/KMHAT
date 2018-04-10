@@ -1,0 +1,95 @@
+<html>
+<head>
+{php}html_header_show();{/php}
+
+<link rel="stylesheet" href="{$CSS_HEADER}" type="text/css">
+<link rel="stylesheet" href="{$WEBROOT}/interface/themes/jquery.autocomplete.css" type="text/css">
+{literal}
+<style type="text/css">
+    .text {
+        font-size: 9pt;
+    }
+</style>
+{/literal}
+    <link data-require="bootstrap-css@*" data-semver="2.3.2" rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" />
+    <script src="http://code.angularjs.org/1.2.6/angular.js"></script>
+    <script data-require="jquery@*" data-semver="2.0.1" src="http://code.jquery.com/jquery-2.0.1.min.js"></script>
+    <script data-require="bootstrap@2.3.2" data-semver="2.3.2" src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <script data-require="ui-bootstrap@0.3.0" data-semver="0.3.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.9.0.min.js"></script>
+<script language="Javascript">
+{literal}
+		function my_process () {
+			// Pass the variable
+			opener.document.prescribe.drug.value = document.lookup.drug.value;
+			// Close the window
+			window.self.close();
+		}
+{/literal}
+</script>
+{literal}
+{/literal}
+<!---Gen Look up-->
+<script type="text/javascript" src="{$WEBROOT}/library/dialog.js"></script>
+<script type="text/javascript" src="{$WEBROOT}/library/js/jquery-1.2.2.min.js"></script>
+<script type="text/javascript" src="{$WEBROOT}/library/js/jquery.bgiframe.min.js"></script>
+<script type="text/javascript" src="{$WEBROOT}/library/js/jquery.dimensions.pack.js"></script>
+<script type="text/javascript" src="{$WEBROOT}/library/js/jquery.autocomplete.pack.js"></script>
+{literal}
+<script language='JavaScript'>
+
+ // This holds all the default drug attributes.
+{/literal}
+ var drugopts = [{$DRUG_ATTRIBUTES}];
+ var drug_name  = [{$DRUG_NAMES}];
+  drug_names=drug_name.toString().split(",");
+
+ var drug_id1 = [{$DRUG_ID}];
+ drug_id=drug_id1.toString().split(",");
+{literal}
+
+ // Helper to choose an option from its value.
+ function selchoose(sel, value) {
+  var o = sel.options;
+  for (i = 0; i < o.length; ++i) {
+   o[i].selected = (o[i].value == value);
+  }
+ }
+
+ // Fill in default values when a drop-down drug is selected.
+ function drugselected(sel) {
+  var f = document.forms[0];
+  var i = f.drug_id.selectedIndex - 1;
+  if (i >= 0) {
+   var d = drugopts[i];
+   f.drug.value = d[0];
+   selchoose(f.form, d[1]);
+   f.dosage.value = d[2];
+   f.size.value = d[3];
+   selchoose(f.unit, d[4]);
+   selchoose(f.route, d[5]);
+   selchoose(f.interval, d[6]);
+   selchoose(f.substitute, d[7]);
+   f.quantity.value = d[8];
+   f.disp_quantity.value = d[8];
+   selchoose(f.refills, d[9]);
+   f.per_refill.value = d[10];
+  }
+ }
+
+
+</script>
+{/literal}
+</head>
+<body class="body_top">
+
+<tr ng-controller="Main" ng-click="showAlert(dessert)">
+	<td COLSPAN="1" class="text" ALIGN="right" VALIGN="MIDDLE" >&nbsp; {xl t='in-house'} </td>
+	<td COLSPAN="2" ALIGN="LEFT" VALIGN="MIDDLE" >
+	<input type = "text" ng-model = "yourName" placeholder = "Enter a name here">
+		<select name="drug_id" onchange="drugselected(this)" multiple ng-model="selectedValues" ng-change="search2()">
+		<option  ng-repeat="cust in customers | filter: yourName" value="<% cust.id %>"><% cust.name %></option>
+     
+		</select>
+	</td><br>
+	<td><% selectedValues %></td>
+</tr>
