@@ -5,7 +5,7 @@
 $host	= 'localhost';
 $port	= '3306';
 $login	= 'root';
-$pass	= 'admin123';
+$pass	= '';
 $dbase	= 'mhat';
 
 //Added ability to disable

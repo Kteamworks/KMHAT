@@ -407,6 +407,9 @@ if (!empty($_GET['pid']) && empty($_SESSION['pid'])) {
 elseif (!empty($_POST['pid']) && empty($_SESSION['pid'])) {
   $_SESSION['pid'] = $_POST['pid'];
 }
+if (!empty($_POST['facility_id']) && empty($_SESSION['facility_id'])) {
+  $_SESSION['facility_id'] = $_POST['facility_id'];
+}
 $pid = empty($_SESSION['pid']) ? 0 : $_SESSION['pid'];
 $userauthorized = empty($_SESSION['userauthorized']) ? 0 : $_SESSION['userauthorized'];
 $groupname = empty($_SESSION['authProvider']) ? 0 : $_SESSION['authProvider'];

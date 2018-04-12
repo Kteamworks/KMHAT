@@ -169,7 +169,24 @@ else {
 <td>
 <input class="entryfield" type="password" size="10" name="clearPass">
 </td></tr>
-
+     <tr>
+	 <td><span class="text1"><b><?php echo xlt('Facility:'); ?></span></b></td>
+	 <td>
+<span class="text1"><select class="entryfield" name='facility_id' style="width:150px;" >
+<?php
+$fres = sqlStatement("select * from facility where service_location != 0 order by name");
+if ($fres) {
+for ($iter2 = 0; $frow = sqlFetchArray($fres); $iter2++)
+                $result[$iter2] = $frow;
+foreach($result as $iter2) {
+?>
+  <option value="<?php echo $iter2['id']; ?>" <?php if ($iter['facility_id'] == $iter2['id']) echo "selected"; ?>><?php echo htmlspecialchars($iter2['name']); ?></option>
+<?php
+}
+}
+?>
+</select>
+</td></tr>
 <?php
 if ($GLOBALS['language_menu_login']) {
 if (count($result3) != 1) { ?>
