@@ -112,12 +112,36 @@ foreach ($aColumns as $colname) {
 
 // Get total number of rows in the table.
 //
-$row = sqlQuery("SELECT COUNT(id) AS count FROM patient_data ");
+$user_facility=sqlStatement("SELECT * from users_facility where table_id='".$_SESSION['authUserID']."'");
+$X=array();
+ while($row3=sqlFetchArray($user_facility))
+{
+  $X[]=$row3['facility_id'];
+	
+}
+$X = "'" . implode("', '", $X) . "'";
+$user_log=sqlStatement("SELECT * from users where id='".$_SESSION['authUserID']."'");
+$user_log1=sqlFetchArray($user_log);
+$user_log2=$user_log1['facility_log'];
+if($user_log2==1)
+{
+$row = sqlQuery("SELECT COUNT(id) AS count FROM patient_data where facility_id='".$_SESSION['facility_id']."'");
+}else
+{
+	$row = sqlQuery("SELECT COUNT(id) AS count FROM patient_data where facility_id IN ($X)");
+}
 $iTotal = $row['count'];
 
 // Get total number of rows in the table after filtering.
 //
-$row = sqlQuery("SELECT COUNT(id) AS count FROM patient_data $where");
+if($user_log2==1)
+{
+$row = sqlQuery("SELECT COUNT(id) AS count FROM patient_data $where where facility_id='".$_SESSION['facility_id']."'");
+}else
+{
+	$row = sqlQuery("SELECT COUNT(id) AS count FROM patient_data $where where facility_id IN ($X)");
+	
+}
 $iFilteredTotal = $row['count'];
 
 // Build the output data array.
@@ -128,7 +152,13 @@ $out = array(
   "iTotalDisplayRecords" => $iFilteredTotal,
   "aaData"               => array()
 );
-$query = "SELECT $sellist FROM patient_data  $where  $orderby  $limit ";
+if($user_log2==1)
+{
+$query = "SELECT $sellist FROM patient_data  $where where facility_id='".$_SESSION['facility_id']."' $orderby  $limit ";
+}else
+{
+$query = "SELECT $sellist FROM patient_data  $where where facility_id IN ($X) $orderby  $limit ";	
+}
 $res = sqlStatement($query);
 while ($row = sqlFetchArray($res)) {
   // Each <tr> will have an ID identifying the patient.

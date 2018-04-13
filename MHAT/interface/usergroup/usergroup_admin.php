@@ -109,6 +109,7 @@ if (isset($_POST["privatemode"]) && $_POST["privatemode"] =="user_admin") {
               //(CHEMED) Update facility name when changing the id
               sqlStatement("UPDATE users, facility SET users.facility = facility.name WHERE facility.id = '$tqvar' AND users.id = {$_POST["id"]}");
               //END (CHEMED)
+			  
       }
       if ($GLOBALS['restrict_user_facility'] && $_POST["schedule_facility"]) {
           sqlStatement("delete from users_facility
@@ -174,8 +175,9 @@ if (isset($_POST["privatemode"]) && $_POST["privatemode"] =="user_admin") {
       $tqvar  = $_POST["authorized"] ? 1 : 0;
       $actvar = $_POST["active"]     ? 1 : 0;
       $calvar = $_POST["calendar"]   ? 1 : 0;
+	  $facility_log = $_POST["facility_log"]   ? 1 : 0;
   
-      sqlStatement("UPDATE users SET authorized = $tqvar, active = $actvar, " .
+      sqlStatement("UPDATE users SET authorized = $tqvar, active = $actvar, facility_log = $facility_log," .
         "calendar = $calvar, see_auth = '" . $_POST['see_auth'] . "' WHERE " .
         "id = {$_POST["id"]}");
       //Display message when Emergency Login user was activated 
@@ -270,6 +272,7 @@ if (isset($_POST["mode"])) {
             "', pwd_expiration_date = '" . trim("$exp_date") .
             "'";
     
+	
     $clearAdminPass=$_POST['adminPass'];
     $clearUserPass=$_POST['stiltskin'];
     $password_err_msg="";
@@ -307,7 +310,19 @@ if (isset($_POST["mode"])) {
            }
 	}
       }
-  }
+	  if($_POST['facility_id'])
+	  {
+		  foreach($facility_id as $facility)
+		  {
+			   sqlInsert("INSERT INTO facility_user SET " .
+      "date = NOW(), " .
+	  "user = '" . $_SESSION["authUser"] . "',".
+      "name = '" . trim(formData('rumple'       )) . "', " .
+      "facility_id = '" . trim(formData('facility_id'  )) . "'");
+		  }
+	  }
+
+		  }
   else if ($_POST["mode"] == "new_group") {
     $res = sqlStatement("select distinct name, user from groups");
     for ($iter = 0; $row = sqlFetchArray($res); $iter++)
