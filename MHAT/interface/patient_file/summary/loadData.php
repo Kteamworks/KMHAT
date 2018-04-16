@@ -153,7 +153,7 @@ AND encounter = ?";
 			else if($pres['form'] == 3) { $drug_form = 'INJ'; }
 			$qtyz = str_replace(".00", "", (string)number_format ($pres['dosage'], 2, ".", ""));
 $HTML .= '<tr>
-<td class="text-left">'.$pres['drug'].'&nbsp;<sub>('. $drug_form.')</sub> '.$qtyz.' mg</td>
+<td class="text-left">'. $drug_form.'.&nbsp; '.$pres['drug'].'&nbsp; '.$qtyz.' mg</td>
 <td class="text-left">'.$pres['drug_intervals'].' ('. $pres['drug_meal_time'] .') for '.$pres['duration'].' Weeks</td>
 </tr>';
 		  }
@@ -286,9 +286,22 @@ $(".bs-example-modal-sm .modal-content:first").remove();
             <label>Dosage Type</label>
 			<select name="dosagetype" class="form-control" required>
 			
-    <option value="1" selected="">Tablet</option>
-    <option value="2">Syrup</option>
-    <option value="3">Injection</option>
+    <option value="1"';
+	if($pres['form'] == 1) {
+		$HTML .= 'selected';
+	}
+		$HTML .='
+	>Tablet</option>
+    <option value="2"';
+	if($pres['form'] == 2) {
+		$HTML .= 'selected';
+	}
+		$HTML .='>Syrup</option>
+    <option value="3"';
+	if($pres['form'] == 3) {
+		$HTML .= 'selected';
+	}
+		$HTML .='>Injection</option>
   </select>
    
         </div>
@@ -298,7 +311,11 @@ $(".bs-example-modal-sm .modal-content:first").remove();
 			<option value="">-- Choose Medicine Units --</option>';
 		  while ($drug_data = sqlFetchArray($results_dr)) { 
 		  $qtyz = str_replace(".00", "", (string)number_format ($drug_data['dosage_quantity'], 2, ".", ""));
-    $HTML .= '<option value="'. $drug_data['dosage_quantity'] .'-'. $drug_data['dosage_units'] .'" selected="">'. $qtyz .'&nbsp;'. $drug_data['dosage_units'] .'</option>';
+    $HTML .= '<option value="'. $x['dosage_quantity'] .'-'. $drug_data['dosage_units'] .'"';
+	if($pres['dosage'] == $drug_data['dosage_quantity']) {
+		$HTML .= 'selected';
+	}
+	$HTML .='>'. $qtyz .'&nbsp;'. $drug_data['dosage_units'] .'</option>';
 			 }
 			$HTML .= ' </select>
   </div>
@@ -307,31 +324,105 @@ $(".bs-example-modal-sm .modal-content:first").remove();
         <div class="form-group">
             <label>Take</label>
 			<select name="take1" ng-model="take1"  style="width:45px" ng-required="false">
-  <option value="0">0</option>
-    <option value="1"  selected="">1</option>
-    <option value="2">2</option>
+  <option value="0"';
+  $times = explode('-',$pres['drug_intervals']);
+  $time1 = $times[0];
+    $time2 = $times[1];
+	  $time3 = $times[2];
+	if($time1 == 0) {
+		$HTML .= 'selected';
+	}
+		$HTML .='
+	>0</option>
+    <option value="1"';
+	if($time1 == 1) {
+		$HTML .= 'selected';
+	}
+		$HTML .='
+	>1</option>
+    <option value="2"';
+	if($time1 == 2) {
+		$HTML .= 'selected';
+	}
+		$HTML .='
+	>2</option>
  </select>
  <select name="take2" style="width:45px" ng-model="take2"  ng-required="false">
-    <option value="0"  selected="">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
+    <option value="0"';
+	if($time2 == 0) {
+		$HTML .= 'selected';
+	}
+		$HTML .='
+	>0</option>
+    <option value="1"';
+	if($time2 == 1) {
+		$HTML .= 'selected';
+	}
+		$HTML .='
+	>1</option>
+    <option value="2"';
+	if($time2 == 2) {
+		$HTML .= 'selected';
+	}
+		$HTML .='
+	>2</option>
  </select>
  <select name="take3" style="width:45px" ng-model="take3"  ng-required="false">
-   <option value="0">0</option>
-    <option value="1" selected="">1</option>
-    <option value="2">2</option>
+   <option value="0"';
+	if($time3 == 0) {
+		$HTML .= 'selected';
+	}
+		$HTML .='
+	>0</option>
+    <option value="1"';
+	if($time3 == 1) {
+		$HTML .= 'selected';
+	}
+		$HTML .='
+	>1</option>
+    <option value="2"';
+	if($time3 == 2) {
+		$HTML .= 'selected';
+	}
+		$HTML .='
+	>2</option>
  </select> 
              <select name="name" ng-model="name"  style="width:150px" ng-required="false">
-  <option value="BF">Before Food</option>
-    <option value="AF"  selected="">After Food</option>
+  <option value="BF"';
+	if($pres['drug_meal_time'] == "BF") {
+		$HTML .= 'selected';
+	}
+		$HTML .='
+	>Before Food</option>
+    <option value="AF"';
+	if($pres['drug_meal_time'] == "AF") {
+		$HTML .= 'selected';
+	}
+		$HTML .='
+	>After Food</option>
  </select>
         </div>
 						<div class="form-group">
             <label>Duration</label>
  <select name="duration" class="form-control" >
-   <option value="1">1 Week</option>
-    <option value="2" selected="selected">2 Weeks</option>
-    <option value="3">3 Weeks</option>
+   <option value="1"';
+	if($pres['duration'] == 1) {
+		$HTML .= 'selected';
+	}
+		$HTML .='
+	>1 Week</option>
+    <option value="2"';
+	if($pres['duration'] == 2) {
+		$HTML .= 'selected';
+	}
+		$HTML .='
+	>2 Weeks</option>
+    <option value="3"';
+	if($pres['duration'] == 3) {
+		$HTML .= 'selected';
+	}
+		$HTML .='
+	>3 Weeks</option>
  </select>
 	</div>
 		<div class="form-group">
@@ -350,6 +441,7 @@ $(".bs-example-modal-sm .modal-content:first").remove();
     </div>
   </div><br>
   <script type="text/javascript">$(document).ready(function(){
+ 
  $("#merge-form'. $pres['id'].'").on("submit", function(){
     $.ajax({
     type: "POST",
