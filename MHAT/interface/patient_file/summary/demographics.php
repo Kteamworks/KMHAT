@@ -715,23 +715,13 @@ $qty_al = "SELECT * from lists where pid=? AND type='allergy'" ; $allergies = sq
 <table class="table table-responsive">
 <?php while($diagnos = sqlFetchArray($diagnosis)) { ?>
 <tr>
-<?php
-   $date_d=$diagnos['date'];
-      $date_a=$allergy['date'];
-	     $createDate_a = new DateTime($date_a);
-
-$stripa = $createDate_a->format('F j, Y');
-   $createDate_d = new DateTime($date_d);
-
-$stripd = $createDate_d->format('F j, Y');
-?>
-<td><div class="date"><?php echo $stripd; ?> </div></td>
+<td><div class="date"><?php  $date_d=$diagnos['date'];$createDate_d = new DateTime($date_d);$stripd = $createDate_d->format('F j, Y'); echo $stripd; ?> </div></td>
 <th>
 Diagnosis:</th>
 
 <td>&nbsp;<?php echo $diagnos['title']; ?>  <a id="<?php echo $diagnos['id']; ?>"  class="editscript" data-toggle="modal" data-target="#mydiagd<?php echo $diagnos['id']; ?>">&nbsp;&nbsp;<span><i class="fa fa-pencil-square-o" data-toggle="tooltip" data-placement="top" title="Edit Diagnosis" aria-hidden="true"></i></span></a></td>
 </tr>
-</table>
+
 <!-- Edit Diagnosis Modal -->
   <div class="modal fade" id="mydiagd<?php echo $diagnos['id']; ?>" role="dialog">
     <div class="modal-dialog">
@@ -819,6 +809,7 @@ Diagnosis:</th>
                     $("#merge-err-alertd<?php echo $diagnos['id']; ?>").show();
                     $("#message-merge-errd<?php echo $diagnos['id']; ?>").html(message);
 					 setInterval(function(){$("#merge-err-alertd<?php echo $diagnos['id']; ?>").hide(); },8000); 
+					 					  window.location.reload();
             }
 			 else {
             $("#merge_bodyd<?php echo $diagnos['id']; ?>").show();
@@ -829,7 +820,8 @@ Diagnosis:</th>
                     var message = " has been updated";
                     $("#merge-succ-alertd<?php echo $diagnos['id']; ?>").show();
                     $("#message-merge-succd<?php echo $diagnos['id']; ?>").html(message);
-					 setInterval(function(){$("#merge-succ-alertd<?php echo $diagnos['id']; ?>").hide(); $(".close").trigger("click"); },2000);
+					setInterval(function(){$("#merge-succ-alertd<?php echo $diagnos['id']; ?>").hide(); $(".close").trigger("click"); },2000);
+					 					  window.location.reload();
             }
 				console.log(response);
             }
@@ -837,13 +829,15 @@ Diagnosis:</th>
             return false;
     });
 	});</script>
-<?php } } else {  ?>
+<?php } ?>
+</table>
+<?php } else {  ?>
 <p> There are no Diagnosis data for this patient available yet</p>
 <?php } ?>
 <?php if(sqlNumRows($allergies)!=0) {  while($allergy = sqlFetchArray($allergies)) { ?>
 <table class="table table-responsive">
 
-<tr><td><div class="date"><?php echo $stripa; ?> </div></td><th>Allergies & Side Effects</th>
+<tr><td><div class="date"><?php $date_a=$allergy['date'];$createDate_a = new DateTime($date_a);$stripa = $createDate_a->format('F j, Y'); echo $stripa; ?> </div></td><th>Allergies & Side Effects</th>
 <td><?php echo $allergy['title']; ?></td></tr>
 <?php } ?>
 </table>
@@ -1123,7 +1117,8 @@ $pre = 1;
                     var message = "Error while saving";
                     $("#diagnosismerge-err-alert").show();
                     $("#diagnosismessage-merge-err").html(message);
-					 setInterval(function(){$("#diagnosismerge-err-alert").hide(); },8000); 
+					 setInterval(function(){$("#diagnosismerge-err-alert").hide(); },5000); 
+					   window.location.reload();
             }
 			 else {
             $("#diagnosismerge_body").show();
@@ -1134,7 +1129,8 @@ $pre = 1;
                     var message = " has been updated";
                     $("#diagnosismerge-succ-alert").show();
                     $("#diagnosismessage-merge-succ").html(message);
-					 setInterval(function(){$("#diagnosismerge-succ-alert").hide(); $(".close").trigger("click"); },2000);
+					 setInterval(function(){$("#diagnosismerge-succ-alert").hide(); $(".close").trigger("click"); },1500);
+					  window.location.reload();
             }
 				console.log(response);
             }
