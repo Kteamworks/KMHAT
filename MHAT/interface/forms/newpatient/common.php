@@ -401,7 +401,7 @@ function getRatePlan(plan)
 	<div class="form-group">
      <label><?php echo xlt('Next Appointment:'); ?></label>
 
-<a href="<?php echo $GLOBALS['webroot'] ?>/interface/main/calendar/add_edit_event.php?startampm=1&starttimeh=9&starttimem=0&userid=0&catid=0" class="iframe"><span class="input-group-addon">
+<a href="<?php echo $GLOBALS['webroot'] ?>/interface/main/calendar/add_edit_event.php?patientid=<?php echo $pid; ?>&startampm=1&starttimeh=9&starttimem=0&userid=0&catid=0" class="iframe"><span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span></a>
 					</div><br>
