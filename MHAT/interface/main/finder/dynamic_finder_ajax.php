@@ -68,12 +68,13 @@ if (isset($_GET['sSearch']) && $_GET['sSearch'] !== "") {
         "fname LIKE '$sSearch%' OR " .
         "lname LIKE '$sSearch%' OR " .
         "mname LIKE '$sSearch%' ";
-    }
+    }	
     else {
       $where .= "`" . escape_sql_column_name($colname,array('patient_data','form_encounter')) . "` LIKE '$sSearch%' ";
     }
   }
   if ($where) $where .= ")";
+  
 }
 
 // Column-specific filtering.
@@ -134,12 +135,23 @@ $iTotal = $row['count'];
 
 // Get total number of rows in the table after filtering.
 //
-if($user_log2==1)
+if($where)
 {
-$row = sqlQuery("SELECT COUNT(id) AS count FROM patient_data $where where facility_id='".$_SESSION['facility_id']."'");
+	if($user_log2==1){
+	$row = sqlQuery("SELECT COUNT(id) AS count FROM patient_data $where AND facility_id='".$_SESSION['facility_id']."'");
+	}else
+		
+		{
+			$row = sqlQuery("SELECT COUNT(id) AS count FROM patient_data $where AND facility_id IN ($X)");
+		}
+	//$sqlQuery = "SELECT $sellist FROM patient_data  $where AND facility_id='".$_SESSION['facility_id']."' $orderby  $limit ";
+}else
+	if($user_log2==1)
+{
+$row = sqlQuery("SELECT COUNT(id) AS count FROM patient_data  where facility_id='".$_SESSION['facility_id']."'");
 }else
 {
-	$row = sqlQuery("SELECT COUNT(id) AS count FROM patient_data $where where facility_id IN ($X)");
+	$row = sqlQuery("SELECT COUNT(id) AS count FROM patient_data  where facility_id IN ($X)");
 	
 }
 $iFilteredTotal = $row['count'];
@@ -152,12 +164,22 @@ $out = array(
   "iTotalDisplayRecords" => $iFilteredTotal,
   "aaData"               => array()
 );
-if($user_log2==1)
+if($where)
 {
-$query = "SELECT $sellist FROM patient_data  $where where facility_id='".$_SESSION['facility_id']."' $orderby  $limit ";
+	if($user_log2==1){
+	$query = "SELECT $sellist FROM patient_data  $where AND facility_id='".$_SESSION['facility_id']."'  $orderby  $limit ";
+	}else
+	{
+		$query = "SELECT $sellist FROM patient_data  $where AND facility_id IN ($X)  $orderby  $limit ";
+	}
+	//var_dump($query);
+	
+}else if($user_log2==1)
+{
+$query = "SELECT $sellist FROM patient_data   where facility_id='".$_SESSION['facility_id']."' $orderby  $limit ";
 }else
 {
-$query = "SELECT $sellist FROM patient_data  $where where facility_id IN ($X) $orderby  $limit ";	
+$query = "SELECT $sellist FROM patient_data   where facility_id IN ($X) $orderby  $limit ";	
 }
 $res = sqlStatement($query);
 while ($row = sqlFetchArray($res)) {

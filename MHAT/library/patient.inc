@@ -887,6 +887,7 @@ function updatePatientData($pid, $new, $create=false)
         $real[$key] = $value;
     $real['date'] = "'+NOW()+'";
 	$real['user']= '" . $_SESSION["authUser"] . "';
+	$real['facility_id']= '" . $_SESSION["facility_id"] . "';
     $real['id'] = "";
     $sql = "insert into patient_data set ";
     while(list($key, $value) = each($real))
@@ -901,12 +902,13 @@ function updatePatientData($pid, $new, $create=false)
 
   $new['DOB'] = fixDate($new['DOB']);
   $user=$_SESSION["authUser"];
-  $gres = sqlStatement("SELECT * FROM users WHERE username='$user'");
+  $facility_id=$_SESSION["facility_id"];
+  $gres = sqlStatement("SELECT * FROM facility WHERE id='$facility_id'");
   $grow = sqlFetchArray($gres);
-  $facilityid=$grow['facility_id'];
+  $facilityname=$grow['name'];
   
   if ($create) {
-    $sql = "INSERT INTO patient_data SET pid = '$pid', date = NOW(),facility_id='$facilityid',user ='" . $_SESSION["authUser"] . "'";
+    $sql = "INSERT INTO patient_data SET pid = '$pid', date = NOW(),facility_id='$facility_id',facility_name='$facilityname',user ='" . $_SESSION["authUser"] . "'";
     foreach ($new as $key => $value) {
       if ($key == 'id') continue;
       $sql .= ", `$key` = " . pdValueOrNull($key, $value);

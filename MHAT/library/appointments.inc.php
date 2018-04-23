@@ -62,13 +62,14 @@ function fetchEvents( $from_date, $to_date, $where_param = null, $orderby_param 
 	$query = "SELECT " .
   	"e.pc_eventDate, e.pc_endDate, e.pc_startTime, e.pc_endTime, e.pc_duration, e.pc_recurrtype, e.pc_recurrspec, e.pc_recurrfreq, e.pc_catid, e.pc_eid, " .
   	"e.pc_title, e.pc_hometext, e.pc_apptstatus, " .
-  	"p.fname, p.mname, p.lname, p.pid, p.pubpid, p.phone_home, p.phone_cell, " .
+  	"p.fname, p.mname, p.lname, p.pid, p.pubpid, p.phone_home, p.phone_cell, f.name facility_name" .
   	"u.fname AS ufname, u.mname AS umname, u.lname AS ulname, u.id AS uprovider_id, " .
 	"$tracker_fields" .
   	"c.pc_catname, c.pc_catid " .
   	"FROM openemr_postcalendar_events AS e " .
 	 "$tracker_joins" .
   	"LEFT OUTER JOIN patient_data AS p ON p.pid = e.pc_pid " .
+	"LEFT OUTER JOIN facility AS f ON f.id = e.pc_facility " .
   	"LEFT OUTER JOIN users AS u ON u.id = e.pc_aid " .
 	"LEFT OUTER JOIN openemr_postcalendar_categories AS c ON c.pc_catid = e.pc_catid " .
 	"WHERE $where " . 
