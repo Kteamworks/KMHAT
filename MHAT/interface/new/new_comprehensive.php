@@ -87,7 +87,11 @@ div.section {
 <style type="text/css">@import url(../../library/dynarch_calendar.css);</style>
 <link rel="stylesheet" href="<?php echo $GLOBALS['webroot'] ?>/library/js/jAlert-master/src/jAlert-v3.css" />
 <link rel="stylesheet" href="<?php echo $GLOBALS['webroot'] ?>/library/js/jquery.treeview-1.4.1/jquery.treeview.css" />
+<link href="<?php echo $GLOBALS['webroot'] ?>/library/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<link href="<?php echo $GLOBALS['webroot'] ?>/library/css/bootstrap-datetimepicker4.7.14.min.css" rel="stylesheet" />
+
 <script src="<?php echo $GLOBALS['webroot'] ?>/library/js/jquery-1.7.2.min.js"></script>
+
 <script src="<?php echo $GLOBALS['webroot'] ?>/library/js/jAlert-master/src/jAlert-v3.js"></script>
 <script src="<?php echo $GLOBALS['webroot'] ?>/library/js/jAlert-master/src/jAlert-functions.js"> //optional!!</script>
 <script type="text/javascript" src="../../library/dialog.js"></script>
@@ -273,7 +277,10 @@ function validate(f) {
       else if(f[i].name == 'form_phone_cell')
       {
        alertMsg += checkPhone(f[i].name,f[i].value);
-      }
+      }else if(f[i].name == 'form_postal_code')
+	  {
+		  alertMsg += checkpostalcode(f[i].name,f[i].value);
+	  }
     }
   }
   if(alertMsg)
@@ -373,13 +380,12 @@ while ($lrow = sqlFetchArray($lres)) {
 <script type="text/javascript">
 
 jQuery(document).ready(function(){
-	 document.getElementById("form_pubpid").disabled = true; 
-	  document.getElementById("form_age").disabled = true; 
+	document.getElementById("form_pubpid").disabled = true
 jQuery('#form_postal_code').blur(function(){ //.postcode class of zipcode text field
 var s = jQuery(this).val();
 jQuery.ajax({
 type: 'POST',
-url: "http://localhost/KMHAT_Base/mhat/interface/new/insertzip.php", //file which read zip code excel file
+url: "<?php echo $GLOBALS['webroot'] ?>/interface/new/insertzip.php", //file which read zip code excel file
 dataType: "json", //is used for return multiple values
 data: { 's' : s },
 success: function(data){
@@ -411,7 +417,7 @@ jQuery('#form_em_postal_code').blur(function(){ //.postcode class of zipcode tex
 var s = jQuery(this).val();
 jQuery.ajax({
 type: 'POST',
-url: "http://demo.medsmart.co.in/demo/interface/new/insertzip.php",//file which read zip code excel file
+url: "<?php echo $GLOBALS['webroot'] ?>/interface/new/insertzip.php",//file which read zip code excel file
 dataType: "json", //is used for return multiple values
 data: { 's' : s },
 success: function(data){
@@ -746,15 +752,17 @@ if (! $GLOBALS['simplified_demographics']) {
    <a href="javascript:popUp('../../interface/patient_file/summary/browse.php?browsenum=<?php echo $i?>')" class=text>(<?php xl('Browse','e'); ?>)</a><br />
 
    <span class=bold><?php xl('D.O.B.','e'); ?>: </span>
+        <div class='input-group date'  id='datetimepicker1' >
+          
    <input type='entry' size='11' name='i<?php echo $i?>subscriber_DOB'
     id='i<?php echo $i?>subscriber_DOB'
     value='<?php echo $result3['subscriber_DOB'] ?>'
     onkeyup='datekeyup(this,mypcc)' onblur='dateblur(this,mypcc)'
     title='yyyy-mm-dd' />
-
-   <img src='../../interface/pic/show_calendar.gif' align='absbottom' width='24' height='22'
-    id='img_i<?php echo $i; ?>dob_date' border='0' alt='[?]' style='cursor:pointer'
-    title='<?php xl('Click here to choose a date','e'); ?>'>
+		      <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
 
     <script LANGUAGE="JavaScript">
     Calendar.setup({inputField:"i<?php echo $i?>subscriber_DOB", ifFormat:"%Y-%m-%d", button:"img_i<?php echo $i; ?>dob_date"});
@@ -925,6 +933,64 @@ while ($lrow = sqlFetchArray($lres)) {
 }); // end document.ready
 
 </script>
+
+        <script type="text/javascript">
+
+document.getElementById("form_DOB").onblur = null;
+ $( "#form_DOB" ).blur(function () { // birthday is a date
+
+   var today = new Date();
+
+   var dateString = $( "#form_DOB" ).val();
+    if(dateString !== "") {
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+if(age !== null) {
+     document.getElementById('form_age').value = age;
+	 	document.getElementById('form_age').readOnly = true;
+document.getElementById('form_age').setAttribute("disabled","true");
+}
+	}
+});
+ $( "#form_age" ).blur(function () {
+	 if($( "#form_age" ).is('[readonly]')) {
+		 $(this).blur();
+	 } else {
+    var today = new Date();
+    var currentYear = today.getFullYear() ;
+    var age = parseInt(document.getElementById('form_age').value, 10);
+
+	    if(document.getElementById('form_age').value !== '') {
+    var birthdayPast = 0;
+    document.getElementById('form_DOB').value =  (currentYear - age - (birthdayPast?0:1) )+"-1-1";  
+	document.getElementById('form_DOB').readOnly = true;
+		}
+	 }
+});
+$('#form_phone_cell').blur(function() {
+    if (!$.isNumeric(this.value))
+        this.value = 0;
+	var email=$("#form_phone_cell").val();// value in field email
+$.ajax({
+    type:'post',
+        url:'checkNumber.php',// put your real file name 
+        data:{email: email},
+        success:function(msg){
+			if(msg == 1) {
+				      alert("Number already exists");   
+        }
+ }
+
+});
+});
+		
+        </script>
+
+		              
 
 </html>
 

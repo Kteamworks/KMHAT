@@ -95,7 +95,11 @@ $res = sqlQuery("select * from users where username='".$_SESSION{"authUser"}."'"
 
 	<tr><td valign="baseline"><B>
 		<a class="css_button_small" style="padding: 4px 10px 0px 11px;" onclick="history.go(-1);">Back </a>
-		</td></tr></table>
+		</td>
+		<td style="vertical-align:text-bottom;">
+		<a href='' class="css_button_small" style="margin:0px;vertical-align:top;" id='new0' onClick=" return top.window.parent.left_nav.loadFrame2('new0','RTop','main/calendar/index.php?module=PostCalendar&viewtype=day&func=view&framewidth=1400')">
+		<span><?php echo htmlspecialchars( xl('CALENDAR'), ENT_QUOTES); ?></span></a>
+    </td></tr></table>
 <?php } else { ?>
 &nbsp;
 <?php } ?>
