@@ -144,7 +144,7 @@ function todaysEncounterCheck($patient_id, $enc_date = '', $reason = '', $fac_id
 		}
 	}
 	$dos = $enc_date ? $enc_date : $today;
-	$visit_reason = $reason ? $reason : 'Please indicate visit reason';
+	$visit_reason = $reason ? $reason : ' ';
   $tmprow = sqlQuery("SELECT username, facility, facility_id FROM users WHERE id = ?", array($_SESSION["authUserID"]) );
   $username = $tmprow['username'];
   $facility = $tmprow['facility'];
@@ -189,7 +189,7 @@ function todaysEncounterIf($patient_id) {
 function todaysEncounter($patient_id, $reason='') {
   global $today, $userauthorized;
 
-  if (empty($reason)) $reason = xl('Please indicate visit reason');
+  if (empty($reason)) $reason = xl(' ');
 
   // Was going to use the existing encounter for today if there is one, but
   // decided it's right to always create a new one.  Leaving the code here
