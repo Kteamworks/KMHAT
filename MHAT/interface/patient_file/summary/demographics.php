@@ -2130,7 +2130,7 @@ expand_collapse_widget($widgetTitle, $widgetLabel, $widgetButtonLabel,
         echo "<div style='margin-left:10px' class='text'><image src='../../pic/ajax-loader.gif'/></div><br/>";
         echo "</div>";
         } // end if crw
-
+echo "-->";
 	// appointments expand collapse widget
         $widgetTitle = xl("Appointments");
         $widgetLabel = "appointments";
@@ -2170,7 +2170,7 @@ expand_collapse_widget($widgetTitle, $widgetLabel, $widgetButtonLabel,
             echo "</div>";
       }
     }
-            
+        echo "<!--";    
 	// Show PAST appointments.
 	// added by Terry Hill to allow reverse sorting of the appointments
  	$direction = "ASC";

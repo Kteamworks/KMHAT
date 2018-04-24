@@ -12,15 +12,8 @@ $pmob = $result_patient['phone_cell'];
 $plocality = $result_patient['locality'];
 $pcity = $result_patient['city'];
 $pstate = $result_patient['state'];
-if($result_patient['sex'] == 1) { 
-$pgender = 'Male';
-}
-elseif($result_patient['sex'] == 2) { 
-$pgender = 'Female';
-}
-else {
-	$pgender = 'Unknown';
-}
+$pgender = $result_patient['sex'];
+
 $pstreet = $result_patient['street'];
 if(isset($_POST['pageId']) && !empty($_POST['pageId'])){
    $id=$_POST['pageId'];
@@ -65,11 +58,7 @@ if($row['sensitivity'] != null) {
   </tr>';
  } 
  if($row['reason'] != null) { 
-	$reason = '<tr>
-									  
-    <th>Reason</th>
-	<td>'. $row['reason'] .'</td>
-		</tr>';
+	$reason = $row['reason'];
 		 }
 
   $qry2 = "SELECT *
@@ -232,7 +221,10 @@ $(document).ready(function(){
 $(".bs-example-modal-sm .modal-content:first").remove();
 </script>
 ';
- $HTML.='<table class="table table-striped">'.$sensitivity.'<tr>
+ $HTML.='<table class="table table-striped">'.$sensitivity;
+   if(sqlNumRows($prescription) != null) {
+	   $HTML.='
+ <tr>
 
   <th>Prescription</th><td>';
  		  foreach($prescription as $pres) {
@@ -311,7 +303,7 @@ $(".bs-example-modal-sm .modal-content:first").remove();
 			<option value="">-- Choose Medicine Units --</option>';
 		  while ($drug_data = sqlFetchArray($results_dr)) { 
 		  $qtyz = str_replace(".00", "", (string)number_format ($drug_data['dosage_quantity'], 2, ".", ""));
-    $HTML .= '<option value="'. $x['dosage_quantity'] .'-'. $drug_data['dosage_units'] .'"';
+    $HTML .= '<option value="'. $drug_data['dosage_quantity'] .'-'. $drug_data['dosage_units'] .'"';
 	if($pres['dosage'] == $drug_data['dosage_quantity']) {
 		$HTML .= 'selected';
 	}
@@ -462,6 +454,7 @@ $(".bs-example-modal-sm .modal-content:first").remove();
                     $("#merge-err-alert'. $pres['id'].'").show();
                     $("#message-merge-err'. $pres['id'].'").html(message);
 					 setInterval(function(){$("#merge-err-alert'. $pres['id'].'").hide(); },8000); 
+					 window.location.reload();
             }
 			 else {
             $("#merge_body").show();
@@ -473,6 +466,7 @@ $(".bs-example-modal-sm .modal-content:first").remove();
                     $("#merge-succ-alert'. $pres['id'].'").show();
                     $("#message-merge-succ'. $pres['id'].'").html(message);
 					 setInterval(function(){$("#merge-succ-alert'. $pres['id'].'").hide(); $(".close").trigger("click"); },2000);
+					 window.location.reload();
             }
 				console.log(response);
             }
@@ -481,12 +475,19 @@ $(".bs-example-modal-sm .modal-content:first").remove();
     });
 	});</script>'; } 
  $HTML .='</td>
- </tr><tr>
+ </tr>';
+   }
+  if($app_date != null) {
+	  
+  $HTML .='<tr>
     <th>Next Appointment</th>
 	<td>'. $app_date .'</td>
-		</tr></table></h3>';
+		</tr>';
+		  }
+		$HTML.='</table></h3>';
 		$HTML.='<div class="timeline-body">
-                                            <p style="word-wrap: break-word;">'. $reason .'</p>
+		<b style="font-size: 16px;">Notes:</b>
+                                            <p style="word-wrap: break-word;font-family: sans-serif;font-size: 20px;">'. $reason .'</p>
                                     </div>
                                                                                                                                                                     <div class="box-body col-md-9">
                                                     <br>
