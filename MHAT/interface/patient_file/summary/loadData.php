@@ -114,7 +114,7 @@ AND encounter = ?";
 <div class="table-title">
 <div class="row auo-mar">
 <p style="display:inline"><b>Serial No:</b>&nbsp;</th><td>'.$pserial.'</p>
-<p class="pull-right"><b>Date:</b>&nbsp;</th><td>'.$strip.'</p>
+<p class="pull-right"><b>Visit Date:</b>&nbsp;</th><td>'.$strip.'</p>
 </div>
 <div style="text-align: center">
 <p class="doc-head">Dr T Manoj Kumar, MBBS;DPM;MD; FRCPsych</p>
@@ -124,7 +124,7 @@ AND encounter = ?";
 <p>Patient Full Name: '.$pfname.'&nbsp'.$plname.'&nbsp'.$pmname.'</p><p class="pull-right">Gender: '.$pgender.'</p>
 </div>
 <div class="row pdata">
-<p>Patient’s Address and Phone number: '.$pstreet.', '.$pmob.'</p><p class="pull-right">Age: '.$page.' Years</p>
+<p>Patient’s Address and Phone number: '.$pstreet.', '.$pmob.'</p><p class="pull-right">Age: '.$page.'</p>
 </div>
 </div>
 <table class="table-fill">
