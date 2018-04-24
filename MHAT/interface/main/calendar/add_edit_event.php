@@ -1583,7 +1583,7 @@ if ($repeatexdate != "") {
 // jQuery stuff to make the page a little easier to use
 
 $(document).ready(function(){
-	$(".tabNav li:eq(1)").hide();
+	//$(".tabNav li:eq(1)").hide();
     $("#form_save").click(function() { validate("save"); });
     $("#form_duplicate").click(function() { validate("duplicate"); });
     $("#find_available").click(function() { find_available(''); });
