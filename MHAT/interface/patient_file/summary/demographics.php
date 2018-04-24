@@ -1214,6 +1214,7 @@ $pre = 1;
                     $("#alergymerge-err-alert").show();
                     $("#alergymessage-merge-err").html(message);
 					 setInterval(function(){$("#alergymerge-err-alert").hide(); },8000); 
+					 window.location.reload();
             }
 			 else {
             $("#alergymerge_body").show();
@@ -1225,6 +1226,7 @@ $pre = 1;
                     $("#alergymerge-succ-alert").show();
                     $("#alergymessage-merge-succ").html(message);
 					 setInterval(function(){$("#alergymerge-succ-alert").hide(); $(".close").trigger("click"); },2000);
+					 window.location.reload();
             }
 				console.log(response);
             }
