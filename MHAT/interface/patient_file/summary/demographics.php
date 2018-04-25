@@ -697,7 +697,7 @@ if ($GLOBALS['patient_id_category_name']) {
 
 ?>
 
-<li><a href="<?php echo $GLOBALS['webroot'] ?>/interface/forms/newpatient/new.php?autoloaded=1&calenc=" class="visit_ico element iframe pull-right" Title="New Visit"></a></li>
+<li><a href="<?php echo $GLOBALS['webroot'] ?>/interface/forms/newpatient/new.php?autoloaded=1&calenc=" class="visit_ico element" Title="New Visit"></a></li>
 <li><a class='allergyBtn element' href="#" title="Allergies & Side Effects"  data-toggle="modal" data-target="#myAlg"></a></li>
 <li><a class='diagnosisBtn element' href="#" title="Diagnosis"  data-toggle="modal" data-target="#mydiag"></a></li>
 <!-- <li id="iclick"><a href="#"  class="css_button pull-right" ><span><i class="fa fa-plus"></i> <?php echo xlt('Add Prescription'); ?></a></span></li> -->&nbsp;&nbsp;
@@ -994,7 +994,8 @@ LEFT JOIN lists
 ON form_encounter.pid = lists.pid
 AND form_encounter.encounter =lists.encounter 
 WHERE form_encounter.pid =?
-Order By form_encounter.encounter DESC";
+AND form_encounter.date is not null
+Order By form_encounter.date DESC";
           $pdata = sqlStatement($qry, array($pid));
 $count=sqlNumRows($pdata);
 if($count > 0){

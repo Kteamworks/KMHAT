@@ -106,7 +106,7 @@ $(document).ready(function(){
 <div>
     <div>
 	<table><tr><td>
-        <b><?php xl('Facilities','e'); ?></b>&nbsp;</td><td>
+        <b><?php xl('Centers','e'); ?></b>&nbsp;</td><td>
 		 <a href="facilities_add.php" class="iframe addfac_modal css_button"><span><?php xl('Add','e');?></span></a>
 		 </td></tr>
 	</table>

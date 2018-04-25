@@ -370,16 +370,16 @@ function getRatePlan(plan)
 
 	
 	<div class="form-group">
-     <label><?php echo xlt('Clinician:'); ?></label>
+     <label><?php echo xlt('Provider:'); ?></label>
      
-  
 <?php
   $ures = sqlStatement("SELECT id, username, fname, lname FROM users WHERE " .
   "authorized != 0 AND active = 1 ORDER BY lname, fname");
    echo "<select name='form_provider' class='form-control' style='width:100%' />";
     while ($urow = sqlFetchArray($ures)) {
       echo "    <option value='" . attr($urow['id']) . "'";
-      if ($urow['id'] == $defaultProvider) echo " selected";
+	 
+      if ($urow['id'] == $_SESSION['authUserID']) echo " selected";
       echo ">" . "Dr. ".text($urow['fname']);
       if ($urow['lname']) echo " " . text($urow['lname']);
       echo "</option>\n";

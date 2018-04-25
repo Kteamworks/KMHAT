@@ -159,7 +159,7 @@ function displayAlert()
 <body class="body_top">
 <table>
 <tr><td>
-    <span class="title"><?php xl('Add Facility','e'); ?></span>&nbsp;&nbsp;&nbsp;</td>
+    <span class="title"><?php xl('Add Center','e'); ?></span>&nbsp;&nbsp;&nbsp;</td>
     <td colspan=5 align=center style="padding-left:2px;">
         <a onclick="submitform();" class="css_button large_button" name='form_save' id='form_save' href='#'>
             <span class='css_button_span large_button_span'><?php xl('Save','e');?></span>
@@ -198,7 +198,7 @@ function displayAlert()
         <tr>
         <td height="22"><span class="text"><?php xl('Country','e'); ?>: </span></td><td><input type=entry size=20 name=country_code value=""></td>
         <td>&nbsp;</td>
-        <td><span class="text"><?php ($GLOBALS['simplified_demographics'] ? xl('Facility Code','e') : xl('Facility NPI','e')); ?>:
+        <td><span class="text"><?php ($GLOBALS['simplified_demographics'] ? xl('Center Code','e') : xl('Center NPI','e')); ?>:
         </span></td><td><input type=entry size=20 name=facility_npi value=""></td>
         </tr>
 		<tr>
