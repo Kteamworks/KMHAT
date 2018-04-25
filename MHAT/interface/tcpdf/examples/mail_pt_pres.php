@@ -68,15 +68,9 @@ $plocality = $result_patient['locality'];
 $pcity = $result_patient['city'];
 $pstate = $result_patient['state'];
 $facility = $result_patient['facility_id'];
-if($result_patient['sex'] == 1) { 
-$pgender = 'Male';
-}
-elseif($result_patient['sex'] == 2) { 
-$pgender = 'Female';
-}
-else {
-	$pgender = 'Unknown';
-}
+
+$pgender = $result_patient['sex'];
+
 $pstreet = $result_patient['street'];
 
   while ($row = sqlFetchArray($prescription)) { 
@@ -217,7 +211,7 @@ Signature:         ________________________________<br><br>Dispensed By: &nbsp;&
     $pdf->Output($_SERVER['DOCUMENT_ROOT'] . '/'.$pfname.'_prescription.pdf', 'F');
 		    $mail = new MyMailer();
 	
-    $email_subject=xl('Test Prescriptions');
+    $email_subject=xl('MHAT Patient Prescriptions');
     $email_sender="kavaiidev01@gmail.com";
     $mail->AddReplyTo($email_sender, $email_sender);
     $mail->SetFrom($email_sender, $email_sender);
@@ -253,6 +247,6 @@ while($row1 = sqlFetchArray($res_em)) {
 }
 	
  else {
-	 
+	 echo "2";
  }
 	?>

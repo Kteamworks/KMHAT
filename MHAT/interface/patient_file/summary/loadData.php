@@ -195,6 +195,13 @@ $(document).ready(function(){
         });
 
             }
+			else if (response == "2") {
+            BootstrapDialog.show({
+            title: "Failed!",
+            message: "Prescription not found for the visit."
+        });
+
+            }
 			else {
 				 BootstrapDialog.show({
             title: "Failed!",
