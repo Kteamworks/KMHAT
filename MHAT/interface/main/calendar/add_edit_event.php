@@ -1218,7 +1218,7 @@ $classpati='';
  </tr>
 
     <tr>
-      <td nowrap><b><?php echo xlt('Facility'); ?>:</b></td>
+      <td nowrap><b><?php echo xlt('Center'); ?>:</b></td>
       <td>
       <select name="facility" id="facility" >
       <?php
@@ -1231,6 +1231,7 @@ $classpati='';
       $qsql = sqlStatement("SELECT * FROM facility WHERE service_location != 0");
       ***************************************************************/
       $facils = getUserFacilities($_SESSION['authId']);
+	  
       $qsql = sqlStatement("SELECT id, name FROM facility WHERE service_location != 0");
       /**************************************************************/
       while ($facrow = sqlFetchArray($qsql)) {
@@ -1243,7 +1244,7 @@ $classpati='';
           echo "<option value='" . attr($facrow['id']) . "' $selected>" . text($facrow['name']) . "</option>";
         }
         else{
-		$selected = ( $facrow['id'] == $e2f ) ? 'selected="selected"' : '' ;
+		$selected = ( $facrow['id'] == $_SESSION['facility_id'] ) ? 'selected="selected"' : '' ;
          echo "<option value='" . attr($facrow['id']) . "' $selected>" . text($facrow['name']) . "</option>";
         }
         /************************************************************/
@@ -1256,7 +1257,7 @@ $classpati='';
       </td>
       </select>
     </tr>
-	<tr>
+	<tr style="visibility:hidden;position: absolute;">
 		<td nowrap>
 		<b><?php echo xlt('Billing Facility'); ?>:</b>
 		</td>
@@ -1287,7 +1288,7 @@ $classpati='';
  <?php
  }
  ?>
- <tr>
+ <tr style="visibility:hidden;position: absolute">
   <td nowrap>
    <b><?php echo xlt('Provider'); ?>:</b>
   </td>
