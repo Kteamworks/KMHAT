@@ -28,7 +28,8 @@ LEFT JOIN lists
 ON form_encounter.pid = lists.pid
 AND form_encounter.encounter =lists.encounter 
 WHERE form_encounter.pid =?
-Order By form_encounter.encounter DESC
+AND form_encounter.date is not null
+Order By form_encounter.date DESC
 limit  $pageLimit,".PAGE_PER_NO;
           $res = sqlStatement($qry, array($pid));
 //$query="select post,postlink from pagination order by id desc
