@@ -1492,7 +1492,7 @@ if ($repeatexdate != "") {
  <?php
  if($_GET['prov']!=true){
  ?>
- <tr>
+ <tr style="visibility:hidden;position: absolute;">
   <td nowrap>
    <b><?php echo xlt('Room Number'); ?>:</b>
   </td>
