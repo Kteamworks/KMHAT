@@ -145,7 +145,7 @@ $message .= '<tr>
   font-weight:300;
   font-size:18px;
   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
-  border-right: 1px solid #C1C3D1;">'.$pres['drug'].'&nbsp;<sub>('. $drug_form.')</sub> '.$qtyz.' mg</td>
+  border-right: 1px solid #C1C3D1;">'.$drug_form.'.&nbsp; '.$pres['drug'].'&nbsp; '.$qtyz.' mg</td>
 <td class="text-left" style="  background:#FFFFFF;
   padding:20px;
   text-align:left;
