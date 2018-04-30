@@ -170,7 +170,7 @@ else {
 <input class="entryfield" type="password" size="10" name="clearPass">
 </td></tr>
      <tr>
-	 <td><span class="text1"><b><?php echo xlt('Facility:'); ?></span></b></td>
+	 <td><span class="text1"><b><?php echo xlt('Center:'); ?></span></b></td>
 	 <td>
 <span class="text1"><select class="entryfield" name='facility_id' style="width:150px;" >
 <?php
