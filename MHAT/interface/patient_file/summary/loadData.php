@@ -279,7 +279,7 @@ $(".bs-example-modal-sm .modal-content:first").remove();
                         </div>
                     </div><!-- /.merge-alert -->
                     <div id="merge-body-form'. $pres['id'].'">
-                
+         <input type="hidden" name="pres_id" value="'. $pres['id'].'">       
 		<input type="hidden" name="drug_id" value="'. $pres['drug_id'].'">
 		<input type="hidden" name="encounter" value="'. $row['encounter'].'">
            <div class="form-group">
