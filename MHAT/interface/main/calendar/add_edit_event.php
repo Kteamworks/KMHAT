@@ -1288,11 +1288,11 @@ $classpati='';
  <?php
  }
  ?>
- <tr style="visibility:hidden;position: absolute">
+ <tr>
   <td nowrap>
-   <b><?php echo xlt('Provider'); ?>:</b>
+   <b><?php echo xlt('Set Upto'); ?>:</b>
   </td>
-  <td nowrap>
+  <td style="visibility:hidden;position: absolute" nowrap>
 
 <?php
 
@@ -1492,7 +1492,7 @@ if ($repeatexdate != "") {
  <?php
  if($_GET['prov']!=true){
  ?>
- <tr>
+ <tr style="visibility:hidden;position: absolute;">
   <td nowrap>
    <b><?php echo xlt('Room Number'); ?>:</b>
   </td>
