@@ -237,9 +237,9 @@ $(".bs-example-modal-sm .modal-content:first").remove();
   <th>Prescription</th><td>';
  		  foreach($prescription as $pres) {
 		  $results_dr = sqlStatement($qry_dr, array($pres['drug_id']));
-
+$qtyz = str_replace(".00", "", (string)number_format ($pres['dosage'], 2, ".", ""));
 		  $HTML .= 
-     $pres['drug'] .' : '. $pres['drug_intervals'] .'&nbsp('. $pres['drug_meal_time'] .') for '. $pres['duration'].' weeks<a id="'. $pres['id'].'"  class="editscript" data-toggle="modal" data-target="#myModal'. $pres['id'].'">&nbsp;&nbsp;<span><i class="fa fa-pencil-square-o" data-toggle="tooltip" data-placement="top" title="Edit Prescription" aria-hidden="true"></i></span></a>
+     $pres['drug'] .' &nbsp;'.$qtyz.'mg &nbsp;:&nbsp;'. $pres['drug_intervals'] .'&nbsp('. $pres['drug_meal_time'] .') for '. $pres['duration'].' weeks<a id="'. $pres['id'].'"  class="editscript" data-toggle="modal" data-target="#myModal'. $pres['id'].'">&nbsp;&nbsp;<span><i class="fa fa-pencil-square-o" data-toggle="tooltip" data-placement="top" title="Edit Prescription" aria-hidden="true"></i></span></a>
      <!-- Modal -->
 
 <!-- Modal -->
