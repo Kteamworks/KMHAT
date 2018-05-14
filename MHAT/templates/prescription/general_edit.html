@@ -346,7 +346,8 @@ var ModalInstanceCtrl = function ($scope,$http, $modalInstance, userForm) {
 	  'take3' : this.form.userForm.take3.$modelValue,
 	  'duration' : this.form.userForm.duration.$modelValue,
 	  'note' : this.form.userForm.note.$modelValue,
-	  'take' : this.form.userForm.email.$modelValue
+	  'take' : this.form.userForm.email.$modelValue,
+	  	  	  'time_frame' : this.form.userForm.time_frame.$modelValue,
     };
 	var req = {
  method: 'POST',
@@ -358,7 +359,12 @@ var ModalInstanceCtrl = function ($scope,$http, $modalInstance, userForm) {
 }
             $http(req).success(function(data){
                     console.log(data);
+					if(data == '1') {
 					BootstrapDialog.alert('The Drug has been saved as prescription!');
+					}
+					else {
+					BootstrapDialog.alert('Oops! something went wrong please try again.');
+					}
                     }).error(function(error){
                     console.log(error);
                });

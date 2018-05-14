@@ -66,8 +66,8 @@ $results = sqlStatement($qry, array($drug_id));
 				<div class="form-group">
             <label>Duration</label>
 			<div class="row">
-			<div class="col-md-4"><input type="text" name="duration" class="form-control" placeholder="In Numbers" ng-model="duration"  ng-required="false"></div>
-<div class="col-md-4"><select name="time_frame" class="form-control" ng-model="time_frame"  ng-required="false" placeholder="Select time span" >
+			<div class="col-md-4"><input type="text" name="duration" placeholder="In Numbers" ng-model="duration"  ng-required="false"></div>
+<div class="col-md-4"><select name="time_frame" ng-model="time_frame"  ng-required="false" placeholder="Select time span" >
 
    <option value="1">Days</option>
     <option value="2" selected="selected">Weeks</option>
