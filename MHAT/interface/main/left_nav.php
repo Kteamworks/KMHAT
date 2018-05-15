@@ -1280,8 +1280,8 @@ if ($GLOBALS['athletic_team']) {
   <?php if (!$GLOBALS['disable_calendar'] && !$GLOBALS['ippf_specific']) genTreeLink('RTop','cal',xl('Calendar')); ?>
   <?php if (!$GLOBALS['disable_pat_trkr'] && !$GLOBALS['disable_calendar']) genTreeLink('RTop','pfb',xl('Flow Board')); ?>
   <?php genTreeLink('RBot','msg',xl('Messages')); ?> 
-  <?php genTreeLink('RTop','ddb',xl('Dashboard')); ?>
-   <?php genTreeLink('RTop','ana',xl('OPs Dashboard')); ?>
+  <?php //genTreeLink('RTop','ddb',xl('Dashboard')); ?>
+   <?php //genTreeLink('RTop','ana',xl('OPs Dashboard')); ?>
   
   
   
@@ -1298,15 +1298,15 @@ if ($GLOBALS['athletic_team']) {
   <li><a class="collapsed" id="patimg" ><span><?php xl('Patient','e') ?></span></a>
     <ul>
       <?php genMiscLink('RTop','fin','0',xl('Patients'),'main/finder/dynamic_finder.php'); ?>
-	  <?php genMiscLink('RTop','fin','0',xl('Doctor Specific'),'main/finder/p_dynamic_finder.php'); ?>
 	  <!--
+	  <?php genMiscLink('RTop','fin','0',xl('Doctor Specific'),'main/finder/p_dynamic_finder.php'); ?>
 	  <?php genMiscLink('RTop','fin','0',xl('IP Specific'),'main/finder/p_dynamic_finder_ip.php'); ?>
 	  <?php genMiscLink('RTop','fin','0',xl('Lab Specific'),'main/finder/p_dynamic_finder_lab.php'); ?>
 	   <?php genMiscLink('RTop','fin','0',xl('Lab Review'),'main/finder/p_dynamic_finder_lab_report_review.php'); ?>
 	   <?php genMiscLink('RTop','fin','0',xl('Lab Report'),'main/finder/p_dynamic_finder_lab_report.php'); ?>-->
       <?php genTreeLink('RTop','new',($GLOBALS['full_new_patient_form'] ? xl('New/Search') : xl('New'))); ?>
       <?php genTreeLink('RTop','dem',xl('Summary')); ?>
-	  <?php genTreeLink('RTop','op',xl('OPD Card')); ?>
+	  <?php //genTreeLink('RTop','op',xl('OPD Card')); ?>
       <li class="open"><a class="expanded_lv2"><span><?php xl('Visits','e') ?></span></a>
         <ul>
           <?php if ($GLOBALS['ippf_specific'] && !$GLOBALS['disable_calendar']) genTreeLink('RTop','cal',xl('Calendar')); ?>
@@ -1622,8 +1622,8 @@ if (!empty($reg)) {
 		   <?php genMiscLink('RTop','rep','0',xl('Bed Occupancy'), 'reports/bed_managment_report.php'); ?>
         </ul>
       </li>
-<?php if (acl_check('acct', 'rep_a')) { ?>
-      <li><a class="collapsed_lv2"><span><?php xl('Financial','e') ?></span></a>
+  <?php if (acl_check('acct', 'rep_a')) { ?>
+  <!--  <li><a class="collapsed_lv2"><span><?php xl('Financial','e') ?></span></a>
         <ul>
           <?php genMiscLink('RTop','rep','0',xl('Sales'),'reports/sales_by_item.php'); ?>
 		  <?php genMiscLink('RTop','rep','0',xl('Sales By Category'),'reports/sales_by_category.php'); ?>
@@ -1634,11 +1634,11 @@ if (!empty($reg)) {
           <?php genMiscLink('RTop','rep','0',xl('Pmt Method'), 'reports/receipts_by_method_report.php'); ?>
 		  <?php genMiscLink('RTop','rep','0',xl('OP Docwise'), 'reports/op_cons_doc_wise.php'); ?>
           <?php genMiscLink('RTop','rep','0',xl('Collections'), 'reports/collections_report.php'); ?>
-	 	  <!--<?php genMiscLink('RTop','rep','0',xl('Collections Report'), 'reports/collections_report _new.php'); ?> -->
+	 	  <?php genMiscLink('RTop','rep','0',xl('Collections Report'), 'reports/collections_report _new.php'); ?>
           <?php genMiscLink('RTop','rep','0',xl('Financial Summary by Service Code'),'reports/svc_code_financial_report.php'); ?>
         </ul>
-      </li>
-<?php } ?>
+      </li>-->
+<?php } ?> 
 <?php if ($GLOBALS['inhouse_pharmacy']) { ?>
       <li><a class="collapsed_lv2"><span><?php xl('Inventory','e') ?></span></a>
         <ul>
@@ -1648,18 +1648,19 @@ if (!empty($reg)) {
         </ul>
       </li>
 <?php } ?>
-      <li><a class="collapsed_lv2"><span><?php xl('Procedures','e') ?></span></a>
+     <!-- <li><a class="collapsed_lv2"><span><?php xl('Procedures','e') ?></span></a>
         <ul>
           <?php genPopLink(xl('Pending Res'),'../orders/pending_orders.php'); ?>
           <?php if (!empty($GLOBALS['code_types']['IPPF'])) genPopLink(xl('Pending F/U'),'../orders/pending_followup.php'); ?>
           <?php genPopLink(xl('Statistics'),'../orders/procedure_stats.php'); ?>
         </ul>
-      </li>
+      </li>-->
+	  <!--
 	  <li><a class="collapsed_lv2" ><span><?php xl('Analytics','e') ?></span></a>
         <ul>
           <?php genMiscLink('RTop','rep','0',xl('Analytics'),'reports/analytics.php'); ?>
         </ul>
-      </li>
+      </li>-->
 <?php if (! $GLOBALS['simplified_demographics']) { ?>
       <li><a class="collapsed_lv2"><span><?php xl('Insurance','e') ?></span></a>
         <ul>
@@ -1714,13 +1715,13 @@ if (!empty($reg)) {
       <?php // genTreeLink('RTop','rep','Other'); ?>
     </ul>
   </li>
-  <li><a class="collapsed" id="analyticsimg" ><span><?php xl('Analytics','e') ?></span></a>
+  <!--<li><a class="collapsed" id="analyticsimg" ><span><?php xl('Analytics','e') ?></span></a>
  
         <ul>
           <?php genMiscLink('RTop','rep','0',xl('Advanced Analytics'),'reports/analytics.php'); ?>
         </ul>
       
-  </li>
+  </li>-->
   <li><a class="collapsed" id="misimg" ><span><?php xl('Miscellaneous','e') ?></span></a>
     <ul>
       <?php genTreeLink('RTop','ped',xl('Patient Education')); ?> 
