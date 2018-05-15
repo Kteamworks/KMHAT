@@ -314,7 +314,8 @@ if ($_POST['form_refresh'] || $_POST['form_orderby']) {
 	}
 	
 	//$appointments=
-	//$appointments = fetchAppointments( $from_date, $to_date, $patient, $provider, $facility, $form_apptstatus, $with_out_provider, $with_out_facility,$form_apptcat );
+	
+	$appointments = fetchAppointments( $from_date, $to_date, $patient, $provider, $facility, $form_apptstatus, $with_out_provider, $with_out_facility,$form_apptcat );
 	
 	if ( $show_available_times ) {
 		$availableSlots = getAvailableSlots( $from_date, $to_date, $provider, $facility );
