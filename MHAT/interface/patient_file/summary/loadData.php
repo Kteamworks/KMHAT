@@ -144,7 +144,19 @@ AND encounter = ?";
 			$qtyz = str_replace(".00", "", (string)number_format ($pres['dosage'], 2, ".", ""));
 $HTML .= '<tr>
 <td class="text-left">'. $drug_form.'.&nbsp; '.$pres['drug'].'&nbsp; '.$qtyz.' mg</td>
-<td class="text-left">'.$pres['drug_intervals'].' ('. $pres['drug_meal_time'] .') for '.$pres['duration'].' Weeks</td>
+<td class="text-left">'.$pres['drug_intervals'].' ('. $pres['drug_meal_time'] .') for '.$pres['duration'].'&nbsp;';
+	 if($pres['time_frame']==1) {
+		 $frame = "Day(s)";
+	 } else if($pres['time_frame']==2) {
+		 $frame = "Week(s)";
+	 } else if($pres['time_frame']==3) {
+		 $frame = "Month(s)";
+	 } else if($pres['time_frame']==4) {
+		 $frame = "Year(s)";
+	 } else {
+		 $frame = "Week(s)";
+	 }
+	 $HTML.=$frame.'</td>
 </tr>';
 		  }
 		  
@@ -237,9 +249,20 @@ $(".bs-example-modal-sm .modal-content:first").remove();
   <th>Prescription</th><td>';
  		  foreach($prescription as $pres) {
 		  $results_dr = sqlStatement($qry_dr, array($pres['drug_id']));
-
-		  $HTML .= 
-     $pres['drug'] .' : '. $pres['drug_intervals'] .'&nbsp('. $pres['drug_meal_time'] .') for '. $pres['duration'].' weeks<a id="'. $pres['id'].'"  class="editscript" data-toggle="modal" data-target="#myModal'. $pres['id'].'">&nbsp;&nbsp;<span><i class="fa fa-pencil-square-o" data-toggle="tooltip" data-placement="top" title="Edit Prescription" aria-hidden="true"></i></span></a>
+$qtyz = str_replace(".00", "", (string)number_format ($pres['dosage'], 2, ".", ""));
+		  $HTML .= $pres['drug'] .' &nbsp;'.$qtyz.'mg &nbsp;:&nbsp;'. $pres['drug_intervals'] .'&nbsp('. $pres['drug_meal_time'] .') for '. $pres['duration'].'&nbsp;';
+	 if($pres['time_frame']==1) {
+		 $frame = "Day(s)";
+	 } else if($pres['time_frame']==2) {
+		 $frame = "Week(s)";
+	 } else if($pres['time_frame']==3) {
+		 $frame = "Month(s)";
+	 } else if($pres['time_frame']==4) {
+		 $frame = "Year(s)";
+	 } else {
+		 $frame = "Week(s)";
+	 }
+	 $HTML.=$frame.'<a id="'. $pres['id'].'"  class="editscript" data-toggle="modal" data-target="#myModal'. $pres['id'].'">&nbsp;&nbsp;<span><i class="fa fa-pencil-square-o" data-toggle="tooltip" data-placement="top" title="Edit Prescription" aria-hidden="true"></i></span></a>
      <!-- Modal -->
 
 <!-- Modal -->
@@ -404,26 +427,34 @@ $(".bs-example-modal-sm .modal-content:first").remove();
         </div>
 						<div class="form-group">
             <label>Duration</label>
- <select name="duration" class="form-control" >
+			<div class="row"><div class="col-md-4">
+			<input type="number" name="duration" value="'.$pres['duration'].'"></div><div class="col-md-4">
+ <select name="time_frame">
    <option value="1"';
-	if($pres['duration'] == 1) {
+	if($pres['time_frame'] == 1) {
 		$HTML .= 'selected';
 	}
 		$HTML .='
-	>1 Week</option>
+	> Day(s)</option>
     <option value="2"';
-	if($pres['duration'] == 2) {
+	if($pres['time_frame'] == 2) {
 		$HTML .= 'selected';
 	}
 		$HTML .='
-	>2 Weeks</option>
+	>Week(s)</option>
     <option value="3"';
-	if($pres['duration'] == 3) {
+	if($pres['time_frame'] == 3) {
 		$HTML .= 'selected';
 	}
 		$HTML .='
-	>3 Weeks</option>
- </select>
+	>Month(s)</option>
+	    <option value="4"';
+	if($pres['time_frame'] == 4) {
+		$HTML .= 'selected';
+	}
+		$HTML .='
+	>Year(s)</option>
+ </select></div></div>
 	</div>
 		<div class="form-group">
             <label>Notes</label>
