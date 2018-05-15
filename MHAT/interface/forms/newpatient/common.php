@@ -26,17 +26,11 @@ $days = array("01","02","03","04","05","06","07","08","09","10","11","12","13","
 $thisyear = date("Y");
 $years = array($thisyear-1, $thisyear, $thisyear+1, $thisyear+2);
 
-/*if ($viewmode) {
+if ($viewmode) {
   $id = (isset($_REQUEST['id'])) ? $_REQUEST['id'] : '';
   $result = sqlQuery("SELECT * FROM form_encounter WHERE id = ?", array($id));
   $encounter = $result['encounter'];
-  if ($result['sensitivity'] && !acl_check('sensitivities', $result['sensitivity'])) {
-    echo "<body>\n<html>\n";
-    echo "<p>" . xlt('You are not authorized to see this visit.') . "</p>\n";
-    echo "</body>\n</html>\n";
-    exit();
-  }
-}*/
+}
 
 // Sort comparison for sensitivities by their order attribute.
 function sensitivity_compare($a, $b) {
