@@ -144,7 +144,26 @@ AND encounter = ?";
 			$qtyz = str_replace(".00", "", (string)number_format ($pres['dosage'], 2, ".", ""));
 $HTML .= '<tr>
 <td class="text-left">'. $drug_form.'.&nbsp; '.$pres['drug'].'&nbsp; '.$qtyz.' mg</td>
-<td class="text-left">'.$pres['drug_intervals'].' ('. $pres['drug_meal_time'] .') for '.$pres['duration'].'&nbsp;';
+<td class="text-left">';
+  $times = explode('-',$pres['drug_intervals']);
+  $time1 = $times[0];
+    $time2 = $times[1];
+	  $time3 = $times[2];
+	if($time1 == 0.5) {
+		$f1= '<span>&#189;</span>';
+	} else {
+		$f1 = $time1;
+	}
+	if($time2 == 0.5) {
+		$f2= '<span>&#189;</span>';
+	} else {
+		$f2 = $time2;
+	}	if($time3 == 0.5) {
+		$f3= '<span>&#189;</span>';
+	} else {
+		$f3 = $time3;
+	}
+$HTML .= $f1.'-'.$f2.'-'.$f3.' ('. $pres['drug_meal_time'] .') for '.$pres['duration'].'&nbsp;';
 	 if($pres['time_frame']==1) {
 		 $frame = "Day(s)";
 	 } else if($pres['time_frame']==2) {
@@ -250,7 +269,26 @@ $(".bs-example-modal-sm .modal-content:first").remove();
  		  foreach($prescription as $pres) {
 		  $results_dr = sqlStatement($qry_dr, array($pres['drug_id']));
 $qtyz = str_replace(".00", "", (string)number_format ($pres['dosage'], 2, ".", ""));
-		  $HTML .= $pres['drug'] .' &nbsp;'.$qtyz.'mg &nbsp;:&nbsp;'. $pres['drug_intervals'] .'&nbsp('. $pres['drug_meal_time'] .') for '. $pres['duration'].'&nbsp;';
+		  $HTML .= $pres['drug'] .' &nbsp;'.$qtyz.'mg &nbsp;:&nbsp;';
+  $times = explode('-',$pres['drug_intervals']);
+  $time1 = $times[0];
+    $time2 = $times[1];
+	  $time3 = $times[2];
+	if($time1 == 0.5) {
+		$f1= '<span>&#189;</span>';
+	} else {
+		$f1 = $time1;
+	}
+	if($time2 == 0.5) {
+		$f2= '<span>&#189;</span>';
+	} else {
+		$f2 = $time2;
+	}	if($time3 == 0.5) {
+		$f3= '<span>&#189;</span>';
+	} else {
+		$f3 = $time3;
+	}
+$HTML .= $f1.'-'.$f2.'-'.$f3.'&nbsp('. $pres['drug_meal_time'] .') for '. $pres['duration'].'&nbsp;';
 	 if($pres['time_frame']==1) {
 		 $frame = "Day(s)";
 	 } else if($pres['time_frame']==2) {
@@ -357,6 +395,12 @@ $qtyz = str_replace(".00", "", (string)number_format ($pres['dosage'], 2, ".", "
 	}
 		$HTML .='
 	>0</option>
+	    <option value="0.5"';
+	if($time1 == 0.5) {
+		$HTML .= 'selected';
+	}
+		$HTML .='
+	><span>&#189;</span></option>
     <option value="1"';
 	if($time1 == 1) {
 		$HTML .= 'selected';
@@ -377,6 +421,12 @@ $qtyz = str_replace(".00", "", (string)number_format ($pres['dosage'], 2, ".", "
 	}
 		$HTML .='
 	>0</option>
+	<option value="0.5"';
+	if($time2 == 0.5) {
+		$HTML .= 'selected';
+	}
+		$HTML .='
+	><span>&#189;</span></option>
     <option value="1"';
 	if($time2 == 1) {
 		$HTML .= 'selected';
@@ -397,7 +447,14 @@ $qtyz = str_replace(".00", "", (string)number_format ($pres['dosage'], 2, ".", "
 	}
 		$HTML .='
 	>0</option>
+		<option value="0.5"';
+	if($time3 == 0.5) {
+		$HTML .= 'selected';
+	}
+		$HTML .='
+	><span>&#189;</span></option>
     <option value="1"';
+	
 	if($time3 == 1) {
 		$HTML .= 'selected';
 	}

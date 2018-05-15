@@ -43,16 +43,19 @@ $results = sqlStatement($qry, array($drug_id));
             <label>Take</label>
 			<select name="take1" ng-model="take1"  style="width:45px" ng-required="false">
   <option value="0">0</option>
+  <option value="0.5"><span>&#189;</span></option>
     <option value="1" selected="selected">1</option>
     <option value="2">2</option>
  </select>
  <select name="take2" style="width:45px" ng-model="take2"  ng-required="false">
     <option value="0" selected="selected">0</option>
+	<option value="0.5"><span>&#189;</span></option>
     <option value="1">1</option>
     <option value="2">2</option>
  </select>
  <select name="take3" style="width:45px" ng-model="take3"  ng-required="false">
    <option value="0">0</option>
+   <option value="0.5"><span>&#189;</span></option>
     <option value="1" selected="selected">1</option>
     <option value="2">2</option>
  </select> 
@@ -66,8 +69,8 @@ $results = sqlStatement($qry, array($drug_id));
 				<div class="form-group">
             <label>Duration</label>
 			<div class="row">
-			<div class="col-md-4"><input type="text" name="duration" placeholder="In Numbers" ng-model="duration"  ng-required="false"></div>
-<div class="col-md-4"><select name="time_frame" ng-model="time_frame"  ng-required="false" placeholder="Select time span" >
+			<div class="col-md-4" style="display:inline"><input type="text" name="duration" placeholder="In Numbers" ng-model="duration"  ng-required="false"></div>
+<div class="col-md-4" style="display:inline"><select name="time_frame" ng-model="time_frame"  ng-required="false" placeholder="Select time span" >
 
    <option value="1">Days</option>
     <option value="2" selected="selected">Weeks</option>
