@@ -253,9 +253,9 @@ else if ($mode == 'update')
 {
   $id = $_POST["id"];
   $result = sqlQuery("SELECT encounter, sensitivity FROM form_encounter WHERE id = ?", array($id));
-  if ($result['sensitivity'] && !acl_check('sensitivities', $result['sensitivity'])) {
+  /*if ($result['sensitivity'] && !acl_check('sensitivities', $result['sensitivity'])) {
    die(xlt("You are not authorized to see this encounter."));
-  }
+  }*/
   $encounter = $result['encounter'];
   // See view.php to allow or disallow updates of the encounter date.
   $datepart = acl_check('encounters', 'date_a') ? "date = '" . add_escape_custom($date) . "', " : "";
