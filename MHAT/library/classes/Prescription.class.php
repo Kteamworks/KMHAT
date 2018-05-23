@@ -149,6 +149,7 @@ class Prescription extends ORDataObject {
     var $drug_intervals;
 	 var $duration;
 	 var $drug_meal_time;
+	  var $time_frame;
     var $drug_id;
     var $active;
 
@@ -236,6 +237,7 @@ class Prescription extends ORDataObject {
 			."Drug Intervals: " . $this->drug_intervals. "\n"
 			."Duration: " . $this->duration. "\n"
 			."Drug Meal Time: " . $this->drug_meal_time. "\n"
+			."Time Frame: " . $this->time_frame. "\n"
         	."Qty: " . $this->quantity. "\n"
         	."Size: " . $this->size. "\n"
         	."Unit: " . $this->unit_array[$this->unit] . "\n"
@@ -294,7 +296,12 @@ class Prescription extends ORDataObject {
     function get_drug_intervals() {
         return $this->drug_intervals;
     }
-	
+function set_time_frame($time_frame) {
+   	$this->time_frame = $time_frame;
+   }
+    function get_time_frame() {
+       return $this->time_frame;
+   }	
 function set_duration($duration) {
     	$this->duration = $duration;
     }
