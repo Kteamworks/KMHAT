@@ -181,7 +181,7 @@ function getRatePlan(plan)
 <div id="overDiv" style="position:absolute; visibility:hidden; z-index:1000;"></div>
 <div class="container">
 <form method='post' action="<?php echo $rootdir ?>/forms/newpatient/save.php" name='new_encounter'
- <?php if ($GLOBALS['concurrent_layout']) echo "target='Main'"; ?>>
+ <?php if (!$GLOBALS['concurrent_layout']) echo "target='Main'"; ?>>
 
 <div style = 'float:left'>
 <?php if ($viewmode) { ?>
