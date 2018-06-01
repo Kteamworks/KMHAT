@@ -46,12 +46,12 @@ $strip = $createDate->format('F j, Y');
    $encount = $row['encounter'];
    $app_date=$row['next_date'];
    $root = $GLOBALS['webroot'];
-if($row['sensitivity'] != null) { 
+/*if($row['sensitivity'] != null) { 
   $sensitivity = '<tr>
   <th>Status</th>
     <td>'. $row['sensitivity'] .'</td>
 	</tr>';
-}
+}*/
  if($row['title'] != null) { 
 	$title = '<tr>
 	<th>Diagnosis</th>

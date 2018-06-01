@@ -543,17 +543,17 @@ class C_Prescription extends Controller {
 		}
 		if($p->get_time_frame()==1)
 		{
-			$time_frame="Days";
+			$time_frame="Day(s)";
 	}else if($p->get_time_frame()==2)
 		{
-			$time_frame="Weeks";
+			$time_frame="Week(s)";
 		}else  if($p->get_time_frame()==3)
 		{
-		$time_frame="Months";
+		$time_frame="Month(s)";
 		}
 		else  if($p->get_time_frame()==4)
 		{
-		$time_frame="Years";
+		$time_frame="Year(s)";
 		}
 		$body = '<b>' . $form . '. ' . $p->get_drug() . ' ' . $p->get_dosage() . ' ' . $p->get_unit_display().' '.$p->get_drug_intervals().' '.'('.$p->get_drug_meal_time().')'.'for'.' '.$p->get_duration().' '.$time_frame;
 		/*if ($p->get_form()) $body .= ' [' . $p->form_array[$p->get_form()] . "]";*/
