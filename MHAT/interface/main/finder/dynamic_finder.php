@@ -73,7 +73,7 @@ $(document).ready(function() {
   // http://datatables.net/release-datatables/extras/ColReorder/server_side.html
   "aoColumns": [ <?php echo $coljson; ?> ],
   "aLengthMenu": [ 10, 25, 50, 100 ],
-  "iDisplayLength": <?php echo empty($GLOBALS['gbl_pt_list_page_size']) ? '25' : '25'; ?>,
+  "iDisplayLength": <?php echo empty($GLOBALS['gbl_pt_list_page_size']) ? '100' : '100'; ?>,
   // language strings are included so we can translate them
   "oLanguage": {
    "sSearch"      : "<?php echo xla('Search all columns'); ?>:",
@@ -170,7 +170,7 @@ function openNewTopWindow(pid) {
 <script type="text/javascript">
  $(document).ready(function() {
 function explode(){
-$("#pt_table tbody tr").each(function(i){
+$("#pt_table tbody  tr").each(function(i){
 	var con = i+1;
     $(this).prepend("<td style='text-align:center;'>" + con + "</td>")
 });
@@ -178,7 +178,9 @@ $("#pt_table thead tr:nth-child(1)").each(function(i){
         $(this).prepend("<th width='50'>S.No.</th>")
 });
 }
+
 setTimeout(explode, 2000);
+
 
     });
 </script>
