@@ -201,7 +201,7 @@ function getRatePlan(plan)
  if ($sensitivities && count($sensitivities)) {
   usort($sensitivities, "sensitivity_compare");
 ?>
-	<div class="form-group">
+	<div class="form-group" style="display:none">
      <label><?php echo xlt('Visit Category:'); ?></label>
 
       <select name='pc_catid' class='form-control' id='pc_catid'>
@@ -213,13 +213,19 @@ function getRatePlan(plan)
   $catid = $crow['pc_catid'];
   if ($catid < 9 && $catid != 5) continue;
   echo "       <option value='" . attr($catid) . "'";
+  if($result['pc_catid']=='')
+  {
+	  if($crow['pc_catid'] == 12) echo "selected";
+  }else
+  {
   if ($viewmode && $crow['pc_catid'] == $result['pc_catid']) echo " selected";
+  }
   echo ">" . text(xl_appt_category($crow['pc_catname'])) . "</option>\n";
  }
 ?>
       </select>
      </div>
-<div class="form-group">
+<div class="form-group" style="display:none">
      <label><?php echo xlt('Status:'); ?></label>
      
       <select name='form_sensitivity' class='form-control'>
@@ -367,14 +373,14 @@ function getRatePlan(plan)
      <label><?php echo xlt('Provider:'); ?></label>
      
 <?php
-  $ures = sqlStatement("SELECT id, username, fname, lname FROM users WHERE " .
+  $ures = sqlStatement("SELECT id, title,username, fname, lname FROM users WHERE " .
   "authorized != 0 AND active = 1 ORDER BY lname, fname");
    echo "<select name='form_provider' class='form-control' style='width:100%' />";
     while ($urow = sqlFetchArray($ures)) {
       echo "    <option value='" . attr($urow['id']) . "'";
 	 
       if ($urow['id'] == $_SESSION['authUserID']) echo " selected";
-      echo ">" . "Dr. ".text($urow['fname']);
+      echo ">" . text($urow['title']).text($urow['fname']);
       if ($urow['lname']) echo " " . text($urow['lname']);
       echo "</option>\n";
     }

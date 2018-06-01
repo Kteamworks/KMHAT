@@ -35,7 +35,7 @@ $ndate             = (isset($_POST['next_date']))            ? $_POST['next_date
 $onset_date       = (isset($_POST['form_onset_date']))      ? $_POST['form_onset_date'] : '';
 $sensitivity      = (isset($_POST['form_sensitivity']))     ? $_POST['form_sensitivity'] : '';
 $pc_catid         = (isset($_POST['pc_catid']))             ? $_POST['pc_catid'] : '';
-$facility_id      = (isset($_POST['facility_id']))          ? $_POST['facility_id'] : '';
+//$facility_id      = (isset($_POST['facility_id']))          ? $_POST['facility_id'] : '';
 $billing_facility = (isset($_POST['billing_facility']))     ? $_POST['billing_facility'] : '';
 $reason           = (isset($_POST['reason']))               ? $_POST['reason'] : '';
 $mode             = (isset($_POST['mode']))                 ? $_POST['mode'] : '';
@@ -72,7 +72,7 @@ function QuotedOrNull($fld) {
 
 
 
-
+$facility_id=$_SESSION["facility_id"];
 $facilityresult = sqlQuery("select name FROM facility WHERE id = ?", array($facility_id));
 $facility = $facilityresult['name'];
 
