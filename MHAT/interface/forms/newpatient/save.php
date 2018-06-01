@@ -77,7 +77,7 @@ $facilityresult = sqlQuery("select name FROM facility WHERE id = ?", array($faci
 $facility = $facilityresult['name'];
 
 
-if ($GLOBALS['concurrent_layout'])
+if (!$GLOBALS['concurrent_layout'])
   $normalurl = "patient_file/encounter/encounter_top.php";
 else
   $normalurl = "$rootdir/patient_file/encounter/patient_encounter.php";
