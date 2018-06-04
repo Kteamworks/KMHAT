@@ -607,13 +607,7 @@ $HTML .= $f1.'-'.$f2.'-'.$f3.'&nbsp('. $pres['drug_meal_time'] .') for '. $pres[
  $HTML .='</td>
  </tr>';
    }
-  if($app_date != null) {
-	  
-  $HTML .='<tr>
-    <th>Next Appointment</th>
-	<td>'. $app_date .'</td>
-		</tr>';
-		  }
+
 		$HTML.='</table></h3>';
 		$HTML.='<div class="timeline-body">
 		<b style="font-size: 16px;">Notes:</b>
