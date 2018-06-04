@@ -225,7 +225,7 @@ $urlparms = "docid=$docid&orderid=$orderid";
   </td>
  </tr>
  <tr>
-  <td class='text'>
+  <td class='text' style="display:none">
     <br/>
 
    <b><?php echo htmlspecialchars( xl('Type'), ENT_NOQUOTES); ?>:</b>

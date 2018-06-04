@@ -846,7 +846,7 @@ Diagnosis:</th>
 <?php } ?>
 <?php $qry2 = "SELECT pnotes.body
 FROM pnotes
-WHERE pid = ?";
+WHERE pid = ? and deleted=0";
           $pnotes = sqlStatement($qry2, array($pid));
 		  if(sqlNumRows($pnotes)!=0) {
 		  while ($pnote = sqlFetchArray($pnotes)) {
