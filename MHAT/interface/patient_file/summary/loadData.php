@@ -295,8 +295,6 @@ $HTML .= $f1.'-'.$f2.'-'.$f3.'&nbsp('. $pres['drug_meal_time'] .') for '. $pres[
 		 $frame = "Week(s)";
 	 } else if($pres['time_frame']==3) {
 		 $frame = "Month(s)";
-	 } else if($pres['time_frame']==4) {
-		 $frame = "Year(s)";
 	 } else {
 		 $frame = "Week(s)";
 	 }
@@ -413,6 +411,18 @@ $HTML .= $f1.'-'.$f2.'-'.$f3.'&nbsp('. $pres['drug_meal_time'] .') for '. $pres[
 	}
 		$HTML .='
 	>2</option>
+	<option value="3"';
+	if($time1 == 3) {
+		$HTML .= 'selected';
+	}
+		$HTML .='
+	>3</option>
+	<option value="4"';
+	if($time1 == 4) {
+		$HTML .= 'selected';
+	}
+		$HTML .='
+	>4</option>
  </select>
  <select name="take2" style="width:45px" ng-model="take2"  ng-required="false">
     <option value="0"';
@@ -439,6 +449,18 @@ $HTML .= $f1.'-'.$f2.'-'.$f3.'&nbsp('. $pres['drug_meal_time'] .') for '. $pres[
 	}
 		$HTML .='
 	>2</option>
+	 <option value="3"';
+	if($time2 == 3) {
+		$HTML .= 'selected';
+	}
+		$HTML .='
+	>3</option>
+	 <option value="4"';
+	if($time2 == 4) {
+		$HTML .= 'selected';
+	}
+		$HTML .='
+	>4</option>
  </select>
  <select name="take3" style="width:45px" ng-model="take3"  ng-required="false">
    <option value="0"';
@@ -466,6 +488,18 @@ $HTML .= $f1.'-'.$f2.'-'.$f3.'&nbsp('. $pres['drug_meal_time'] .') for '. $pres[
 	}
 		$HTML .='
 	>2</option>
+	<option value="3"';
+	if($time3 == 3) {
+		$HTML .= 'selected';
+	}
+		$HTML .='
+	>3</option>
+	<option value="4"';
+	if($time3 == 4) {
+		$HTML .= 'selected';
+	}
+		$HTML .='
+	>4</option>
  </select> 
              <select name="name" ng-model="name"  style="width:150px" ng-required="false">
   <option value="BF"';

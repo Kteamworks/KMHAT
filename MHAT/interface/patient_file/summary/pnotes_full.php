@@ -360,7 +360,7 @@ if ($result != "") {
   echo "  <th style='width:100px';>&nbsp;</th>\n";
   echo "  <th>" . xlt('Active') . "&nbsp;</th>\n";
   echo "  <th>" . (($docid || $orderid) ? xlt('Linked') : '') . "</th>\n";
-  echo "  <th>" . xlt('Type') . "</th>\n";
+ // echo "  <th>" . xlt('Type') . "</th>\n";
   echo "  <th>" . xlt('Content') . "</th>\n";
   echo " </tr>\n";
 
