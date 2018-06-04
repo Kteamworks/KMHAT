@@ -540,6 +540,13 @@ $(document).ready(function(){
 	'frameHeight' : 300,
 	'frameWidth' : 350
   });
+    $(".iframe2").fancybox( {
+  'left':10,
+	'overlayOpacity' : 0.0,
+	'showCloseButton' : true,
+	'frameHeight' : 400,
+	'frameWidth' : 650
+  });
 // special size for patient portal
   $(".small_modal").fancybox( {
 	'overlayOpacity' : 0.0,
@@ -697,7 +704,7 @@ if ($GLOBALS['patient_id_category_name']) {
 
 ?>
 
-<li><a href="<?php echo $GLOBALS['webroot'] ?>/interface/forms/newpatient/new.php?autoloaded=1&calenc=" class="visit_ico element" Title="New Visit"></a></li>
+<li><a href="<?php echo $GLOBALS['webroot'] ?>/interface/forms/newpatient/new.php?autoloaded=1&calenc=" class="visit_ico element iframe2" Title="New Visit"></a></li>
 <li><a class='allergyBtn element' href="#" title="Allergies & Side Effects"  data-toggle="modal" data-target="#myAlg"></a></li>
 <li><a class='diagnosisBtn element' href="#" title="Diagnosis"  data-toggle="modal" data-target="#mydiag"></a></li>
 <!-- <li id="iclick"><a href="#"  class="css_button pull-right" ><span><i class="fa fa-plus"></i> <?php echo xlt('Add Prescription'); ?></a></span></li> -->&nbsp;&nbsp;
