@@ -62,7 +62,7 @@ function fetchEvents( $from_date, $to_date, $where_param = null, $orderby_param 
 	$query = "SELECT " .
   	"e.pc_eventDate, e.pc_endDate, e.pc_startTime, e.pc_endTime, e.pc_duration, e.pc_recurrtype, e.pc_recurrspec, e.pc_recurrfreq, e.pc_catid, e.pc_eid, " .
   	"e.pc_title, e.pc_hometext, e.pc_apptstatus, " .
-  	"p.fname, p.mname, p.lname, p.pid, p.pubpid, p.phone_home, p.phone_cell, f.name facility_name," .
+  	"p.fname, p.mname, p.lname, p.pid, p.pubpid, p.phone_home, p.phone_cell, f.name facility_name,p.genericname1," .
   	"u.fname AS ufname, u.mname AS umname, u.lname AS ulname, u.id AS uprovider_id, " .
 	"$tracker_fields" .
   	"c.pc_catname, c.pc_catid " .
@@ -123,9 +123,9 @@ function fetchAppointments( $from_date, $to_date, $patient_id = null, $provider_
 
 	$facility_filter = '';
 	if ( $facility_id ) {
+		 
 		$event_facility_filter = " AND e.pc_facility = '$facility_id'";
-		$provider_facility_filter = " AND u.facility_id = '$facility_id'";
-		$facility_filter = $event_facility_filter . $provider_facility_filter;
+		$facility_filter = $event_facility_filter;
 	}
 	
 	$where .= $facility_filter;

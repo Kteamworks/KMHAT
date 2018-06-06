@@ -135,7 +135,7 @@ $form_orderby = getComparisonOrder( $_REQUEST['form_orderby'] ) ?  $_REQUEST['fo
 
 		<table class='text'>
 			<tr>
-				<td class='label'><?php xl('Facility','e'); ?>:</td>
+				<td class='label'><?php xl('Center','e'); ?>:</td>
 				<td><?php dropdown_facility(strip_escape_custom($facility), 'form_facility'); ?>
 				</td>
 				<td class='label'><?php xl('Provider','e'); ?>:</td>
@@ -229,8 +229,8 @@ $form_orderby = getComparisonOrder( $_REQUEST['form_orderby'] ) ?  $_REQUEST['fo
                                 <?php if ($_POST['form_refresh'] || $_POST['form_orderby'] ) { ?>
 				<a href='#' class='css_button' onclick='window.print()'> 
                                     <span> <?php xl('Print','e'); ?> </span> </a> 
-                                <a href='#' class='css_button' onclick='window.open("../patient_file/printed_fee_sheet.php?fill=2","_blank")'> 
-                                    <span> <?php xl('Superbills','e'); ?> </span> </a> 
+                              <!--  <a href='#' class='css_button' onclick='window.open("../patient_file/printed_fee_sheet.php?fill=2","_blank")'> 
+                                    <span> <?php xl('Superbills','e'); ?> </span> </a> -->
                                 <?php } ?></div>
 				</td>
 			</tr>
@@ -248,6 +248,9 @@ if ($_POST['form_refresh'] || $_POST['form_orderby']) {
 <table>
 
 	<thead>
+	<th><a href="nojs.php" onclick="return dosort('facility')"
+	<?php if ($form_orderby == "facility") echo " style=\"color:#00cc00\"" ?>><?php  xl('Center','e'); ?>
+		</a></th>
 		<th><a href="nojs.php" onclick="return dosort('doctor')"
 	<?php if ($form_orderby == "doctor") echo " style=\"color:#00cc00\"" ?>><?php  xl('Provider','e'); ?>
 		</a></th>
@@ -265,12 +268,12 @@ if ($_POST['form_refresh'] || $_POST['form_orderby']) {
 		</th>
 
 		<th><a href="nojs.php" onclick="return dosort('pubpid')"
-	<?php if ($form_orderby == "pubpid") echo " style=\"color:#00cc00\"" ?>><?php  xl('ID','e'); ?></a>
+	<?php if ($form_orderby == "pubpid") echo " style=\"color:#00cc00\"" ?>><?php  xl('MHATID','e'); ?></a>
 		</th>
 
-         	<th><?php xl('Home','e'); //Sorting by phone# not really useful ?></th>
+         
 
-                <th><?php xl('Cell','e'); //Sorting by phone# not really useful ?></th>
+                <th><?php xl('Mobile No','e'); //Sorting by phone# not really useful ?></th>
                 
 		<th><a href="nojs.php" onclick="return dosort('type')"
 	<?php if ($form_orderby == "type") echo " style=\"color:#00cc00\"" ?>><?php  xl('Type','e'); ?></a>
@@ -280,16 +283,13 @@ if ($_POST['form_refresh'] || $_POST['form_orderby']) {
 			<?php if ($form_orderby == "status") echo " style=\"color:#00cc00\"" ?>><?php  xl('Status','e'); ?></a>
 		</th>
 
-		<th><a href="nojs.php" onclick="return dosort('comment')"
-	<?php if ($form_orderby == "comment") echo " style=\"color:#00cc00\"" ?>><?php  xl('Comment','e'); ?></a>
-		</th>
-
 	</thead>
 	<tbody>
 		<!-- added for better print-ability -->
 	<?php
 	
 	$lastdocname = "";
+	$lastfacilityname = "";
 	//Appointment Status Checking
         $form_apptstatus = $_POST['form_apptstatus'];
         $form_apptcat=null;
@@ -330,13 +330,15 @@ if ($_POST['form_refresh'] || $_POST['form_orderby']) {
                 array_push($pid_list,$appointment['pid']);
 		$patient_id = $appointment['pid'];
 		$docname  = $appointment['ufname'] . ' ' . $appointment['ulname'] . ' ' . $appointment['umname'];
-                
+        $facilityname = $appointment['facility_name'];      
         $errmsg  = "";
 		$pc_apptstatus = $appointment['pc_apptstatus'];
 
 		?>
 
 	<tr bgcolor='<?php echo $bgcolor ?>'>
+	<td class="detail">&nbsp;<?php echo  ($facilityname == $lastfacilityname) ? "" : $facilityname ?>
+		</td>
 		<td class="detail">&nbsp;<?php echo ($docname == $lastdocname) ? "" : $docname ?>
 		</td>
 
@@ -349,11 +351,9 @@ if ($_POST['form_refresh'] || $_POST['form_orderby']) {
 		<td class="detail">&nbsp;<?php echo $appointment['fname'] . " " . $appointment['lname'] ?>
 		</td>
 
-		<td class="detail">&nbsp;<?php echo $appointment['pubpid'] ?></td>
+		<td class="detail">&nbsp;<?php echo $appointment['genericname1'] ?></td>
 
-        <td class="detail">&nbsp;<?php echo $appointment['phone_home'] ?></td>
-
-        <td class="detail">&nbsp;<?php echo $appointment['phone_cell'] ?></td>
+         <td class="detail">&nbsp;<?php echo $appointment['phone_cell'] ?></td>
 
 		<td class="detail">&nbsp;<?php echo xl_appt_category($appointment['pc_catname']) ?></td>
 		
@@ -374,6 +374,7 @@ if ($_POST['form_refresh'] || $_POST['form_orderby']) {
 
 	<?php
 	$lastdocname = $docname;
+	$lastfacilityname = $facilityname;
 	}
 	// assign the session key with the $pid_list array - note array might be empty -- handle on the printed_fee_sheet.php page.
         $_SESSION['pidList'] = $pid_list;
