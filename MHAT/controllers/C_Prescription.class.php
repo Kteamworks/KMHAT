@@ -39,7 +39,50 @@ class C_Prescription extends Controller {
 			$drug_attributes = '';
 
 			// $res = sqlStatement("SELECT * FROM drugs ORDER BY selector");
+            $qry2 = "SELECT * from prescriptions join (
+SELECT distinct form_encounter.encounter FROM `prescriptions` left join form_encounter on prescriptions.encounter=form_encounter.encounter
+and  patient_id = ? 
+ORDER by patient_id, encounter desc limit 1,1)a on prescriptions.encounter=a.encounter";
+$encounter = $_SESSION["encounter"];
+$pid = $_SESSION["pid"];
+          $prescription = sqlStatement($qry2, array($pid));
+          
+		   
+		   			while ( $pres=sqlFetchArray($prescription)) {
+						$prev_drug .= $pres['drug'] .'  <br>';
+						$drug_meal_time .= $pres['drug_meal_time'] .' <br>';
+						$interval .= $pres['drug_intervals'] .'  <br>';
+						$duration .= $pres['duration'] .' <br>';
+if($pres['time_frame'] == 0) {
+$time_frame .= 'N/A <br>';
+} elseif($pres['time_frame'] == 1) {
+	$time_frame .= 'Day(s) <br>';
+}
+elseif($pres['time_frame'] == 2) {
+	$time_frame .= 'Weeks(s) <br>';
+}
+elseif($pres['time_frame'] == 3) {
+	$time_frame .= 'Month(s) <br>';
+}
+elseif($pres['time_frame'] == 4) {
+	$time_frame .= 'Year(s) <br>';
+}
+					}
+					
+		   $this->assign("PREVIOUS_DRUG", $prev_drug);
 
+$lab_coder = sqlStatement("select * from procedure_order a, procedure_order_code b, form_encounter c
+where a.procedure_order_id=b.procedure_order_id and  a.encounter_id=c.encounter and c.encounter='".$_SESSION['encounter']."'");
+
+while($lab_code = sqlFetchArray($lab_coder)) {
+$prev_lab .=  $lab_code['procedure_name'] .'</br>';
+ }
+
+$this->assign("PREVIOUS_LAB", $prev_lab);
+		   						$this->assign("drug_intervals", $interval);
+						$this->assign("drug_meal_time", $drug_meal_time);
+						$this->assign("duration", $duration);
+						$this->assign("time_frame", $time_frame);
 			$res = sqlStatement("SELECT d.name, d.ndc_number, d.form, d.size, " .
 				"d.unit, d.route, d.substitute, t.drug_id, t.selector, t.dosage, " .
 				"t.period, t.quantity, t.refills " .

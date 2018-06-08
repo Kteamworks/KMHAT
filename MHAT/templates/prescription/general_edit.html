@@ -258,10 +258,49 @@
 {$ENDING_JAVASCRIPT}
 </script>
 </form>
+<div  id="prescription-order">
+{if $PREVIOUS_DRUG}
+<label>Last visit prescription</label>
+
+
+<table class="table table-striped">
+<thead>
+<th>Name </th>
+<th>Time </th>
+<th>Meal </th>
+<th>Duration</th>
+</thead>
+<tbody>
+
+<td>{$PREVIOUS_DRUG} </td><td>{$drug_intervals} </td><td>{$drug_meal_time}</td><td> {$duration}</td><td> {$time_frame}</td>
+</tbody>
+</table>
+<input name="click" type="checkbox"  id="check1" onchange="cTrig()"/> Continue with same prescription
+{/if}
+</div>
 {literal}
 <!-- for the fancy jQuery stuff -->
 <script>
+function cTrig() { 
+      if (document.getElementById('check1').checked == true) {
+               var box= confirm("Are you sure you want to prescribe same medicines?");
+        if (box==true) {
+            
+			document.getElementById('check1').checked = true;
+			    $.ajax({
+        url: 'templates/prescription/save_last_prescription.php',
+        success: function(result){
+        alert(JSON.stringify(result));
+    }});
+	document.getElementById('check1').disabled = true;
+        } else {
+           document.getElementById('check1').checked = false;
+		   }
+      } else {
 
+         return false;   
+      }
+    }
 var fiddleApp = angular.module('fiddleApp', ['ui.bootstrap'], function($interpolateProvider) {
         $interpolateProvider.startSymbol('<%');
         $interpolateProvider.endSymbol('%>');
