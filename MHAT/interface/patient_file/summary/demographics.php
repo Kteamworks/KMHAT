@@ -219,6 +219,114 @@ td {
     z-index: 1000;
     display:none;
 }
+@import url(//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css);
+
+/*** basic styles ***/
+
+body { margin: 30px; } 
+h1 { font-size: 1.5em; }
+label { font-size: 24px; }
+container { 
+  width: 175px; 
+  margin-left: 20px;
+}
+
+input[type=radio].with-font,
+input[type=checkbox].with-font {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+    
+input[type=radio].with-font.dec ~ label:before,
+input[type=checkbox].with-font.dec ~ label:before {
+    font-family: FontAwesome;
+    display: inline-block;
+    content: "\f1db";
+    letter-spacing: 10px;
+    font-size: 1.2em;
+    color: #535353;
+    width: 1.4em;
+}
+input[type=radio].with-font.inc ~ label:before,
+input[type=checkbox].with-font.inc ~ label:before {
+    font-family: FontAwesome;
+    display: inline-block;
+    content: "\f0aa";
+    letter-spacing: 10px;
+    font-size: 1.2em;
+    color: #535353;
+    width: 1.4em;
+}
+input[type=radio].with-font.stop ~ label:before,
+input[type=checkbox].with-font.stop ~ label:before {
+    font-family: FontAwesome;
+    display: inline-block;
+    content: "\f05e";
+    letter-spacing: 10px;
+    font-size: 1.2em;
+    color: #535353;
+    width: 1.4em;
+}
+input[type=radio].with-font.adjust ~ label:before,
+input[type=checkbox].with-font.adjust ~ label:before {
+    font-family: FontAwesome;
+    display: inline-block;
+    content: "\f042";
+    letter-spacing: 10px;
+    font-size: 1.2em;
+    color: #535353;
+    width: 1.4em;
+}
+input[type=radio].with-font.dec:checked ~ label:before,
+input[type=checkbox].with-font.dec:checked ~ label:before  {
+    content: "\f0ab";
+    font-size: 1.2em;
+    color: lightred;
+    letter-spacing: 5px;
+}
+input[type=radio].with-font.stop:checked ~ label:before,
+input[type=checkbox].with-font.stop:checked ~ label:before  {
+    content: "\f05e";
+    font-size: 1.2em;
+    color: darkred;
+    letter-spacing: 5px;
+}
+input[type=radio].with-font.inc:checked ~ label:before,
+input[type=checkbox].with-font.inc:checked ~ label:before  {
+    content: "\f0aa";
+    font-size: 1.2em;
+    color: darkgreen;
+    letter-spacing: 5px;
+}
+input[type=radio].with-font.adjust:checked ~ label:before,
+input[type=checkbox].with-font.adjust:checked ~ label:before  {
+    content: "\f042";
+    font-size: 1.2em;
+    color: lightgreen;
+    letter-spacing: 5px;
+}
+input[type=checkbox].with-font ~ label:before {        
+    content: "\f0ab";
+}
+input[type=checkbox].with-font:checked ~ label:before {
+    content: "\f0ab";        
+    color: darkgreen;
+}
+input[type=radio].with-font:focus ~ label:before,
+input[type=checkbox].with-font:focus ~ label:before,
+input[type=radio].with-font:focus ~ label,
+input[type=checkbox].with-font:focus ~ label
+{                
+    color: green;
+}
+
+
 </style>
 <style type="text/css">@import url(../../../library/dynarch_calendar.css);</style>
  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.js"></script>
@@ -544,8 +652,8 @@ $(document).ready(function(){
   'left':10,
 	'overlayOpacity' : 0.0,
 	'showCloseButton' : true,
-	'frameHeight' : 400,
-	'frameWidth' : 650
+	'frameHeight' : 500,
+	'frameWidth' : 900
   });
 // special size for patient portal
   $(".small_modal").fancybox( {

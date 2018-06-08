@@ -299,6 +299,41 @@ $HTML .= $f1.'-'.$f2.'-'.$f3.'&nbsp('. $pres['drug_meal_time'] .') for '. $pres[
 		 $frame = "Week(s)";
 	 }
 	 $HTML.=$frame.'<a id="'. $pres['id'].'"  class="editscript" data-toggle="modal" data-target="#myModal'. $pres['id'].'">&nbsp;&nbsp;<span><i class="fa fa-pencil-square-o" data-toggle="tooltip" data-placement="top" title="Edit Prescription" aria-hidden="true"></i></span></a>
+	 <div class=".container">
+<form  id="dosage-form'. $pres['id'].'" action="'.$root.'/templates/prescription/edittypeprescription.php" method="POST" >
+    <input id="inc'. $pres['id'].'" name="question" type="checkbox" class="with-font inc"  onclick="calc(\'inc'. $pres['id'].'\');"/>
+    <label for="inc'. $pres['id'].'"></label>
+
+    <input id="dec'. $pres['id'].'" name="question" type="checkbox" class="with-font dec"  onclick="calc(\'dec'. $pres['id'].'\');"/>
+    <label for="dec'. $pres['id'].'"></label>
+
+    <input id="stop'. $pres['id'].'" name="question" type="checkbox" class="with-font stop"  onclick="calc(\'stp'. $pres['id'].'\');"/>
+    <label for="stop'. $pres['id'].'"></label>
+
+    <input id="adjust'. $pres['id'].'" name="question" type="checkbox" class="with-font adjust"  onclick="calc(\'adj'. $pres['id'].'\');"/>
+    <label for="adjust'. $pres['id'].'"></label>
+</form>
+</div>
+<script type="text/javascript">
+ 
+function calc(type){
+	
+	var res = type.slice(0,3);
+		var presid = type.slice(3,6);
+		console.log(type);
+		var value = document.getElementById("type").value;
+	
+    $.ajax({
+    type: "POST",
+            url: "'.$root.'/templates/prescription/edittypeprescription.php",
+            dataType: "html",
+            data: {type: res,presid: presid,value: value},
+            success: function(response) {
+				console.log(response);
+			}
+	});
+ };
+ </script>
      <!-- Modal -->
 
 <!-- Modal -->
@@ -545,7 +580,9 @@ $HTML .= $f1.'-'.$f2.'-'.$f3.'&nbsp('. $pres['drug_meal_time'] .') for '. $pres[
 	}
 		$HTML .='
 	>Year(s)</option>
- </select></div></div>
+ </select>
+ </div>
+ </div>
 	</div>
 		<div class="form-group">
             <label>Notes</label>
