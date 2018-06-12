@@ -345,10 +345,11 @@ function calc(type){
 		
 		if (document.getElementById(type).checked) {
 			stat = 1;
+			document.getElementById(type).classList.add("highlightcolor");
 		}
 		 else {
 			 stat = 0;
-			 document.getElementById(type).parentElement.style.backgroundColor = none;
+			 document.getElementById(type).classList.remove("highlightcolor");
 		 }
     $.ajax({
     type: "POST",

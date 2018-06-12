@@ -296,34 +296,8 @@ input[type=checkbox].with-font.adjust ~ label:before {
 .changetolightgreen:before {
     color: lightgreen !important;
 }
-input[type=radio].with-font.inc:checked ~ label:before,
-input[type=checkbox].with-font.inc:checked ~ label:before  {
-    content: "\f0aa";
-    font-size: 1.2em;
-    color: darkgreen;
-    letter-spacing: 5px;
-}
-input[type=radio].with-font.decr:checked ~ label:before,
-input[type=checkbox].with-font.decr:checked ~ label:before  {
-    content: "\f0ab";
-    font-size: 1.2em;
-    color: red;
-    letter-spacing: 5px;
-}
-input[type=radio].with-font.stop:checked ~ label:before,
-input[type=checkbox].with-font.stop:checked ~ label:before  {
-    content: "\f05e";
-    font-size: 1.2em;
-    color: darkred;
-    letter-spacing: 5px;
-}
-
-input[type=radio].with-font.adjust:checked ~ label:before,
-input[type=checkbox].with-font.adjust:checked ~ label:before  {
-    content: "\f042";
-    font-size: 1.2em;
-    color: lightgreen;
-    letter-spacing: 5px;
+.highlightcolor + label:before {
+color: blue !important;
 }
 </style>
 <style type="text/css">@import url(../../../library/dynarch_calendar.css);</style>
