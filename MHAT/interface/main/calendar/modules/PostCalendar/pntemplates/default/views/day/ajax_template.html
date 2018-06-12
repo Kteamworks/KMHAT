@@ -327,7 +327,7 @@ if (count($facilities) > 1) {
     echo "    <option value='$username'";
     foreach ($providers as $provider)
         if ($provider['username'] == $username) echo " selected";
-    echo ">" . htmlspecialchars($doc['lname'],ENT_QUOTES) . ", " . htmlspecialchars($doc['fname'],ENT_QUOTES) . "</option>\n";
+    echo ">" . htmlspecialchars($doc['fname'],ENT_QUOTES) . " " . htmlspecialchars($doc['lname'],ENT_QUOTES) . "</option>\n";
  }
  echo "   </select>\n";
 
