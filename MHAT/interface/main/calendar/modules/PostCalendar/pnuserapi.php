@@ -754,7 +754,7 @@ function &postcalendar_userapi_pcQueryEventsFA($args)	{
     "b.pc_catcolor, b.pc_catname, b.pc_catdesc, a.pc_pid, a.pc_aid, " .
     "concat(u.fname,' ',u.lname) as provider_name, " .
     "concat(pd.fname,' ',pd.lname) as patient_name, " .
-    "concat(u2.fname, ' ', u2.lname) as owner_name, pd.DOB as patient_dob, " .
+    "concat(u2.fname, ' ', u2.lname) as owner_name, pd.DOB as patient_dob,pd.local_clinic_no as local_clinic_no, " .
     "a.pc_facility" .
     "FROM  ( $table AS a ) " . 
     "LEFT JOIN $cattable AS b ON b.pc_catid = a.pc_catid " .
@@ -808,7 +808,7 @@ function &postcalendar_userapi_pcQueryEventsFA($args)	{
          $tmp['sharing'],      $tmp['prefcatid'],     $tmp['catcolor'],
          $tmp['catname'],      $tmp['catdesc'],       $tmp['pid'],
          $tmp['aid'],          $tmp['provider_name'], $tmp['patient_name'],
-         $tmp['owner_name'],   $tmp['patient_dob'],   $tmp['facility'])   = $result->fields;
+         $tmp['owner_name'],   $tmp['patient_dob'],   $tmp['facility'],$tmp['local_clinic_no'])   = $result->fields;
 
     // grab the name of the topic
     $topicname = pcGetTopicName($tmp['topic']);
@@ -865,6 +865,7 @@ function &postcalendar_userapi_pcQueryEventsFA($args)	{
     $events[$i]['provider_name'] = $tmp['provider_name'];
     $events[$i]['owner_name']  = $tmp['owner_name'];
     $events[$i]['patient_dob'] = $tmp['patient_dob'];
+	$events[$i]['local_clinic_no'] = $tmp['local_clinic_no'];
     $events[$i]['patient_age'] = date("Y") - substr(($tmp['patient_dob']),0,4);
     $events[$i]['facility']    = getfacility($tmp['facility']);
     $events[$i]['sharing']     = $tmp['sharing'];
@@ -1148,6 +1149,7 @@ function &postcalendar_userapi_pcQueryEvents($args)
     $events[$i]['provider_name'] = $tmp['provider_name'];
     $events[$i]['owner_name']  = $tmp['owner_name'];
     $events[$i]['patient_dob'] = $tmp['patient_dob'];
+	$events[$i]['local_clinic_no'] = $tmp['local_clinic_no'];
     $events[$i]['patient_age'] = getPatientAge($tmp['patient_dob']);
     $events[$i]['facility']    = getFacility($tmp['facility']);
     $events[$i]['sharing']     = $tmp['sharing'];

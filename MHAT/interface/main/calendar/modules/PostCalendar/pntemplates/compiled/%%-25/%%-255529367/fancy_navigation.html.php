@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.3.1, created on 2017-02-21 16:39:27
+<?php /* Smarty version 2.3.1, created on 2018-06-14 12:54:44
          compiled from default/views/global/fancy_navigation.html */ ?>
 <?php $this->_load_plugins(array(
 array('function', 'pc_url', 'default/views/global/fancy_navigation.html', 269, false),)); ?><style>
@@ -268,8 +268,8 @@ div.tiny { width:1px; height:1px; font-size:1px; }
     <div class='service_buttons'>
         <input type='button' value='<?php  echo xl("Add");  ?>' onclick='newEvt(1, 9, 00, <?php  echo $Date; ?>, 0, 0)' />
         <input type='button' value='<?php  echo xl("Search");  ?>' onclick='top.restoreSession();location="index.php?module=PostCalendar&func=search"' />
-
-        <a href="<?php $this->_plugins['function']['pc_url'][0](array('action' => $this->_tpl_vars['VIEW_TYPE'],'print' => "true"), $this); if($this->_extract) { extract($this->_tpl_vars); $this->_extract=false; } ?>"><?php  echo xl("Print");  ?></a>
+           <input type='button' value='<?php  echo xl("Report");  ?>' onclick='location="../../reports/appointments_report.php"' />
+       <!-- <a href="<?php $this->_plugins['function']['pc_url'][0](array('action' => $this->_tpl_vars['VIEW_TYPE'],'print' => "true"), $this); if($this->_extract) { extract($this->_tpl_vars); $this->_extract=false; } ?>"><?php  echo xl("Print");  ?></a>-->
 
     </div>
 
@@ -372,4 +372,4 @@ trig.onmouseover = function() {
     }
 }
 //END (CHEMED)
-</script>
+</script>
