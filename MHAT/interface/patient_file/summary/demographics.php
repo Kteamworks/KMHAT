@@ -242,17 +242,6 @@ input[type=checkbox].with-font {
     position: absolute;
     width: 1px;
 }
-    
-input[type=radio].with-font.dec ~ label:before,
-input[type=checkbox].with-font.dec ~ label:before {
-    font-family: FontAwesome;
-    display: inline-block;
-    content: "\f1db";
-    letter-spacing: 10px;
-    font-size: 1.2em;
-    color: #535353;
-    width: 1.4em;
-}
 input[type=radio].with-font.inc ~ label:before,
 input[type=checkbox].with-font.inc ~ label:before {
     font-family: FontAwesome;
@@ -262,7 +251,19 @@ input[type=checkbox].with-font.inc ~ label:before {
     font-size: 1.2em;
     color: #535353;
     width: 1.4em;
+}    
+input[type=radio].with-font.decr ~ label:before,
+input[type=checkbox].with-font.decr ~ label:before {
+	
+    font-family: FontAwesome;
+    display: inline-block;
+    content: "\f0ab";
+    letter-spacing: 10px;
+    font-size: 1.2em;
+    color: #535353;
+    width: 1.4em;
 }
+
 input[type=radio].with-font.stop ~ label:before,
 input[type=checkbox].with-font.stop ~ label:before {
     font-family: FontAwesome;
@@ -283,50 +284,21 @@ input[type=checkbox].with-font.adjust ~ label:before {
     color: #535353;
     width: 1.4em;
 }
-input[type=radio].with-font.dec:checked ~ label:before,
-input[type=checkbox].with-font.dec:checked ~ label:before  {
-    content: "\f0ab";
-    font-size: 1.2em;
-    color: lightred;
-    letter-spacing: 5px;
+.changecolortogreen:before {
+    color: darkgreen !important;
 }
-input[type=radio].with-font.stop:checked ~ label:before,
-input[type=checkbox].with-font.stop:checked ~ label:before  {
-    content: "\f05e";
-    font-size: 1.2em;
-    color: darkred;
-    letter-spacing: 5px;
+.changecolortored:before {
+    color: red !important;
 }
-input[type=radio].with-font.inc:checked ~ label:before,
-input[type=checkbox].with-font.inc:checked ~ label:before  {
-    content: "\f0aa";
-    font-size: 1.2em;
-    color: darkgreen;
-    letter-spacing: 5px;
+.changetodarkred:before {
+    color: darkred !important;
 }
-input[type=radio].with-font.adjust:checked ~ label:before,
-input[type=checkbox].with-font.adjust:checked ~ label:before  {
-    content: "\f042";
-    font-size: 1.2em;
-    color: lightgreen;
-    letter-spacing: 5px;
+.changetolightgreen:before {
+    color: lightgreen !important;
 }
-input[type=checkbox].with-font ~ label:before {        
-    content: "\f0ab";
+.highlightcolor + label:before {
+color: blue !important;
 }
-input[type=checkbox].with-font:checked ~ label:before {
-    content: "\f0ab";        
-    color: darkgreen;
-}
-input[type=radio].with-font:focus ~ label:before,
-input[type=checkbox].with-font:focus ~ label:before,
-input[type=radio].with-font:focus ~ label,
-input[type=checkbox].with-font:focus ~ label
-{                
-    color: green;
-}
-
-
 </style>
 <style type="text/css">@import url(../../../library/dynarch_calendar.css);</style>
  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.js"></script>
