@@ -496,6 +496,7 @@ if ($MULTIDAY) {
      $fname = substr($event['patient_name'], $commapos + 2);
      $patient_dob = $event['patient_dob'];
      $patient_age = $event['patient_age'];
+	 $local_clinic_no = $event['local_clinic_no'];
      $title = xl('Age') . " $patient_age ($patient_dob)";
      $catid = $event['catid'];
      $comment = addslashes($event['hometext']);
