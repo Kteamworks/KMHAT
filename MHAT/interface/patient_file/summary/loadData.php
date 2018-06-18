@@ -137,7 +137,7 @@ AND encounter = ?";
 </thead>
 <tbody class="table-hover">';
  		  foreach($prescription as $pres) {
-			  
+			  if($pres['stp'] == 1) continue;
 		 if($pres['form'] == 1) { $drug_form = 'TAB'; }
 			else if($pres['form'] == 2) { $drug_form = 'SYR'; }
 			else if($pres['form'] == 3) { $drug_form = 'INJ'; }
@@ -269,7 +269,10 @@ $(".bs-example-modal-sm .modal-content:first").remove();
  		  foreach($prescription as $pres) {
 		  $results_dr = sqlStatement($qry_dr, array($pres['drug_id']));
 $qtyz = str_replace(".00", "", (string)number_format ($pres['dosage'], 2, ".", ""));
-		  $HTML .= $pres['drug'] .' &nbsp;'.$qtyz.'mg &nbsp;:&nbsp;';
+ if($pres['form'] == 1) { $drug_form = 'TAB'; }
+			else if($pres['form'] == 2) { $drug_form = 'SYR'; }
+			else if($pres['form'] == 3) { $drug_form = 'INJ'; }
+		  $HTML .= $drug_form.'.&nbsp;'. $pres['drug'] .' &nbsp;'.$qtyz.'mg &nbsp;:&nbsp;';
   $times = explode('-',$pres['drug_intervals']);
   $time1 = $times[0];
     $time2 = $times[1];
@@ -300,7 +303,15 @@ $HTML .= $f1.'-'.$f2.'-'.$f3.'&nbsp('. $pres['drug_meal_time'] .') for '. $pres[
 	 }
 	 $HTML.=$frame.'<a id="'. $pres['id'].'"  class="editscript" data-toggle="modal" data-target="#myModal'. $pres['id'].'">&nbsp;&nbsp;<span><i class="fa fa-pencil-square-o" data-toggle="tooltip" data-placement="top" title="Edit Prescription" aria-hidden="true"></i></span></a>
 <form  id="dosage-form'. $pres['id'].'" action="'.$root.'/templates/prescription/edittypeprescription.php" method="POST" >
-    <input id="inc'. $pres['id'].'" name="question" type="checkbox" class="with-font inc"  onclick="calc(\'inc'. $pres['id'].'\');"/>
+    <input id="srt'. $pres['id'].'" name="question" type="checkbox" class="with-font srt"  onclick="calc(\'srt'. $pres['id'].'\');"/>
+    <label for="srt'. $pres['id'].'"';
+	if($pres['srt']=='1') {
+		$indicator5 = "changecolortoblue";
+	} else {
+		$indicator5 = "";
+	}
+	$HTML .='class="'.$indicator5.'"></label>
+<input id="inc'. $pres['id'].'" name="question" type="checkbox" class="with-font inc"  onclick="calc(\'inc'. $pres['id'].'\');"/>
     <label for="inc'. $pres['id'].'"';
 	if($pres['inc']=='1') {
 		$indicator1 = "changecolortogreen";
@@ -602,12 +613,6 @@ function calc(type){
 	}
 		$HTML .='
 	>Month(s)</option>
-	    <option value="4"';
-	if($pres['time_frame'] == 4) {
-		$HTML .= 'selected';
-	}
-		$HTML .='
-	>Year(s)</option>
  </select>
  </div>
  </div>

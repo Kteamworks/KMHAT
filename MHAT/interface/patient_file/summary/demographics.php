@@ -242,6 +242,16 @@ input[type=checkbox].with-font {
     position: absolute;
     width: 1px;
 }
+input[type=radio].with-font.srt ~ label:before,
+input[type=checkbox].with-font.srt ~ label:before {
+    font-family: FontAwesome;
+    display: inline-block;
+    content: "\f011";
+    letter-spacing: 10px;
+    font-size: 1.2em;
+    color: #535353;
+    width: 1.4em;
+}   
 input[type=radio].with-font.inc ~ label:before,
 input[type=checkbox].with-font.inc ~ label:before {
     font-family: FontAwesome;
@@ -283,6 +293,9 @@ input[type=checkbox].with-font.adjust ~ label:before {
     font-size: 1.2em;
     color: #535353;
     width: 1.4em;
+}
+.changecolortoblue:before {
+    color: #00003f !important;
 }
 .changecolortogreen:before {
     color: darkgreen !important;
@@ -787,12 +800,13 @@ if ($GLOBALS['patient_id_category_name']) {
 <li><a href="<?php echo $GLOBALS['webroot'] ?>/interface/forms/newpatient/new.php?autoloaded=1&calenc=" class="visit_ico element iframe2" Title="New Visit"></a></li>
 <li><a class='allergyBtn element' href="#" title="Allergies & Side Effects"  data-toggle="modal" data-target="#myAlg"></a></li>
 <li><a class='diagnosisBtn element' href="#" title="Diagnosis"  data-toggle="modal" data-target="#mydiag"></a></li>
+<li><a class='allvisitBtn element' href="#" title="Diagnosis"  data-toggle="modal" data-target="#allvisits"></a></li>
 <!-- <li id="iclick"><a href="#"  class="css_button pull-right" ><span><i class="fa fa-plus"></i> <?php echo xlt('Add Prescription'); ?></a></span></li> -->&nbsp;&nbsp;
 <li><a href="pnotes_full_add.php?<?php echo $urlparms; ?>" id="note" class="black-tooltip notepad iframe" data-original-title="Tooltip on bottom" onclick='top.restoreSession()' data-toggle="tooltip" data-placement="bottom" title="Add Patient Notes"></a></li>
 </ul>
 	<div class="container-fluid" style="min-height: 240px">
 <div class="row">
-<div class="col-md-4 top-left">
+<div class="col-md-8 top-left">
 <?php 
 $result_patient = getPatientData($pid, "*, DATE_FORMAT(DOB,'%Y-%m-%d') as DOB_YMD");
 ?>
@@ -945,7 +959,7 @@ $stripn = $createDate_n->format('F j, Y');
 		  <table class="table table-responsive">
 		  <tr>
 		  <td style="width: 1px;"><div class="date"><?php echo $stripn; ?></div></td>
-  <th style="width: 46%;">Patient Notes:</th>
+  <th>Patient Notes:</th>
 <td><?php echo $string[1]; ?></td>
   </tr>
   </table>
@@ -953,7 +967,7 @@ $stripn = $createDate_n->format('F j, Y');
 		  <p>There are no Notes recorded for this patient yet</p>
 		  <?php } ?>
 </div>
-<div class="col-md-8">
+<div class="col-md-4">
  <?php 
 		 if(isset($_GET['month']) && isset($_GET['year'])) {
 		 			$date = (!isset($_GET['month']) && !isset($_GET['year'])) ? time() : strtotime($_GET['month'] . '/1/' . $_GET['year']);
