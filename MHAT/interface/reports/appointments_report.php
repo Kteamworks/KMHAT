@@ -273,7 +273,7 @@ if ($_POST['form_refresh'] || $_POST['form_orderby']) {
 
          
 
-                <th><?php xl('Mobile No','e'); //Sorting by phone# not really useful ?></th>
+                <th><?php xl('Local Clinic No','e'); //Sorting by phone# not really useful ?></th>
                 
 		<th><a href="nojs.php" onclick="return dosort('type')"
 	<?php if ($form_orderby == "type") echo " style=\"color:#00cc00\"" ?>><?php  xl('Type','e'); ?></a>
@@ -353,7 +353,7 @@ if ($_POST['form_refresh'] || $_POST['form_orderby']) {
 
 		<td class="detail">&nbsp;<?php echo $appointment['genericname1'] ?></td>
 
-         <td class="detail">&nbsp;<?php echo $appointment['phone_cell'] ?></td>
+         <td class="detail">&nbsp;<?php echo $appointment['local_clinic_no'] ?></td>
 
 		<td class="detail">&nbsp;<?php echo xl_appt_category($appointment['pc_catname']) ?></td>
 		
