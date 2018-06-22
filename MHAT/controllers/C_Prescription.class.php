@@ -41,7 +41,7 @@ class C_Prescription extends Controller {
 			// $res = sqlStatement("SELECT * FROM drugs ORDER BY selector");
             $qry2 = "SELECT * from prescriptions join (
 SELECT distinct form_encounter.encounter FROM `prescriptions` left join form_encounter on prescriptions.encounter=form_encounter.encounter
-and  patient_id = ? 
+and  patient_id = ? and stp=0
 ORDER by patient_id, encounter desc limit 1,1)a on prescriptions.encounter=a.encounter";
 $encounter = $_SESSION["encounter"];
 $pid = $_SESSION["pid"];

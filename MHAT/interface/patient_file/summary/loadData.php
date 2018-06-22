@@ -29,6 +29,7 @@ ON form_encounter.pid = lists.pid
 AND form_encounter.encounter =lists.encounter 
 WHERE form_encounter.pid =?
 AND form_encounter.date is not null
+AND deleted=0
 Order By form_encounter.date DESC
 limit  $pageLimit,".PAGE_PER_NO;
           $res = sqlStatement($qry, array($pid));
@@ -74,6 +75,7 @@ AND encounter = ?";
    $HTML.='<li>
                                                                   <a id="encounter" href="../encounter/encounter_top.php?set_encounter='. $encount .'">  <i class="fa fa-mail-reply-all bg-yellow uni" style="margin-left: 20px;padding: 6px;border-radius: 13px;" title="View Details"></i></a>
                                                                 <a class="element iframe pull-right" target="_parent" href="'.$root.'/interface/patient_file/encounter/view_form.php?formname=newpatient&amp;id='. $row['id'] .'" onclick="top.restoreSession()"><span><i class="fa fa-pencil-square-o" data-toggle="tooltip" data-placement="top" title="Edit Visit" aria-hidden="true"></i></span></a>
+																<a class="element iframe pull-right" target="_parent" href="'.$root.'/interface/patient_file/encounter/delete_visit.php?id='. $row['id'] .'" onclick="top.restoreSession()"><span><i class="fa fa-trash-o" style="margin-left: 20px;padding: 2px;font-size:18px" data-toggle="tooltip" data-placement="top" title="Delete Visit" aria-hidden="true" ></i></span></a>
 																<div class="timeline-item">
                                     <h3 class="timeline-header">
                                     

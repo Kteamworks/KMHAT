@@ -1096,6 +1096,7 @@ ON form_encounter.pid = lists.pid
 AND form_encounter.encounter =lists.encounter 
 WHERE form_encounter.pid =?
 AND form_encounter.date is not null
+AND deleted=0
 Order By form_encounter.date DESC";
           $pdata = sqlStatement($qry, array($pid));
 $count=sqlNumRows($pdata);
