@@ -214,6 +214,28 @@ if (($_POST['form_save'] || $_POST['form_delete']) && !$alertmsg) {
   }
 
   if ($_POST['form_save'] && $drug_id) {
+	  sqlInsert("INSERT INTO drug_dosage(drug_id,dosage_quantity,dosage_units) VALUES(?,?,?)",array($drug_id,escapedff('form_size'),'mg'));
+	  if(escapedff('form_size1'))
+	  {
+	sqlInsert("INSERT INTO drug_dosage(drug_id,dosage_quantity,dosage_units) VALUES(?,?,?)",array($drug_id,escapedff('form_size1'),'mg'));
+	  }
+	  if(escapedff('form_size2'))
+	  {
+	sqlInsert("INSERT INTO drug_dosage(drug_id,dosage_quantity,dosage_units) VALUES(?,?,?)",array($drug_id,escapedff('form_size2'),'mg'));
+	  }
+	  if(escapedff('form_size3'))
+	  {
+	sqlInsert("INSERT INTO drug_dosage(drug_id,dosage_quantity,dosage_units) VALUES(?,?,?)",array($drug_id,escapedff('form_size3'),'mg'));
+	  }
+	  if(escapedff('form_size4'))
+	  {
+	sqlInsert("INSERT INTO drug_dosage(drug_id,dosage_quantity,dosage_units) VALUES(?,?,?)",array($drug_id,escapedff('form_size4'),'mg'));
+	  }
+	      sqlInsert("INSERT INTO drug_templates ( " .
+      "drug_id, selector, dosage, period, quantity, refills, taxrates " .
+      ") VALUES ( ?, ?, ?, ?, ?, ?, ? )",
+      array($drug_id, escapedff('form_name')    , escapedff('form_size')    , 1,
+      1, 0, $taxrates));
    $tmpl = $_POST['form_tmpl'];
    // If using the simplified drug form, then force the one and only
    // selector name to be the same as the product name.
@@ -234,8 +256,8 @@ if (($_POST['form_save'] || $_POST['form_delete']) && !$alertmsg) {
      sqlInsert("INSERT INTO drug_templates ( " .
       "drug_id, selector, dosage, period, quantity, refills, taxrates " .
       ") VALUES ( ?, ?, ?, ?, ?, ?, ? )",
-      array($drug_id, $selector, trim($iter['dosage']), trim($iter['period']),
-      trim($iter['quantity']), trim($iter['refills']), $taxrates));
+      array($drug_id, $form_name, trim($form_size), 1,
+      1, 0, $taxrates));
 
      // Add prices for this drug ID and selector.
      foreach ($iter['price'] as $key => $value) {
@@ -268,7 +290,7 @@ if (($_POST['form_save'] || $_POST['form_delete']) && !$alertmsg) {
   if ($info_msg) echo " alert('$info_msg');\n";
   echo " if (opener.refreshme) opener.refreshme();\n";
   if ($new_drug) {
-   echo " window.location.href='add_edit_lot.php?drug=$drug_id&lot=0'\n";
+   echo " window.close();\n";
   } else {
    echo " window.close();\n";
   }
@@ -330,7 +352,7 @@ else {
   </td>
  </tr>
 
- <tr>
+ <tr style="display:none">
   <td valign='top' nowrap><b><?php echo xlt('NDC Number'); ?>:</b></td>
   <td>
    <input type='text' size='40' name='form_ndc_number' maxlength='20'
@@ -341,14 +363,24 @@ else {
   </td>
  </tr>
 
- <tr>
+ <tr style="display:none">
   <td valign='top' nowrap><b><?php echo xlt('On Order'); ?>:</b></td>
   <td>
+<?php 
+$order=$row['on_order'];
+if($row['on_order']>0)
+{
+    $row['on_order']=$order;
+}else
+{
+	$row['on_order']=10;
+}
+?>
    <input type='text' size='5' name='form_on_order' maxlength='7' value='<?php echo attr($row['on_order']) ?>' />
   </td>
  </tr>
 
- <tr>
+ <tr style="display:none">
   <td valign='top' nowrap><b><?php echo xlt('Limits'); ?>:</b></td>
   <td>
    <table>
@@ -373,7 +405,7 @@ else {
   }
 ?>
     </tr>
-    <tr>
+    <tr style="display:none">
      <td valign='top' nowrap><?php echo xlt('Min'); ?>&nbsp;</td>
      <td valign='top'>
       <input type='text' size='5' name='form_reorder_point' maxlength='7'
@@ -392,7 +424,7 @@ else {
   }
 ?>
     </tr>
-    <tr>
+    <tr style="display:none">
      <td valign='top' nowrap><?php echo xlt('Max'); ?>&nbsp;</td>
      <td>
       <input type='text' size='5' name='form_max_level' maxlength='7'
@@ -425,9 +457,13 @@ else {
  </tr>
 
  <tr class='drugsonly'>
-  <td valign='top' nowrap><b><?php echo xlt('Pill Size'); ?>:</b></td>
+  <td valign='top' nowrap><b><?php echo xlt('Dosage'); ?>:</b></td>
   <td>
    <input type='text' size='5' name='form_size' maxlength='7' value='<?php echo attr($row['size']) ?>' />
+   <input type='text' size='5' name='form_size1' maxlength='7' value='<?php echo attr($row['size1']) ?>' />
+   <input type='text' size='5' name='form_size2' maxlength='7' value='<?php echo attr($row['size2']) ?>' />
+   <input type='text' size='5' name='form_size3' maxlength='7' value='<?php echo attr($row['size3']) ?>' />
+   <input type='text' size='5' name='form_size4' maxlength='7' value='<?php echo attr($row['size4']) ?>' />
   </td>
  </tr>
 
@@ -440,7 +476,7 @@ else {
   </td>
  </tr>
 
- <tr class='drugsonly'>
+ <tr class='drugsonly' style="display:none">
   <td valign='top' nowrap><b><?php echo xlt('Route'); ?>:</b></td>
   <td>
 <?php
@@ -449,14 +485,14 @@ else {
   </td>
  </tr>
 
- <tr class='ippfonly'>
+ <tr class='ippfonly' style="display:none">
   <td valign='top' nowrap><b><?php echo xlt('CYP Factor'); ?>:</b></td>
   <td>
    <input type='text' size='10' name='form_cyp_factor' maxlength='20' value='<?php echo attr($row['cyp_factor']) ?>' />
   </td>
  </tr>
 
- <tr>
+ <tr style="display:none">
   <td valign='top' nowrap><b><?php echo xlt('Relate To'); ?>:</b></td>
   <td>
    <input type='text' size='50' name='form_related_code'
@@ -466,7 +502,7 @@ else {
   </td>
  </tr>
 
- <tr>
+ <tr style="display:none">
   <td valign='top' nowrap>
    <b><?php echo $GLOBALS['sell_non_drug_products'] == 2 ? xlt('Fees') : xlt('Templates'); ?>:</b>
   </td>
