@@ -199,7 +199,7 @@ td {
 }
 .date {
   position: relative;
-  width: 70px;
+  //width: 70px;
   font-family: Georgia, serif;
   color: #999;
   margin: 0 auto;
@@ -816,11 +816,11 @@ $qty_al = "SELECT * from lists where pid=? AND type='allergy'" ; $allergies = sq
 <table class="table table-responsive">
 <?php while($diagnos = sqlFetchArray($diagnosis)) { ?>
 <tr>
-<td><div class="date"><?php  $date_d=$diagnos['date'];$createDate_d = new DateTime($date_d);$stripd = $createDate_d->format('F j, Y'); echo $stripd; ?> </div></td>
-<th>
+<td width="20%"><div class="date"><?php  $date_d=$diagnos['date'];$createDate_d = new DateTime($date_d);$stripd = $createDate_d->format('F j, Y'); echo $stripd; ?> </div></td>
+<th width="20%">
 Diagnosis:</th>
 
-<td>&nbsp;<?php echo $diagnos['title']; ?>  <a id="<?php echo $diagnos['id']; ?>"  class="editscript" data-toggle="modal" data-target="#mydiagd<?php echo $diagnos['id']; ?>">&nbsp;&nbsp;<span><i class="fa fa-pencil-square-o" data-toggle="tooltip" data-placement="top" title="Edit Diagnosis" aria-hidden="true"></i></span></a></td>
+<td width="80%">&nbsp;<?php echo $diagnos['title']; ?>  <a id="<?php echo $diagnos['id']; ?>"  class="editscript" data-toggle="modal" data-target="#mydiagd<?php echo $diagnos['id']; ?>">&nbsp;&nbsp;<span><i class="fa fa-pencil-square-o" data-toggle="tooltip" data-placement="top" title="Edit Diagnosis" aria-hidden="true"></i></span></a></td>
 </tr>
 
 <!-- Edit Diagnosis Modal -->
@@ -938,8 +938,9 @@ Diagnosis:</th>
 <?php if(sqlNumRows($allergies)!=0) {  while($allergy = sqlFetchArray($allergies)) { ?>
 <table class="table table-responsive">
 
-<tr><td><div class="date"><?php $date_a=$allergy['date'];$createDate_a = new DateTime($date_a);$stripa = $createDate_a->format('F j, Y'); echo $stripa; ?> </div></td><th>Allergies & Side Effects</th>
-<td><?php echo $allergy['title']; ?></td></tr>
+<tr>
+<td width="20%"><div class="date"><?php $date_a=$allergy['date'];$createDate_a = new DateTime($date_a);$stripa = $createDate_a->format('F j, Y'); echo $stripa; ?> </div></td><th width="20%">Allergies & Side Effects</th>
+<td width="80%"><?php echo $allergy['title']; ?></td></tr>
 <?php } ?>
 </table>
 <?php } else { ?>
@@ -956,11 +957,11 @@ WHERE pid = ? and deleted=0";
 
 $stripn = $createDate_n->format('F j, Y');
 ?>
-		  <table class="table table-responsive">
+		  <table class="table table-responsive" style="table-layout: fixed; width: 100%">
 		  <tr>
-		  <td style="width: 1px;"><div class="date"><?php echo $stripn; ?></div></td>
-  <th>Patient Notes:</th>
-<td><?php echo $string[1]; ?></td>
+		  <td width="20%"><div class="date"><?php echo $stripn; ?></div></td>
+  <th width="20%">Patient Notes:</th>
+<td style="word-wrap: break-word" width="80%"><?php echo $string[1]; ?></td>
   </tr>
   </table>
 		  <?php } } else { ?>
