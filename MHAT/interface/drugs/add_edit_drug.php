@@ -178,7 +178,27 @@ if (($_POST['form_save'] || $_POST['form_delete']) && !$alertmsg) {
      "allow_combining = " . (empty($_POST['form_allow_combining']) ? 0 : 1) . ", " .
      "active = "          . (empty($_POST['form_active']) ? 0 : 1) . " " .
      "WHERE drug_id = ?", array($drug_id));
-    sqlStatement("DELETE FROM drug_templates WHERE drug_id = ?", array($drug_id));
+	  if(escapedff('form_size'))
+	  {
+		  sqlStatement("UPDATE drug_dosage SET dosage_quantity ='".escapedff('form_size')."' WHERE drug_id='".$drug_id."' LIMIT 1");
+	  }
+	 if(escapedff('form_size1'))
+	  {
+	 sqlStatement("UPDATE drug_dosage SET dosage_quantity ='".escapedff('form_size1')."' WHERE id IN (SELECT * FROM(SELECT id FROM drug_dosage WHERE drug_id ='".$drug_id."' ORDER BY id LIMIT 1,1)as t)");
+      }
+	   if(escapedff('form_size2'))
+	  {
+	 sqlStatement("UPDATE drug_dosage SET dosage_quantity ='".escapedff('form_size2')."' WHERE id IN (SELECT * FROM(SELECT id FROM drug_dosage WHERE drug_id ='".$drug_id."' ORDER BY id LIMIT 2,1)as t)");
+      }
+	   if(escapedff('form_size3'))
+	  {
+	 sqlStatement("UPDATE drug_dosage SET dosage_quantity ='".escapedff('form_size3')."' WHERE id IN (SELECT * FROM(SELECT id FROM drug_dosage WHERE drug_id ='".$drug_id."' ORDER BY id LIMIT 3,1)as t)");
+      }
+	   if(escapedff('form_size4'))
+	  {
+	 sqlStatement("UPDATE drug_dosage SET dosage_quantity ='".escapedff('form_size4')."' WHERE id IN (SELECT * FROM(SELECT id FROM drug_dosage WHERE drug_id ='".$drug_id."' ORDER BY id LIMIT 4,1)as t)");
+      }
+	sqlStatement("DELETE FROM drug_templates WHERE drug_id = ?", array($drug_id));
    }
    else { // deleting
     if (acl_check('admin', 'super')) {
@@ -211,10 +231,7 @@ if (($_POST['form_save'] || $_POST['form_delete']) && !$alertmsg) {
     (empty($_POST['form_allow_combining']) ? 0 : 1) . ", " .
     (empty($_POST['form_active']) ? 0 : 1)        .
     ")");
-  }
-
-  if ($_POST['form_save'] && $drug_id) {
-	  sqlInsert("INSERT INTO drug_dosage(drug_id,dosage_quantity,dosage_units) VALUES(?,?,?)",array($drug_id,escapedff('form_size'),'mg'));
+	 sqlInsert("INSERT INTO drug_dosage(drug_id,dosage_quantity,dosage_units) VALUES(?,?,?)",array($drug_id,escapedff('form_size'),'mg'));
 	  if(escapedff('form_size1'))
 	  {
 	sqlInsert("INSERT INTO drug_dosage(drug_id,dosage_quantity,dosage_units) VALUES(?,?,?)",array($drug_id,escapedff('form_size1'),'mg'));
@@ -231,16 +248,21 @@ if (($_POST['form_save'] || $_POST['form_delete']) && !$alertmsg) {
 	  {
 	sqlInsert("INSERT INTO drug_dosage(drug_id,dosage_quantity,dosage_units) VALUES(?,?,?)",array($drug_id,escapedff('form_size4'),'mg'));
 	  }
+  }
+
+  if ($_POST['form_save'] && $drug_id) {
+	  
+	  
 	      sqlInsert("INSERT INTO drug_templates ( " .
       "drug_id, selector, dosage, period, quantity, refills, taxrates " .
       ") VALUES ( ?, ?, ?, ?, ?, ?, ? )",
-      array($drug_id, escapedff('form_name')    , escapedff('form_size')    , 1,
+      array($drug_id, escapedff('form_name'), escapedff('form_size')    , 1,
       1, 0, $taxrates));
    $tmpl = $_POST['form_tmpl'];
    // If using the simplified drug form, then force the one and only
    // selector name to be the same as the product name.
    if ($GLOBALS['sell_non_drug_products'] == 2) {
-    $tmpl["1"]['selector'] = $_POST['form_name'];
+    $tmpl["1"]['selector'] = escapedff('form_name');
    }
    sqlStatement("DELETE FROM prices WHERE pr_id = ? AND pr_selector != ''", array($drug_id));
    for ($lino = 1; isset($tmpl["$lino"]['selector']); ++$lino) {
@@ -253,12 +275,6 @@ if (($_POST['form_save'] || $_POST['form_delete']) && !$alertmsg) {
        $taxrates .= "$key:";
       }
      }
-     sqlInsert("INSERT INTO drug_templates ( " .
-      "drug_id, selector, dosage, period, quantity, refills, taxrates " .
-      ") VALUES ( ?, ?, ?, ?, ?, ?, ? )",
-      array($drug_id, $form_name, trim($form_size), 1,
-      1, 0, $taxrates));
-
      // Add prices for this drug ID and selector.
      foreach ($iter['price'] as $key => $value) {
       $value = $value + 0;
@@ -302,6 +318,12 @@ if ($drug_id) {
   $row = sqlQuery("SELECT * FROM drugs WHERE drug_id = ?", array($drug_id));
   $tres = sqlStatement("SELECT * FROM drug_templates WHERE " .
    "drug_id = ? ORDER BY selector", array($drug_id));
+   $row1=sqlQuery("SELECT * from drug_dosage WHERE drug_id=? limit 1", array($drug_id));
+   $row2=sqlQuery("SELECT * from drug_dosage WHERE drug_id=? limit 1,1 ", array($drug_id));
+   $row3=sqlQuery("SELECT * from drug_dosage WHERE drug_id=? limit 2,1", array($drug_id));
+   $row4=sqlQuery("SELECT * from drug_dosage WHERE drug_id=? limit 3,1", array($drug_id));
+   $row5=sqlQuery("SELECT * from drug_dosage WHERE drug_id=? limit 4,1", array($drug_id));
+   
 }
 else {
   $row = array(
@@ -459,11 +481,11 @@ if($row['on_order']>0)
  <tr class='drugsonly'>
   <td valign='top' nowrap><b><?php echo xlt('Dosage'); ?>:</b></td>
   <td>
-   <input type='text' size='5' name='form_size' maxlength='7' value='<?php echo attr($row['size']) ?>' />
-   <input type='text' size='5' name='form_size1' maxlength='7' value='<?php echo attr($row['size1']) ?>' />
-   <input type='text' size='5' name='form_size2' maxlength='7' value='<?php echo attr($row['size2']) ?>' />
-   <input type='text' size='5' name='form_size3' maxlength='7' value='<?php echo attr($row['size3']) ?>' />
-   <input type='text' size='5' name='form_size4' maxlength='7' value='<?php echo attr($row['size4']) ?>' />
+   <input type='text' size='5' name='form_size' maxlength='7' value='<?php echo attr($row1['dosage_quantity']) ?>' />
+   <input type='text' size='5' name='form_size1' maxlength='7' value='<?php echo attr($row2['dosage_quantity']) ?>' />
+   <input type='text' size='5' name='form_size2' maxlength='7' value='<?php echo attr($row3['dosage_quantity']) ?>' />
+   <input type='text' size='5' name='form_size3' maxlength='7' value='<?php echo attr($row4['dosage_quantity']) ?>' />
+   <input type='text' size='5' name='form_size4' maxlength='7' value='<?php echo attr($row5['dosage_quantity']) ?>' />
   </td>
  </tr>
 
