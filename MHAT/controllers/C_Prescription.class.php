@@ -46,9 +46,9 @@ ORDER by patient_id, encounter desc limit 1,1)a on prescriptions.encounter=a.enc
 $encounter = $_SESSION["encounter"];
 $pid = $_SESSION["pid"];
           $prescription = sqlStatement($qry2, array($pid));
-          
 		   
 		   			while ( $pres=sqlFetchArray($prescription)) {
+					
 						$prev_drug .= $pres['drug'] .'  <br>';
 						$drug_meal_time .= $pres['drug_meal_time'] .' <br>';
 						$interval .= $pres['drug_intervals'] .'  <br>';
@@ -558,8 +558,8 @@ $this->assign("PREVIOUS_LAB", $prev_lab);
 
         function multiprintcss_footer() {
 	        echo ("<div class='signdiv'>\n");
-                echo (xl('Signature') . ":         ________________________________<br><br>");
-				echo (xl('Dispensed By').": &nbsp;&nbsp;&nbsp;<br><br>");
+				 echo (xl('Signature').":"."<img src='./interface/pic/Manoj_sig.jpeg' />"." <br><br>");
+				
                 echo (xl('Date of Dispensing') . ": &nbsp;&nbsp;&nbsp;" . date('d/M/y'));
 	        echo ("</div>\n");
                 echo ("</div>\n");
@@ -572,7 +572,7 @@ $this->assign("PREVIOUS_LAB", $prev_lab);
                 echo("</body>\n");
                 echo("</html>\n");
         }
-
+    
 	function get_prescription_body_text($p) {
 		if($p->get_form()==1)
 		{
@@ -598,7 +598,8 @@ $this->assign("PREVIOUS_LAB", $prev_lab);
 		{
 		$time_frame="Year(s)";
 		}
-		$body = '<b>' . $form . '. ' . $p->get_drug() . ' ' . $p->get_dosage() . ' ' . $p->get_unit_display().' '.$p->get_drug_intervals().' '.'('.$p->get_drug_meal_time().')'.'for'.' '.$p->get_duration().' '.$time_frame;
+		
+		$body = '<b>' .$p->get_id().' '.$form . '. ' . $p->get_drug() . ' ' . $p->get_dosage() . ' ' . $p->get_unit_display().' '.$p->get_drug_intervals().' '.'('.$p->get_drug_meal_time().')'.'for'.' '.$p->get_duration().' '.$time_frame;
 		/*if ($p->get_form()) $body .= ' [' . $p->form_array[$p->get_form()] . "]";*/
 		$body .= "</b>     <i>" .
 			$p->substitute_array[$p->get_substitute()] . "</i>\n" .
