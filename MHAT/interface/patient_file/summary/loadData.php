@@ -165,7 +165,7 @@ $HTML .= '<tr>
 	} else {
 		$f3 = $time3;
 	}
-$HTML .= $f1.'-'.$f2.'-'.$f3.' ('. $pres['drug_meal_time'] .') for '.$pres['duration'].'&nbsp;';
+$HTML .= $f1.'-'.$f2.'-'.$f3.' for '.$pres['duration'].'&nbsp;';
 	 if($pres['time_frame']==1) {
 		 $frame = "Day(s)";
 	 } else if($pres['time_frame']==2) {
@@ -293,7 +293,7 @@ $qtyz = str_replace(".00", "", (string)number_format ($pres['dosage'], 2, ".", "
 	} else {
 		$f3 = $time3;
 	}
-$HTML .= $f1.'-'.$f2.'-'.$f3.'&nbsp('. $pres['drug_meal_time'] .') for '. $pres['duration'].'&nbsp;';
+$HTML .= $f1.'-'.$f2.'-'.$f3.'&nbsp for '. $pres['duration'].'&nbsp;';
 	 if($pres['time_frame']==1) {
 		 $frame = "Day(s)";
 	 } else if($pres['time_frame']==2) {
@@ -577,7 +577,7 @@ function calc(type){
 		$HTML .='
 	>4</option>
  </select> 
-             <select name="name" ng-model="name"  style="width:150px" ng-required="false">
+            <!-- <select name="name" ng-model="name"  style="width:150px" ng-required="false">
   <option value="BF"';
 	if($pres['drug_meal_time'] == "BF") {
 		$HTML .= 'selected';
@@ -590,7 +590,7 @@ function calc(type){
 	}
 		$HTML .='
 	>After Food</option>
- </select>
+ </select>-->
         </div>
 						<div class="form-group">
             <label>Duration</label>

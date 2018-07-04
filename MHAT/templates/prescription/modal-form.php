@@ -41,34 +41,34 @@ $results = sqlStatement($qry, array($drug_id));
         <!-- EMAIL -->
         <div class="form-group">
             <label>Take</label>
-			<select name="take1" ng-model="take1"  style="width:45px" ng-required="false">
+			<select name="take1" ng-init="take1='0'" ng-model="take1" ng-init="0" style="width:45px" ng-required="false">
   <option value="0">0</option>
   <option value="0.5"><span>&#189;</span></option>
-    <option value="1" selected="selected">1</option>
+    <option value="1">1</option>
     <option value="2">2</option>
 	<option value="3">3</option>
 	<option value="4">4</option>
  </select>
- <select name="take2" style="width:45px" ng-model="take2"  ng-required="false">
-    <option value="0" selected="selected">0</option>
+ <select name="take2" style="width:45px" ng-init="take2='0'" ng-model="take2"  ng-required="false">
+    <option value="0">0</option>
 	<option value="0.5"><span>&#189;</span></option>
     <option value="1">1</option>
     <option value="2">2</option>
 	<option value="3">3</option>
 	<option value="4">4</option>
  </select>
- <select name="take3" style="width:45px" ng-model="take3"  ng-required="false">
+ <select name="take3" style="width:45px" ng-init="take3='0'" ng-model="take3"  ng-required="false">
    <option value="0">0</option>
    <option value="0.5"><span>&#189;</span></option>
-    <option value="1" selected="selected">1</option>
+    <option value="1">1</option>
     <option value="2">2</option>
 	<option value="3">3</option>
 	<option value="4">4</option>
  </select> 
-              <select name="name" class="form-control" ng-model="name"  style="width:150px" ng-required="false">
+             <!-- <select name="name" class="form-control" ng-model="name"  type="hidden" style="width:150px" ng-required="false">
   <option value="BF">Before Food</option>
     <option value="AF"  selected="">After Food</option>
- </select>
+ </select>-->
          <input name="email" class="form-control" ng-model="email" type="hidden" ng-required="false">
            <p ng-show="form.userForm.email.$invalid && !form.userForm.email.$pristine" class="help-block">Take is required.</p> 
         </div>

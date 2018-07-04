@@ -599,11 +599,12 @@ $this->assign("PREVIOUS_LAB", $prev_lab);
 		$time_frame="Year(s)";
 		}
 		
-		$body = '<b>' .$p->get_id().' '.$form . '. ' . $p->get_drug() . ' ' . $p->get_dosage() . ' ' . $p->get_unit_display().' '.$p->get_drug_intervals().' '.'('.$p->get_drug_meal_time().')'.'for'.' '.$p->get_duration().' '.$time_frame;
+		//$body = '<b>' .$form . '. ' . $p->get_drug() . ' ' . $p->get_dosage() . ' ' . $p->get_unit_display().' '.$p->get_drug_intervals().' '.'('.$p->get_drug_meal_time().')'.'for'.' '.$p->get_duration().' '.$time_frame;
+		$body = '<b>' .$form . '. ' . $p->get_drug() . ' ' . $p->get_dosage() . ' ' . $p->get_unit_display().' '.$p->get_drug_intervals().' '.'for'.' '.$p->get_duration().' '.$time_frame;	
 		/*if ($p->get_form()) $body .= ' [' . $p->form_array[$p->get_form()] . "]";*/
 		$body .= "</b>     <i>" .
 			$p->substitute_array[$p->get_substitute()] . "</i>\n" .
-			//'<b>' . xl('Drug Intervals') . ':</b> <u>' . '1-0-1' . "</u>\n" .
+			//'<b>' . xl('Drug Intervals') . ':</b> <//u>' . '1-0-1' . "</u>\n" .
 			//'<b>' . xl('Sig') . ':</b> ' . $p->get_dosage() . ' ' . $p->form_array[$p->get_form()] . ' ' .
 			$p->route_array[$p->get_route()] . ' ' . $p->interval_array[$p->get_interval()] . "\n";
 		if ($p->get_refills() > 0) {
