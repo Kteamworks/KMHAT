@@ -808,7 +808,7 @@ function &postcalendar_userapi_pcQueryEventsFA($args)	{
          $tmp['sharing'],      $tmp['prefcatid'],     $tmp['catcolor'],
          $tmp['catname'],      $tmp['catdesc'],       $tmp['pid'],
          $tmp['aid'],          $tmp['provider_name'], $tmp['patient_name'],
-         $tmp['owner_name'],   $tmp['patient_dob'],   $tmp['facility'],$tmp['local_clinic_no'])   = $result->fields;
+         $tmp['owner_name'],   $tmp['patient_dob'],   $tmp['local_clinic_no'],$tmp['facility'])   = $result->fields;
 
     // grab the name of the topic
     $topicname = pcGetTopicName($tmp['topic']);
@@ -1093,7 +1093,7 @@ function &postcalendar_userapi_pcQueryEvents($args)
          $tmp['catname'],      $tmp['catdesc'],     $tmp['pid'],
          $tmp['apptstatus'],   $tmp['aid'],         $tmp['provider_name'],
          $tmp['patient_name'], $tmp['owner_name'],  $tmp['patient_dob'],
-         $tmp['facility'],     $tmp['pubpid']) = $result->fields;
+         $tmp['facility'],     $tmp['pubpid'],$tmp['local_clinic_no']) = $result->fields;
 
     // grab the name of the topic
     $topicname = pcGetTopicName($tmp['topic']);
