@@ -431,14 +431,16 @@ $this->assign("PREVIOUS_LAB", $prev_lab);
 			echo("</tr>\n");
 			echo("<tr>\n");
 	        echo ("<td>\n");
-             echo ('<b><span class="small">' . xl('Patient Address and Telephone No&nbsp;&nbsp;&nbsp;&nbsp;:') . '</span></b>'. '');
+             echo ('<b><span class="small">' . xl('Patient Address :&nbsp;&nbsp;') . '</span></b>'. '');
                 //echo ('<span class="small">'.$p->patient->get_name_display() . '</span><br>');
                //$res = sqlQuery("SELECT  concat('\n','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',street,'<B>','\n ','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;','</B>',city,', ',state,' ',postal_code,'\n','<B>','Tel   &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: ','</B>',if(phone_home!='',phone_home,if(phone_cell!='',phone_cell,if(phone_biz!='',phone_biz,'')))) addr,sex from patient_data where pid =". mysql_real_escape_string ($p->patient->id));
-            $res = sqlQuery("SELECT  concat('\n','<br>','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',street,'<B>','\n ','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;','</B>',city,', ',state,' ',postal_code,'\n','<B>','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;','</B>',if(phone_home!='',phone_home,if(phone_cell!='',phone_cell,if(phone_biz!='',phone_biz,'')))) addr,sex,age from patient_data where pid =". mysql_real_escape_string ($p->patient->id));    
+            $res = sqlQuery("SELECT district as addr,sex,age from patient_data where pid =". mysql_real_escape_string ($p->patient->id));    
 			$patterns = array ('/\n/');
 	        $replace = array ('<br>');
 	        $res = preg_replace($patterns, $replace, $res);
-                echo ('<span class="small">'.$res['addr'].'</span>');
+			$dis=sqlStatement("SELECT title from list_options where list_id='District' and option_id='".$res['addr']."'");
+			$dis1=sqlFetchArray($dis);
+                echo ('<span class="small">'.  $dis1['title'].'</span>');
 	        echo ("</td>\n");
 			echo("</tr>\n");
 			echo ("<tr>\n");
@@ -497,11 +499,11 @@ $this->assign("PREVIOUS_LAB", $prev_lab);
 	        echo ("}\n");
                 echo ("div.paddingdiv {\n");
                 echo (" width: 524pt;\n");
-	        echo (" height: 668pt;\n");
+	        echo (" height: 1100pt;\n");
                 echo ("}\n");
                 echo ("div.scriptdiv {\n");
 	        echo (" padding-top: 13pt;\n");
-	        echo (" padding-bottom: 22pt;\n");
+	        //echo (" padding-bottom: 22pt;\n");
 	        echo (" padding-left: 35pt;\n");
 	        echo (" border-bottom:1pt solid black;\n");
 	        echo ("}\n");
@@ -729,7 +731,7 @@ $this->assign("PREVIOUS_LAB", $prev_lab);
                         if ($on_this_page == 0) {
                                 $this->multiprintcss_header($p);
                         }
-                        if (++$on_this_page > 3 || $p->provider->id != $this->providerid) {
+                        if (++$on_this_page > 10 || $p->provider->id != $this->providerid) {
                                 $this->multiprintcss_footer();
                                 $this->multiprintcss_header($p);
                                 $on_this_page = 1;
