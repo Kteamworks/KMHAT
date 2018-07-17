@@ -1,0 +1,154 @@
+select {
+    color: black;
+}
+.user-menu .user-image {
+    float: left;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+	background: white;
+    margin-right: 10px;
+}
+.dropdown.user.user-menu{
+    display: block;
+}
+.dropdown-toggle span {
+	display: block;
+	white-space: nowrap;
+	overflow: hidden;
+	float: left;
+}
+#logout_link {
+	    padding: 5px;
+}
+.main-header .logo {
+margin-top: 0px;
+margin-left: 30px;
+}
+.logo-lg {
+	color: rgb(153,153,153) !important;
+
+}
+.logo-lg b {
+color: rgb(21,100,145);
+}
+.dropdown.user.user-menu form {
+    margin: 0px;
+}
+
+.alink {
+	font-style: italic;
+	}
+	#form-id {
+		display:inline;
+	}
+	.info-box-icon i {
+    padding: 20px;
+	}
+	.nav_new {
+	background-color: #222d32;
+color: #fff;
+	}
+	.main-header .sidebar-toggle {
+    margin-left: 30px;
+}
+	.nav_new a {
+	color: #fff;
+	}
+	.nav_new .sidebar-form .btn {
+    color: #999;
+    border-top-left-radius: 0;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 0;
+}
+.nav_new .sidebar-form .btn {
+    box-shadow: none;
+    background-color: #374850;
+    border: 1px solid transparent;
+    height: 35px;
+}
+.nav_new .sidebar-form {
+    border-radius: 3px;
+    border: 1px solid #374850;
+    margin: 10px 10px;
+}
+.nav_new .sidebar-form input[type="text"] {
+    color: #666;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 2px;
+}
+.nav_new .sidebar-form .btn {
+    box-shadow: none;
+    background-color: #374850;
+    border: 1px solid transparent;
+    height: 35px;
+}
+.nav_new .sidebar-menu > li.header {
+    color: #4b646f;
+    background: #1a2226;
+}
+.nav_new .sidebar-menu > li > a {
+    border-left: 3px solid transparent;
+}
+.nav_new .sidebar a {
+    color: #b8c7ce !important;
+}
+.nav_new .sidebar-menu > li > .treeview-menu {
+    margin: 0 1px;
+    background: #2c3b41;
+}
+ul ul {
+    list-style: none;
+}
+body::-webkit-scrollbar {
+    width: 0.5em;
+}
+ 
+body::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+ 
+body::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+.nav_new .sidebar-menu>li.active>a {
+    border-left-color: #3c8dbc;
+}
+.nav_new .sidebar-menu>li:hover>a, .nav_new .sidebar-menu>li.active>a, .nav_new .sidebar-menu>li.menu-open>a {
+    color: #fff;
+    background: #1e282c;
+}
+.nav_new .sidebar-menu>li>a {
+    border-left: 3px solid transparent;
+}
+.thead-inverse {
+color: #666B85;
+font-size: 16px;
+font-weight: normal;
+text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+}
+.table-striped thead th {
+    color: #D5DDE5;
+    background: #1b1e24;
+    border-bottom: 4px solid #9ea7af;
+    border-right: 1px solid #343a45;
+    font-size: 23px;
+    font-weight: 100;
+    padding: 24px;
+    text-align: left;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    vertical-align: middle;
+}
+.no-margin {
+padding: 0px;
+}
+.user-panel > .image > a > img {
+    width: 100%;
+    max-width: 45px;
+    height: auto;
+	background: #fff;
+}
