@@ -87,7 +87,7 @@ $enc1=$visit_detail2['enc'];
 $qry2 = "SELECT *
 FROM prescriptions
 WHERE patient_id = ?
-AND encounter = ?";
+AND encounter = ? and stp=0";
           $prescription = sqlStatement($qry2, array($pid,$enc1));
            $pres=sqlFetchArray($prescription);
          if($pres!=null){ ?>  
