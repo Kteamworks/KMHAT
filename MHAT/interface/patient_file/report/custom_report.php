@@ -453,7 +453,7 @@ if (file_exists(dirname(__FILE__) . "/../../forms/track_anything/style.css")) { 
   }
 </script>
 </head>
-<body class="body_top" style="padding-top:95px;">
+<body class="body_top" style="padding-top:5px;">
 <?php } ?>
 <div id="report_custom" style="width:100%;">  <!-- large outer DIV -->
 
@@ -481,24 +481,25 @@ if ($printable) {
   }
   // Setup Headers and Footers for html2PDF only Download
   // in HTML view it's just one line at the top of page 1
-  echo '<page_header style="text-align:right;"> ' . xlt("PATIENT") . ':' . text($titleres['lname']) . ', ' . text($titleres['fname']) . ' - ' . $titleres['DOB_TS'] . '</page_header>    ';
-  echo '<page_footer style="text-align:right;">' . xlt('Generated on') . ' ' . oeFormatShortDate() . ' - ' . text($facility['name']) . ' ' . text($facility['phone']) . '</page_footer>';
+  //echo '<page_header style="text-align:right;"> ' . xlt("PATIENT") . ':' . text($titleres['lname']) . ', ' . text($titleres['fname']) . ' - ' . $titleres['DOB_TS'] . '</page_header>    ';
+  //echo '<page_footer style="text-align:right;">' . xlt('Generated on') . ' ' . oeFormatShortDate() . ' - ' . text($facility['name']) . ' ' . text($facility['phone']) . '</page_footer>';
 
   // Use logo if it exists as 'practice_logo.gif' in the site dir
   // old code used the global custom dir which is no longer a valid
-   $practice_logo = "$OE_SITE_DIR/images/practice_logo.gif";
+   $practice_logo = "$OE_SIE_DIR/interface/pic/medii_rx.jpg";
    if (file_exists($practice_logo)) {
         echo "<img src='$practice_logo' align='left'><br />\n";
      } 
 ?>
-<h2><?php echo $facility['name'] ?></h2>
+<img WIDTH='700pt' src='../../pic/medii_rx.jpg' style=" margin-bottom: 2%;"/>
+<!--<h2><?php echo $facility['name'] ?></h2>
 <?php echo $facility['street'] ?><br>
 <?php echo $facility['city'] ?>, <?php echo $facility['state'] ?> <?php echo $facility['postal_code'] ?><br clear='all'>
-<?php echo $facility['phone'] ?><br>
+<?php echo $facility['phone'] ?><br>-->
 
-<a href="javascript:window.close();"><span class='title'><?php echo $titleres['fname'] . " " . $titleres['lname']; ?></span></a><br>
+<!--<a href="javascript:window.close();"><span class='title'><?php echo $titleres['fname'] . " " . $titleres['lname']; ?></span></a><br>
 <span class='text'><?php xl('Generated on','e'); ?>: <?php echo oeFormatShortDate(); ?></span>
-<br><br>
+<br><br>-->
 
 <?php
 
@@ -513,61 +514,6 @@ else { // not printable
 <a href="custom_report.php?printable=1&<?php print postToGet($ar); ?>" class='link_submit' target='new' onclick='top.restoreSession()'>
  [<?php xl('Printable Version','e'); ?>]
 </a><br>
-<div class="report_search_bar" style="width:100%;" id="search_options">
-  <table style="width:100%;">
-    <tr>
-      <td>
-        <input type="text" onKeyUp="clear_last_visit();remove_mark_all();find_all();" name="search_element" id="search_element" style="width:180px;"/>
-      </td>
-      <td>
-         <a class="css_button" onClick="clear_last_visit();remove_mark_all();find_all();" ><span><?php echo xlt('Find'); ?></span></a>
-      </td>
-      <td>
-         <a class="css_button" onClick="next_prev('prev');" ><span><?php echo xlt('Prev'); ?></span></a>
-      </td>
-      <td>
-         <a class="css_button" onClick="next_prev('next');" ><span><?php echo xlt('Next'); ?></span></a>
-      </td>
-      <td>
-        <input type="checkbox" onClick="clear_last_visit();remove_mark_all();find_all();" name="search_case" id="search_case" />
-      </td>
-      <td>
-        <span><?php echo xlt('Match case'); ?></span>
-      </td>
-      <td style="padding-left:10px;">
-        <span class="text"><b><?php echo xlt('Search In'); ?>:</b></span>
-        <br>
-        <?php
-        $form_id_arr = array();
-        $form_dir_arr = array();
-        $last_key ='';
-        //ksort($ar);
-        foreach ($ar as $key_search => $val_search) {
-            if ($key_search == 'pdf' || $key_search == '' ) continue;
-            if (($auth_notes_a || $auth_notes || $auth_coding_a || $auth_coding || $auth_med || $auth_relaxed)) {
-                        preg_match('/^(.*)_(\d+)$/', $key_search, $res_search);
-                        $form_id_arr[] = add_escape_custom($res_search[2]);
-                         $form_dir_arr[] = add_escape_custom($res_search[1]);
-            }
-        }
-        //echo json_encode(json_encode($array_key_id));
-        if(sizeof($form_id_arr)>0){
-          $query = "SELECT DISTINCT(form_name),formdir FROM forms WHERE form_id IN ( '".implode("','",$form_id_arr)."') AND formdir IN ( '".implode("','",$form_dir_arr)."')";
-          $arr = sqlStatement($query);
-          echo "<select multiple size='4' style='width:300px;' id='forms_to_search' onchange='clear_last_visit();remove_mark_all();find_all();' >";
-          while($res_forms_ids = sqlFetchArray($arr)){
-            echo "<option value='".attr($res_forms_ids['formdir'])."' selected>".text($res_forms_ids['form_name'])."</option>";
-          }
-          echo "</select>";
-        }
-        ?>
-      </td>
-      <td style="padding-left:10px;;width:30%;">
-        <span id ='alert_msg' style='color:red;'></span>
-      </td>
-    </tr>
-  </table>
-</div>
 <?php
 } // end not printable ?>
 
