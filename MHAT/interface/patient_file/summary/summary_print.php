@@ -144,61 +144,6 @@ $interval= $f1.'-'.$f2.'-'.$f3;			?>
 </tbody>
 </table>
 </div>
-<?php $qry2 = "SELECT *
-FROM prescriptions
-WHERE patient_id = ?
-AND encounter = ?";
-          $prescription = sqlStatement($qry2, array($pid,$encounter));
-           $pres=sqlFetchArray($prescription);
-          if($pres!=null){ ?>
-<div class="table-title">
-<h2>Prescription</h2>
-
-<table class="table-fill">
-<thead>
-<tr>
-<th class="text-left">Drug</th>
-<th class="text-left">Prescription</th>
-</tr>
-</thead>
-		 
-<tbody class="table-hover">
- 		<?php  foreach($prescription as $pres) {
-			  
-		 if($pres['form'] == 1) { $drug_form = 'TAB'; }
-			else if($pres['form'] == 2) { $drug_form = 'SYR'; }
-			else if($pres['form'] == 3) { $drug_form = 'INJ'; }
-			$qtyz = str_replace(".00", "", (string)number_format ($pres['dosage'], 2, ".", ""));
-						 $times = explode('-',$pres['drug_intervals']);
-  $time1 = $times[0];
-    $time2 = $times[1];
-	  $time3 = $times[2];
-	if($time1 == 0.5) {
-		$f1= '<span>&#189;</span>';
-	} else {
-		$f1 = $time1;
-	}
-	if($time2 == 0.5) {
-		$f2= '<span>&#189;</span>';
-	} else {
-		$f2 = $time2;
-	}	if($time3 == 0.5) {
-		$f3= '<span>&#189;</span>';
-	} else {
-		$f3 = $time3;
-	}
-$interval= $f1.'-'.$f2.'-'.$f3;			?>
-<tr>
-<td class="text-left"><?php echo $pres['drug']; ?>&nbsp;<sub>(<?php echo $drug_form ?>)</sub> <?php echo $qtyz ?> mg</td>
-<td class="text-left"><?php echo $interval; ?> (<?php echo $pres['drug_meal_time'] ?>) for <?php echo $pres['duration']?> Weeks</td>
-</tr>
-<?php
-		  }
-		  ?>
-</tbody>
-</table>
-</div>
-		  <?php }?>
 <?php
 
 				

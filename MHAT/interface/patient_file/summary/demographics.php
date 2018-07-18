@@ -803,7 +803,8 @@ if ($GLOBALS['patient_id_category_name']) {
 <li><a class='allvisitBtn element' href="#" title="Diagnosis"  data-toggle="modal" data-target="#allvisits"></a></li>
 <!-- <li id="iclick"><a href="#"  class="css_button pull-right" ><span><i class="fa fa-plus"></i> <?php echo xlt('Add Prescription'); ?></a></span></li> -->&nbsp;&nbsp;
 <li><a href="pnotes_full_add.php?<?php echo $urlparms; ?>" id="note" class="black-tooltip notepad iframe" data-original-title="Tooltip on bottom" onclick='top.restoreSession()' data-toggle="tooltip" data-placement="bottom" title="Add Patient Notes"></a></li>&nbsp;&nbsp;
-<li><a href="summary_print.php" id="summary" class="black-tooltip visit " onclick='top.restoreSession()' target="_blank"  title="View Visit Details"></a></li>
+<li><a href="summary_print.php" id="summary" class="black-tooltip visit " onclick='top.restoreSession()' target="_blank"  title="View Visit Details"></a></li>&nbsp;&nbsp;
+<li><a href="../report/patient_report.php" id="demographics" class="black-tooltip visit iframe " data-original-title="Tooltip on bottom" onclick='top.restoreSession()'  data-toggle="tooltip" data-placement="bottom" title="Print Demographics Details"></a></li>
 </ul>
 	<div class="container-fluid" style="min-height: 240px">
 <div class="row">
