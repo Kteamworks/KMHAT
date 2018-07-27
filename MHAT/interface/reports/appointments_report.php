@@ -229,7 +229,7 @@ $form_orderby = getComparisonOrder( $_REQUEST['form_orderby'] ) ?  $_REQUEST['fo
                                 <?php if ($_POST['form_refresh'] || $_POST['form_orderby'] ) { ?>
 				<a href='#' class='css_button' onclick='window.print()'> 
                                     <span> <?php xl('Print','e'); ?> </span> </a> 
-									<a href='../tcpdf/examples/mail_pt_pres.php' class='css_button' onclick='window.print()'> 
+									<a href='../tcpdf/examples/mail_appointments.php' class='css_button' onclick='window.print()'> 
                                     <span> <?php xl('EMAIL Report','e'); ?> </span> </a> 
                               <!--  <a href='#' class='css_button' onclick='window.open("../patient_file/printed_fee_sheet.php?fill=2","_blank")'> 
                                     <span> <?php xl('Superbills','e'); ?> </span> </a> -->
