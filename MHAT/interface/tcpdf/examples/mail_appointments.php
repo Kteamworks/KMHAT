@@ -69,7 +69,7 @@ if($facility)
 	LEFT OUTER JOIN facility AS f ON f.id = e.pc_facility
   	LEFT OUTER JOIN users AS u ON u.id = e.pc_aid 
 	LEFT OUTER JOIN openemr_postcalendar_categories AS c ON c.pc_catid = e.pc_catid
-where pc_eventDate>='".$from_date."' AND pc_eventDate <= '".$to_date."'$where	";
+where pc_pid != '' AND pc_eventDate>='".$from_date."' AND pc_eventDate <= '".$to_date."'$where	";
        $prescription = sqlStatement($qry2);
  if(sqlNumRows($prescription)!=0) {
 
