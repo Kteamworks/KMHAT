@@ -29,7 +29,9 @@ require_once("$srcdir/classes/postmaster.php");
 require_once("tcpdf_include.php");
 
    $createDate = new DateTime();
-
+$from_date=$_GET['from_date'];
+$to_date=$_GET['to_date'];
+$facility=$_GET['facility'];
 $strip = $createDate->format('F j, Y');
 /* $query = "SELECT drug,quantity FROM prescriptions WHERE date_added >= NOW() - INTERVAL 1 DAY";
 $res = sqlStatement($query);
@@ -49,6 +51,11 @@ $prescriptions = array();
 
 
 $ent = $_POST['ent'];
+if($facility)
+{
+	$where .= " AND e.pc_facility = '$facility'";
+}
+   
  $qry2 = "SELECT
   	e.pc_eventDate, e.pc_endDate, e.pc_startTime, e.pc_endTime, e.pc_duration, e.pc_recurrtype, e.pc_recurrspec, e.pc_recurrfreq, e.pc_catid, e.pc_eid, 
   	e.pc_title, e.pc_hometext, e.pc_apptstatus, 
@@ -61,8 +68,9 @@ $ent = $_POST['ent'];
   	LEFT OUTER JOIN patient_data AS p ON p.pid = e.pc_pid 
 	LEFT OUTER JOIN facility AS f ON f.id = e.pc_facility
   	LEFT OUTER JOIN users AS u ON u.id = e.pc_aid 
-	LEFT OUTER JOIN openemr_postcalendar_categories AS c ON c.pc_catid = e.pc_catid ";
-          $prescription = sqlStatement($qry2);
+	LEFT OUTER JOIN openemr_postcalendar_categories AS c ON c.pc_catid = e.pc_catid
+where pc_eventDate>='".$from_date."' AND pc_eventDate <= '".$to_date."'$where	";
+       $prescription = sqlStatement($qry2);
  if(sqlNumRows($prescription)!=0) {
 
 $message = "";
@@ -88,19 +96,6 @@ $pstreet = $result_patient['street'];
 $logo = '<img class="pull-left" style="width: 100%" src="images/image.jpg"  alt="image">';
 $message .= '<div style="  font: 87.5%/1.5em "Lato", sans-serif;
   margin: 0;">
-<div style="   display: block;
-  margin: auto;
-  max-width: 600px;
-  padding:5px;
-  width: 100%;">
-<p style=" display: inline-block;vertical-align: top;"><b>Serial No:</b> '.$pserial.'</p>
-<p style=" display: inline-block;vertical-align: top;float:right"><b>Date:</b> '.$strip.'</p>
-<p style="text-align: center">Dr T Manoj Kumar, MBBS;DPM;MD; FRCPsych</p>
-<p style="text-align: center">Registration No: 13954 (T C Medical Council)</p>
-<p style=" display: inline-block;vertical-align: top;"><b>Patient Full Name:</b> '.$pfname.' '.$plname.' '.$pmname.'</p>
-<p  style=" display: inline-block;vertical-align: top;float:right" ><b>Gender:</b> '.$pgender.'</p>
-<p style=" display: inline-block;vertical-align: top;"><b>Patient’s Address and Phone number:</b> '.$pstreet.', '.$pmob.'</p><p  style=" display: inline-block;vertical-align: top;float:right"><b>Age:</b> '.$page.' Years</p>
-</div>
 <table style="  border-radius:3px;
   border-collapse: collapse;
   height: 320px;
@@ -127,6 +122,16 @@ $message .= '<div style="  font: 87.5%/1.5em "Lato", sans-serif;
   text-align:left;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
   vertical-align:middle;">Patient Name</th>
+  <th class="text-left" style="  color:#D5DDE5;
+  background:#1b1e24;
+  border-bottom:4px solid #9ea7af;
+  border-right: 1px solid #343a45;
+  font-size:23px;
+  font-weight: 100;
+  padding:24px;
+  text-align:left;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  vertical-align:middle;">Date</th>
 <th class="text-left" style="  color:#D5DDE5;
   background:#1b1e24;
   border-bottom:4px solid #9ea7af;
@@ -136,7 +141,27 @@ $message .= '<div style="  font: 87.5%/1.5em "Lato", sans-serif;
   padding:24px;
   text-align:left;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-  vertical-align:middle;">Time</th>
+  vertical-align:middle;">From Time</th>
+  <th class="text-left" style="  color:#D5DDE5;
+  background:#1b1e24;
+  border-bottom:4px solid #9ea7af;
+  border-right: 1px solid #343a45;
+  font-size:23px;
+  font-weight: 100;
+  padding:24px;
+  text-align:left;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  vertical-align:middle;">To Time</th>
+   <th class="text-left" style="  color:#D5DDE5;
+  background:#1b1e24;
+  border-bottom:4px solid #9ea7af;
+  border-right: 1px solid #343a45;
+  font-size:23px;
+  font-weight: 100;
+  padding:24px;
+  text-align:left;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  vertical-align:middle;">Local Clinic No</th>
 </tr>
 </thead>
 <tbody class="table-hover">';
@@ -150,7 +175,7 @@ $message .= '<tr>
   font-weight:300;
   font-size:18px;
   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
-  border-right: 1px solid #C1C3D1;">'.$drug_form.'.&nbsp; '.$pres['drug'].'&nbsp; '.$qtyz.' mg</td>
+  border-right: 1px solid #C1C3D1; nowrap">'.$pres['fname'].'.&nbsp; '.$pres['lname'].'&nbsp; '.$pres['mname'].'</td>
 <td class="text-left" style="  background:#FFFFFF;
   padding:20px;
   text-align:left;
@@ -158,14 +183,37 @@ $message .= '<tr>
   font-weight:300;
   font-size:18px;
   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
-  border-right: 1px solid #C1C3D1;">'.$pres['drug_intervals'].' ('. $pres['drug_meal_time'] .') for '.$pres['duration'].' Weeks</td>
+  border-right: 1px solid #C1C3D1;">'.oeFormatShortDate($pres['pc_eventDate']).'</td>
+  <td class="text-left" style="  background:#FFFFFF;
+  padding:20px;
+  text-align:left;
+  vertical-align:middle;
+  font-weight:300;
+  font-size:18px;
+  text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #C1C3D1;">'.$pres['pc_startTime'].'</td>
+  <td class="text-left" style="  background:#FFFFFF;
+  padding:20px;
+  text-align:left;
+  vertical-align:middle;
+  font-weight:300;
+  font-size:18px;
+  text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #C1C3D1;">'.$pres['pc_endTime'].'</td>
+  <td class="text-left" style="  background:#FFFFFF;
+  padding:20px;
+  text-align:left;
+  vertical-align:middle;
+  font-weight:300;
+  font-size:18px;
+  text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #C1C3D1;">'.$pres['local_clinic_no'].'</td>
 </tr>';
 		  }
 		  
 $message .='
 </tbody>
-</table><br><br><div class="signdiv">
-Signature:         ________________________________<br><br>Dispensed By: &nbsp;&nbsp;&nbsp;<br><br>Date of Dispensing: &nbsp;&nbsp;&nbsp;'.$strip.'</div></div>';
+</table><br><br></div>';
 		$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false, true);
 
 	// set document information
@@ -213,20 +261,22 @@ Signature:         ________________________________<br><br>Dispensed By: &nbsp;&
 // Print text using writeHTMLCell()
 
 	$pdf->writeHTMLCell(180, 178, '', '', $message, 0, 1, 0, true, '', true);
-    $pdf->Output($_SERVER['DOCUMENT_ROOT'] . '/'.$pfname.'_prescription.pdf', 'F');
+    $pdf->Output($_SERVER['DOCUMENT_ROOT'] . '/'.'appointment.pdf', 'F');
 		    $mail = new MyMailer();
 	
-    $email_subject=xl('MHAT Patient Prescriptions');
+    $email_subject=xl('MHAT Appointments');
     $email_sender="kavaiidev01@gmail.com";
     $mail->AddReplyTo($email_sender, $email_sender);
     $mail->SetFrom($email_sender, $email_sender);
     $mail->Subject = $email_subject;
+	$querye1 = "SELECT * FROM facility WHERE id='".$_SESSION['facility_id']. "'";
+$res_em1 = sqlStatement($querye1);
+$res_em2=sqlFetchArray($res_em1);
+$facility_name=$res_em2['name'];
    // $mail->MsgHTML("<html><body><div class='wrapper'>".$logo."&nbsp;".$message."</div></body></html>");
-    $mail->MsgHTML("<html><body><div class='wrapper'><p>Find the prescription for ".$pfname." in attachment.</p></div></body></html>");
+    $mail->MsgHTML("<html><body><div class='wrapper'><p>Find the Appointments in attachment.</p></div></body></html>");
     $mail->IsHTML(true);
     $mail->AltBody = $message;
-$querye = "SELECT * FROM facility WHERE id=".$facility;
-$res_em = sqlStatement($querye);
 /* $rows = array();
 while($row1 = sqlFetchArray($res_em)) {
     $rows[] = $row1;
@@ -234,16 +284,18 @@ while($row1 = sqlFetchArray($res_em)) {
 
   foreach ($rows as $eid) {
 */
+$querye = "SELECT * FROM facility WHERE id='".$_SESSION['facility_id']. "'";
+$res_em = sqlStatement($querye);
 while($row1 = sqlFetchArray($res_em)) {
     $mail->AddAddress($row1['email'], 'MHAT');
   }
   //$mail->AddAddress('sada059@gmail.com', 'MHAT');
 //  foreach($p_rows as $patient) { 
 
-	$mail->AddAttachment($_SERVER['DOCUMENT_ROOT']."/".$pfname."_prescription.pdf");	
+	$mail->AddAttachment($_SERVER['DOCUMENT_ROOT']."/"."appointment.pdf");
  // }	
     if ($mail->Send()) {
-        echo "1";
+        echo "EMAIL SENT SUCCESSFULLY";
     } else {
         $email_status = $mail->ErrorInfo;
         error_log("EMAIL ERROR: ".$email_status,0);
