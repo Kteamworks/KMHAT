@@ -165,7 +165,12 @@ $HTML .= '<tr>
 	} else {
 		$f3 = $time3;
 	}
+	if($pres['form'] == 3) {
+	$HTML .='deep i/m once in every &nbsp'. $pres['duration'].'&nbsp;';
+	}else
+	{
 $HTML .= $f1.'-'.$f2.'-'.$f3.' for '.$pres['duration'].'&nbsp;';
+	}
 	 if($pres['time_frame']==1) {
 		 $frame = "Day(s)";
 	 } else if($pres['time_frame']==2) {
@@ -274,7 +279,13 @@ $qtyz = str_replace(".00", "", (string)number_format ($pres['dosage'], 2, ".", "
  if($pres['form'] == 1) { $drug_form = 'TAB'; }
 			else if($pres['form'] == 2) { $drug_form = 'SYR'; }
 			else if($pres['form'] == 3) { $drug_form = 'INJ'; }
-		  $HTML .= $drug_form.'.&nbsp;'. $pres['drug'] .' &nbsp;'.$qtyz.'mg &nbsp;:&nbsp;';
+			if($pres['form'] == 3)
+			{
+		  $HTML .= $drug_form.'.&nbsp;'. $pres['drug'] .' &nbsp;'.$qtyz.'mg &nbsp;&nbsp;';
+			}else
+			{
+			$HTML .= $drug_form.'.&nbsp;'. $pres['drug'] .' &nbsp;'.$qtyz.'mg &nbsp;:&nbsp;';	
+			}
   $times = explode('-',$pres['drug_intervals']);
   $time1 = $times[0];
     $time2 = $times[1];
@@ -293,7 +304,14 @@ $qtyz = str_replace(".00", "", (string)number_format ($pres['dosage'], 2, ".", "
 	} else {
 		$f3 = $time3;
 	}
+	if($pres['form'] == 3)
+	{
+		$HTML .='deep i/m once in every &nbsp'. $pres['duration'].'&nbsp;';
+		
+	}else
+	{
 $HTML .= $f1.'-'.$f2.'-'.$f3.'&nbsp for '. $pres['duration'].'&nbsp;';
+	}
 	 if($pres['time_frame']==1) {
 		 $frame = "Day(s)";
 	 } else if($pres['time_frame']==2) {

@@ -600,9 +600,14 @@ $this->assign("PREVIOUS_LAB", $prev_lab);
 		{
 		$time_frame="Year(s)";
 		}
-		
+		if($p->get_form()==3)
+		{
+			$body = '<b>' .$form . '. ' . $p->get_drug() . ' ' . $p->get_dosage() . ' ' . $p->get_unit_display().' '.'deep i/m once in every'.' '.$p->get_duration().' '.$time_frame;
+		}else
+		{
 		//$body = '<b>' .$form . '. ' . $p->get_drug() . ' ' . $p->get_dosage() . ' ' . $p->get_unit_display().' '.$p->get_drug_intervals().' '.'('.$p->get_drug_meal_time().')'.'for'.' '.$p->get_duration().' '.$time_frame;
 		$body = '<b>' .$form . '. ' . $p->get_drug() . ' ' . $p->get_dosage() . ' ' . $p->get_unit_display().' '.$p->get_drug_intervals().' '.'for'.' '.$p->get_duration().' '.$time_frame;	
+		}
 		/*if ($p->get_form()) $body .= ' [' . $p->form_array[$p->get_form()] . "]";*/
 		$body .= "</b>     <i>" .
 			$p->substitute_array[$p->get_substitute()] . "</i>\n" .
