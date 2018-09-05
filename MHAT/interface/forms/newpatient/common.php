@@ -399,12 +399,31 @@ function getRatePlan(plan)
 
     </div> -->
 	<div class="form-group">
+     <label><?php echo xlt('Prescribed By:'); ?></label>
+     
+<?php
+  $ures = sqlStatement("SELECT id, title,username, fname, lname FROM users WHERE " .
+  "authorized != 0 AND active = 1 and prescriber=1 ORDER BY lname, fname");
+   echo "<select name='form_prescriber' class='form-control' style='width:100%' />";
+    while ($urow = sqlFetchArray($ures)) {
+      echo "    <option value='" . attr($urow['id']) . "'";
+	 
+      if ($urow['id'] == $_SESSION['authUserID']) echo " selected";
+      echo ">" . text($urow['title']).text($urow['fname']);
+      if ($urow['lname']) echo " " . text($urow['lname']);
+      echo "</option>\n";
+    }
+    echo "</select>";
+?>
+    </div>
+	<div class="form-group">
      <label><?php echo xlt('Next Appointment:'); ?></label>
 
 <a href="<?php echo $GLOBALS['webroot'] ?>/interface/main/calendar/add_edit_event.php?patientid=<?php echo $pid; ?>&startampm=1&starttimeh=9&starttimem=0&userid=0&catid=0" class="iframe"><span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span></a>
-					</div><br>
+					</div>
+					<br>
       <select style="visibility:hidden;position:absolute;opacity:0" name='facility_id' onChange="bill_loc()">
 <?php
 

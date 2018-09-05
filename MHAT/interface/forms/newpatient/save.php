@@ -40,6 +40,7 @@ $billing_facility = (isset($_POST['billing_facility']))     ? $_POST['billing_fa
 $reason           = (isset($_POST['reason']))               ? $_POST['reason'] : '';
 $mode             = (isset($_POST['mode']))                 ? $_POST['mode'] : '';
 $provider_id      = (isset($_POST['form_provider'])) ? $_POST['form_provider'] : '';
+$prescriber     = (isset($_POST['form_prescriber'])) ? $_POST['form_prescriber'] : '';
 $referral_source  = (isset($_POST['form_referral_source'])) ? $_POST['form_referral_source'] : '';
 $tpaid            = (isset($_POST['instpa'])) ? $_POST['instpa'] : '';
 $package          = (isset($_POST['package'])) ? $_POST['package'] : '';
@@ -105,6 +106,7 @@ if ($mode == 'new')
       "encounter = '" . add_escape_custom($encounter) . "', " .
 	  "tpa_id = '" . add_escape_custom($tpaid) . "', " .
 	  "package = '" . add_escape_custom($package) . "', " .
+	  "prescriber = '" . add_escape_custom($prescriber) . "', " .
       "provider_id = '" . add_escape_custom($provider_id) . "'"),
       "newpatient", $pid, $userauthorized, $date);
 	
@@ -271,6 +273,7 @@ else if ($mode == 'update')
 	"provider_id = '" . add_escape_custom($provider_id) . "', " .
 	"tpa_id = '" . add_escape_custom($tpaid) . "', " .
 	"package = '" . add_escape_custom($package) . "', " .
+	"prescriber = '" . add_escape_custom($prescriber) . "', " .
     "referral_source = '" . add_escape_custom($referral_source) . "' " .
     "WHERE id = '" . add_escape_custom($id) . "'");
 

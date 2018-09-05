@@ -40,7 +40,8 @@ class C_Prescription extends Controller {
 
 			// $res = sqlStatement("SELECT * FROM drugs ORDER BY selector");
            $qry2 = "SELECT * from prescriptions join (
-SELECT distinct form_encounter.encounter FROM `prescriptions` left join form_encounter on prescriptions.encounter=form_encounter.encounter AND  prescriptions.patient_id=form_encounter.pid
+SELECT distinct form_encounter.encounter FROM `prescriptions` left join form_encounter on prescriptions.encounter=form_encounter.encounter AND  
+prescriptions.patient_id=form_encounter.pid
 and  patient_id = ? 
 ORDER by patient_id, encounter desc limit 1,1)a on prescriptions.encounter=a.encounter where stp=0";
 $encounter = $_SESSION["encounter"];
@@ -59,7 +60,7 @@ $time_frame .= 'N/A <br>';
 	$time_frame .= 'Day(s) <br>';
 }
 elseif($pres['time_frame'] == 2) {
-	$time_frame .= 'Weeks(s) <br>';
+	$time_frame .= 'Week(s) <br>';
 }
 elseif($pres['time_frame'] == 3) {
 	$time_frame .= 'Month(s) <br>';
@@ -559,12 +560,28 @@ $this->assign("PREVIOUS_LAB", $prev_lab);
 	}
 
         function multiprintcss_footer() {
+			$visit_pres=sqlStatement("select prescriber from form_encounter where encounter='".$_SESSION['encounter']."'");
+			$visit_pres1=sqlFetchArray($visit_pres);
+			$visit_pres2=$visit_pres1['prescriber'];
+			if($visit_pres2==51)
+			{
+				echo ("<div class='signdiv'>\n");
+				 echo (xl('Signature').":"."<img src='./interface/pic/Parmez_sig.jpg' />"." <br><br>");
+				
+                echo (xl('Date of Dispensing') . ": &nbsp;&nbsp;&nbsp;" . date('d/M/y'));
+	        echo ("</div>\n");
+                echo ("</div>\n");
+				
+				
+				
+			}else{
 	        echo ("<div class='signdiv'>\n");
 				 echo (xl('Signature').":"."<img src='./interface/pic/Manoj_sig.jpeg' />"." <br><br>");
 				
                 echo (xl('Date of Dispensing') . ": &nbsp;&nbsp;&nbsp;" . date('d/M/y'));
 	        echo ("</div>\n");
                 echo ("</div>\n");
+			}
         }
 
         function multiprintcss_postfooter() {
