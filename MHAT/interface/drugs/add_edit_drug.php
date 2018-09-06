@@ -180,24 +180,70 @@ if (($_POST['form_save'] || $_POST['form_delete']) && !$alertmsg) {
      "WHERE drug_id = ?", array($drug_id));
 	  if(escapedff('form_size'))
 	  {
+		   $id4=sqlStatement("SELECT id FROM drug_dosage WHERE drug_id ='".$drug_id."' ORDER BY id LIMIT 1");
+		  $id5=sqlFetchArray($id4);
+		  $id6=$id5['id'];
+		    if($id6 !=null)
+		  {
 		  sqlStatement("UPDATE drug_dosage SET dosage_quantity ='".escapedff('form_size')."' WHERE drug_id='".$drug_id."' LIMIT 1");
+		  }else
+		  {
+			sqlInsert("INSERT INTO drug_dosage(drug_id,dosage_quantity,dosage_units) VALUES(?,?,?)",array($drug_id,escapedff('form_size'),'mg'));  
+		  }
+	  
 	  }
 	 if(escapedff('form_size1'))
 	  {
+		  $id=sqlStatement("SELECT id FROM drug_dosage WHERE drug_id ='".$drug_id."' ORDER BY id LIMIT 1,1");
+		  $id1=sqlFetchArray($id);
+		  $id3=$id1['id'];
+		  if($id3 !=null)
+		  {
 	 sqlStatement("UPDATE drug_dosage SET dosage_quantity ='".escapedff('form_size1')."' WHERE id IN (SELECT * FROM(SELECT id FROM drug_dosage WHERE drug_id ='".$drug_id."' ORDER BY id LIMIT 1,1)as t)");
-      }
+		  }else
+		  {
+			sqlInsert("INSERT INTO drug_dosage(drug_id,dosage_quantity,dosage_units) VALUES(?,?,?)",array($drug_id,escapedff('form_size1'),'mg'));
+		  }
+	  }
 	   if(escapedff('form_size2'))
 	  {
+		   $id7=sqlStatement("SELECT id FROM drug_dosage WHERE drug_id ='".$drug_id."' ORDER BY id LIMIT 2,1");
+		  $id8=sqlFetchArray($id7);
+		  $id9=$id8['id'];
+		  if($id9 !=null)
+		  {
 	 sqlStatement("UPDATE drug_dosage SET dosage_quantity ='".escapedff('form_size2')."' WHERE id IN (SELECT * FROM(SELECT id FROM drug_dosage WHERE drug_id ='".$drug_id."' ORDER BY id LIMIT 2,1)as t)");
-      }
+		  }else
+		  {
+			sqlInsert("INSERT INTO drug_dosage(drug_id,dosage_quantity,dosage_units) VALUES(?,?,?)",array($drug_id,escapedff('form_size2'),'mg'));  
+		  }
+	  
+	 }
 	   if(escapedff('form_size3'))
 	  {
+		   $id10=sqlStatement("SELECT id FROM drug_dosage WHERE drug_id ='".$drug_id."' ORDER BY id LIMIT 2,1");
+		  $id11=sqlFetchArray($id10);
+		  $id12=$id11['id'];
+		   if($id12 !=null)
+		   {
 	 sqlStatement("UPDATE drug_dosage SET dosage_quantity ='".escapedff('form_size3')."' WHERE id IN (SELECT * FROM(SELECT id FROM drug_dosage WHERE drug_id ='".$drug_id."' ORDER BY id LIMIT 3,1)as t)");
-      }
+      }else
+	  {
+		sqlInsert("INSERT INTO drug_dosage(drug_id,dosage_quantity,dosage_units) VALUES(?,?,?)",array($drug_id,escapedff('form_size3'),'mg'));    
+	  }
+	  }
 	   if(escapedff('form_size4'))
 	  {
+		  $id13=sqlStatement("SELECT id FROM drug_dosage WHERE drug_id ='".$drug_id."' ORDER BY id LIMIT 2,1");
+		  $id14=sqlFetchArray($id13);
+		  $id15=$id14['id'];
+		  if($id15 !=null){
 	 sqlStatement("UPDATE drug_dosage SET dosage_quantity ='".escapedff('form_size4')."' WHERE id IN (SELECT * FROM(SELECT id FROM drug_dosage WHERE drug_id ='".$drug_id."' ORDER BY id LIMIT 4,1)as t)");
-      }
+		  }else
+		  {
+			  sqlInsert("INSERT INTO drug_dosage(drug_id,dosage_quantity,dosage_units) VALUES(?,?,?)",array($drug_id,escapedff('form_size4'),'mg'));    
+		  }
+	  }
 	sqlStatement("DELETE FROM drug_templates WHERE drug_id = ?", array($drug_id));
    }
    else { // deleting
