@@ -221,7 +221,7 @@ if (($_POST['form_save'] || $_POST['form_delete']) && !$alertmsg) {
 	 }
 	   if(escapedff('form_size3'))
 	  {
-		   $id10=sqlStatement("SELECT id FROM drug_dosage WHERE drug_id ='".$drug_id."' ORDER BY id LIMIT 2,1");
+		   $id10=sqlStatement("SELECT id FROM drug_dosage WHERE drug_id ='".$drug_id."' ORDER BY id LIMIT 3,1");
 		  $id11=sqlFetchArray($id10);
 		  $id12=$id11['id'];
 		   if($id12 !=null)
@@ -234,7 +234,7 @@ if (($_POST['form_save'] || $_POST['form_delete']) && !$alertmsg) {
 	  }
 	   if(escapedff('form_size4'))
 	  {
-		  $id13=sqlStatement("SELECT id FROM drug_dosage WHERE drug_id ='".$drug_id."' ORDER BY id LIMIT 2,1");
+		  $id13=sqlStatement("SELECT id FROM drug_dosage WHERE drug_id ='".$drug_id."' ORDER BY id LIMIT 4,1");
 		  $id14=sqlFetchArray($id13);
 		  $id15=$id14['id'];
 		  if($id15 !=null){
