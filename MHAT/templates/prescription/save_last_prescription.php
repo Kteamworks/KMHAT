@@ -3,7 +3,7 @@ require_once("../../interface/globals.php");
 $qry2 = "SELECT * from prescriptions join (
 SELECT distinct form_encounter.encounter FROM `prescriptions` left join form_encounter on prescriptions.encounter=form_encounter.encounter AND  prescriptions.patient_id=form_encounter.pid
 and  patient_id = ? 
-ORDER by patient_id, encounter desc limit 1,1)a on prescriptions.encounter=a.encounter";
+ORDER by patient_id, encounter desc limit 1,1)a on prescriptions.encounter=a.encounter where stp=0 and deleted=0";
 
 $encounter = $_SESSION["encounter"];
 $pid = $_SESSION["pid"];

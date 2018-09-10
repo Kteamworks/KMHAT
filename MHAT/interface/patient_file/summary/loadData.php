@@ -66,7 +66,7 @@ $strip = $createDate->format('F j, Y');
   $qry2 = "SELECT *
 FROM prescriptions
 WHERE patient_id = ?
-AND encounter = ?";
+AND encounter = ? AND deleted=0";
           $prescription = sqlStatement($qry2, array($pid,$row['encounter']));
 		 
    $doctorname = sqlStatement("SELECT username FROM users WHERE id=?", array($row['provider_id']));  
@@ -321,7 +321,8 @@ $HTML .= $f1.'-'.$f2.'-'.$f3.'&nbsp for '. $pres['duration'].'&nbsp;';
 	 } else {
 		 $frame = "Week(s)";
 	 }
-	 $HTML.=$frame.'<a id="'. $pres['id'].'"  class="editscript" data-toggle="modal" data-target="#myModal'. $pres['id'].'">&nbsp;&nbsp;<span><i class="fa fa-pencil-square-o" data-toggle="tooltip" data-placement="top" title="Edit Prescription" aria-hidden="true"></i></span></a>
+	 $HTML.=$frame.'<a href="'.$root.'/interface/patient_file/encounter/delete_prescription.php?id='. $pres['id'] .'" id="'. $pres['id'].'" class="element iframe pull-right" target="_parent" onclick="top.restoreSession()" data-toggle="modal" data-target="#myModal'. $pres['id'].'">&nbsp;&nbsp;<span><i class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="Delete Prescription" aria-hidden="true"></i></span></a>';
+	 $HTML.='<a id="'. $pres['id'].'"  class="editscript" data-toggle="modal" data-target="#myModal'. $pres['id'].'">&nbsp;&nbsp;<span><i class="fa fa-pencil-square-o" data-toggle="tooltip" data-placement="top" title="Edit Prescription" aria-hidden="true"></i></span></a>
 <form  id="dosage-form'. $pres['id'].'" action="'.$root.'/templates/prescription/edittypeprescription.php" method="POST" >
     <input id="srt'. $pres['id'].'" name="question" type="checkbox" class="with-font srt"  onclick="calc(\'srt'. $pres['id'].'\');"/>
     <label for="srt'. $pres['id'].'"';
