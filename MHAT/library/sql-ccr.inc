@@ -63,7 +63,6 @@ function getMedicationData() {
       ON lo2.list_id = 'drug_form' AND prescriptions.form = lo2.option_id
       WHERE prescriptions.patient_id = ?
       AND prescriptions.date_added BETWEEN ? AND ?
-	  AND prescriptions.deleted=0
       UNION
       SELECT 
         DATE(DATE) AS date_added,
@@ -111,7 +110,6 @@ function getMedicationData() {
       LEFT JOIN list_options AS lo2
       ON lo2.list_id = 'drug_form' AND prescriptions.form = lo2.option_id
       WHERE prescriptions.patient_id = ?
-	  AND prescriptions.deleted=0
       UNION
       SELECT 
         DATE(DATE) AS date_added,

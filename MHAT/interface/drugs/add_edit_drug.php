@@ -244,18 +244,6 @@ if (($_POST['form_save'] || $_POST['form_delete']) && !$alertmsg) {
 			  sqlInsert("INSERT INTO drug_dosage(drug_id,dosage_quantity,dosage_units) VALUES(?,?,?)",array($drug_id,escapedff('form_size4'),'mg'));    
 		  }
 	  }
-	   if(escapedff('form_size5'))
-	  {
-		  $id16=sqlStatement("SELECT id FROM drug_dosage WHERE drug_id ='".$drug_id."' ORDER BY id LIMIT 5,1");
-		  $id17=sqlFetchArray($id16);
-		  $id18=$id17['id'];
-		  if($id18 !=null){
-	 sqlStatement("UPDATE drug_dosage SET dosage_quantity ='".escapedff('form_size5')."' WHERE id IN (SELECT * FROM(SELECT id FROM drug_dosage WHERE drug_id ='".$drug_id."' ORDER BY id LIMIT 5,1)as t)");
-		  }else
-		  {
-			  sqlInsert("INSERT INTO drug_dosage(drug_id,dosage_quantity,dosage_units) VALUES(?,?,?)",array($drug_id,escapedff('form_size5'),'mg'));    
-		  }
-	  }
 	sqlStatement("DELETE FROM drug_templates WHERE drug_id = ?", array($drug_id));
    }
    else { // deleting
@@ -305,10 +293,6 @@ if (($_POST['form_save'] || $_POST['form_delete']) && !$alertmsg) {
 	  if(escapedff('form_size4'))
 	  {
 	sqlInsert("INSERT INTO drug_dosage(drug_id,dosage_quantity,dosage_units) VALUES(?,?,?)",array($drug_id,escapedff('form_size4'),'mg'));
-	  }
-	  if(escapedff('form_size5'))
-	  {
-	sqlInsert("INSERT INTO drug_dosage(drug_id,dosage_quantity,dosage_units) VALUES(?,?,?)",array($drug_id,escapedff('form_size5'),'mg'));
 	  }
   }
 
@@ -385,7 +369,6 @@ if ($drug_id) {
    $row3=sqlQuery("SELECT * from drug_dosage WHERE drug_id=? limit 2,1", array($drug_id));
    $row4=sqlQuery("SELECT * from drug_dosage WHERE drug_id=? limit 3,1", array($drug_id));
    $row5=sqlQuery("SELECT * from drug_dosage WHERE drug_id=? limit 4,1", array($drug_id));
-    $row6=sqlQuery("SELECT * from drug_dosage WHERE drug_id=? limit 5,1", array($drug_id));
    
 }
 else {
@@ -549,7 +532,6 @@ if($row['on_order']>0)
    <input type='text' size='5' name='form_size2' maxlength='7' value='<?php echo attr($row3['dosage_quantity']) ?>' />
    <input type='text' size='5' name='form_size3' maxlength='7' value='<?php echo attr($row4['dosage_quantity']) ?>' />
    <input type='text' size='5' name='form_size4' maxlength='7' value='<?php echo attr($row5['dosage_quantity']) ?>' />
-    <input type='text' size='5' name='form_size5' maxlength='7' value='<?php echo attr($row6['dosage_quantity']) ?>' />
   </td>
  </tr>
 

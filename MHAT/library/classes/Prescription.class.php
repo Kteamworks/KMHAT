@@ -655,7 +655,7 @@ function set_duration($duration) {
         $prescriptions = array();
         require_once (dirname(__FILE__) . "/../translation.inc.php");
         $p = new Prescription();
-        $sql = "SELECT id FROM  " . $p->_table . " WHERE deleted=0 and patient_id = " .
+        $sql = "SELECT id FROM  " . $p->_table . " WHERE patient_id = " .
                 mysql_real_escape_string($patient_id) .
                 " ORDER BY " . mysql_real_escape_string($order_by);
         $results = sqlQ($sql);
