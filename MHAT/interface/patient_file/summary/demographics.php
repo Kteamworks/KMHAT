@@ -1515,6 +1515,7 @@ expand_collapse_widget($widgetTitle, $widgetLabel, $widgetButtonLabel,
         </div> <!-- required for expand_collapse_widget -->
        </td>
       </tr>
+	 <br><br>
       <tr>
        <td>
 	   

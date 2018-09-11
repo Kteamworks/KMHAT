@@ -402,6 +402,8 @@ $this->assign("PREVIOUS_LAB", $prev_lab);
 			"WHERE encounter = '$enc' and e.provider_id=u.id ");
 			$consbrief=$prow['reason'];
 			$doctor=$prow['un'];
+			$doctor_name=sqlQuery("SELECT prescriber from form_encounter where encounter = '".$enc."'");
+			$doc=$doctor_name['prescriber'];
 	        echo ("</td>\n");
 	        echo ("</tr>\n");
 			echo("<br>");
@@ -414,7 +416,21 @@ $this->assign("PREVIOUS_LAB", $prev_lab);
 			  echo ('<b><span class="small" >' . xl('Date: ').'</b>' . date('d/m/Y H:i:s') .'</span></b>' . '<br>');
 			   echo("</td>\n");
 			   echo ("</tr>\n");
+			   if($doc==51)
+			   {
 			echo ("<tr>\n");
+			echo("<td align='center'>\n");
+			   echo ('<b style="float:middle"><span class="small" >' . xl('Dr. Parvez Thekkumpurath MBBS; MRCPsych') . '</span></b>'. '<br>');
+			   echo("</td>\n");
+			echo ("</tr>\n");
+			echo ("<tr>\n");
+			echo("<td align='center'>\n");
+			echo ('<b style="float:middle"><span class="small" >' . xl('Registration No: 28550 (T C Medical Council)') . '</span></b>'. '<br>');
+		 echo("</td>\n");
+			 echo ("</tr>\n");
+			   }else
+			   {
+				 echo ("<tr>\n");
 			echo("<td align='center'>\n");
 			   echo ('<b style="float:middle"><span class="small" >' . xl('Dr T Manoj Kumar, MBBS;DPM;MD; FRCPsych') . '</span></b>'. '<br>');
 			   echo("</td>\n");
@@ -423,7 +439,8 @@ $this->assign("PREVIOUS_LAB", $prev_lab);
 			echo("<td align='center'>\n");
 			echo ('<b style="float:middle"><span class="small" >' . xl('Registration No: 13954 (T C Medical Council)') . '</span></b>'. '<br>');
 		 echo("</td>\n");
-			 echo ("</tr>\n");
+			 echo ("</tr>\n");  
+				    }
 	        echo ("<tr>\n");
 			echo ("<td >");
                 echo ('<b><span class="small" >' . xl('Patient Name: ').'</b>' . $p->patient->get_name_display() .'</span></b>' . '<br>');

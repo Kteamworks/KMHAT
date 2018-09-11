@@ -1,6 +1,3 @@
-@@ -0,0 +1,112 @@
-
-
 <?php
 
 include_once("../../globals.php");
@@ -73,7 +70,6 @@ $today = date('Y-m-d H:i:s',strtotime("+0 days"));
 ?>
 </table>
 <input type="button" id="confirmbtn" name="confirmbtn" value="Yes, Delete this Prescription">
-<input type="button" id="cancel" name="cancel" value="Cancel">
 </form>
 
 </body>
