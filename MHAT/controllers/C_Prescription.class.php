@@ -402,8 +402,9 @@ $this->assign("PREVIOUS_LAB", $prev_lab);
 			"WHERE encounter = '$enc' and e.provider_id=u.id ");
 			$consbrief=$prow['reason'];
 			$doctor=$prow['un'];
-			$doctor_name=sqlQuery("SELECT prescriber from form_encounter where encounter = '".$enc."'");
-			$doc=$doctor_name['prescriber'];
+			$visit_pres=sqlStatement("select prescriber from form_encounter where encounter='".$_SESSION['encounter']."'");
+			$visit_pres1=sqlFetchArray($visit_pres);
+			$visit_pres2=$visit_pres1['prescriber'];
 	        echo ("</td>\n");
 	        echo ("</tr>\n");
 			echo("<br>");
@@ -416,7 +417,7 @@ $this->assign("PREVIOUS_LAB", $prev_lab);
 			  echo ('<b><span class="small" >' . xl('Date: ').'</b>' . date('d/m/Y H:i:s') .'</span></b>' . '<br>');
 			   echo("</td>\n");
 			   echo ("</tr>\n");
-			   if($doc==51)
+			   if($visit_pres2==51)
 			   {
 			echo ("<tr>\n");
 			echo("<td align='center'>\n");
