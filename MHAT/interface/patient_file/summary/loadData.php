@@ -165,6 +165,21 @@ $HTML .= '<tr>
 	} else {
 		$f3 = $time3;
 	}
+	
+	if($time1 == 5) {
+		$f1= '<span>1 SOS</span>';
+	} else {
+		$f1 = $time1;
+	}
+	if($time2 == 5) {
+		$f2= '<span>1 SOS</span>';
+	} else {
+		$f2 = $time2;
+	}	if($time3 == 5) {
+		$f3= '<span>1 SOS</span>';
+	} else {
+		$f3 = $time3;
+	}
 	if($pres['form'] == 3) {
 	$HTML .='deep i/m once in every &nbsp'. $pres['duration'].'&nbsp;';
 	}else
@@ -301,6 +316,20 @@ $qtyz = str_replace(".00", "", (string)number_format ($pres['dosage'], 2, ".", "
 		$f2 = $time2;
 	}	if($time3 == 0.5) {
 		$f3= '<span>&#189;</span>';
+	} else {
+		$f3 = $time3;
+	}
+	if($time1 == 5) {
+		$f1= '<span>1 SOS</span>';
+	} else {
+		$f1 = $time1;
+	}
+	if($time2 == 5) {
+		$f2= '<span>1 SOS</span>';
+	} else {
+		$f2 = $time2;
+	}	if($time3 == 5) {
+		$f3= '<span>1 SOS</span>';
 	} else {
 		$f3 = $time3;
 	}
@@ -518,6 +547,12 @@ function calc(type){
 	}
 		$HTML .='
 	>4</option>
+	 <option value="5"';
+	if($time1 == 5) {
+		$HTML .= 'selected';
+	}
+		$HTML .='
+	><span>1 SOS</span></option>
  </select>
  <select name="take2" style="width:45px" ng-model="take2"  ng-required="false">
     <option value="0"';
@@ -556,6 +591,12 @@ function calc(type){
 	}
 		$HTML .='
 	>4</option>
+	<option value="5"';
+	if($time2 == 5) {
+		$HTML .= 'selected';
+	}
+		$HTML .='
+	><span>1 SOS</span></option>
  </select>
  <select name="take3" style="width:45px" ng-model="take3"  ng-required="false">
    <option value="0"';
@@ -595,6 +636,12 @@ function calc(type){
 	}
 		$HTML .='
 	>4</option>
+	<option value="5"';
+	if($time3 == 5) {
+		$HTML .= 'selected';
+	}
+		$HTML .='
+	><span>1 SOS</span></option>
  </select> 
             <!-- <select name="name" ng-model="name"  style="width:150px" ng-required="false">
   <option value="BF"';
