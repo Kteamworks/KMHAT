@@ -547,7 +547,7 @@ function calc(type){
 	}
 		$HTML .='
 	>4</option>
-	 <option value="5"';
+	 <option value="1 SOS"';
 	if($time1 == 5) {
 		$HTML .= 'selected';
 	}
@@ -591,7 +591,7 @@ function calc(type){
 	}
 		$HTML .='
 	>4</option>
-	<option value="5"';
+	<option value="1 SOS"';
 	if($time2 == 5) {
 		$HTML .= 'selected';
 	}
@@ -636,7 +636,7 @@ function calc(type){
 	}
 		$HTML .='
 	>4</option>
-	<option value="5"';
+	<option value="1 SOS"';
 	if($time3 == 5) {
 		$HTML .= 'selected';
 	}
