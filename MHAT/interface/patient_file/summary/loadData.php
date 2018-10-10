@@ -166,16 +166,16 @@ $HTML .= '<tr>
 		$f3 = $time3;
 	}
 	
-	if($time1 == 5) {
+	if($time1 == "1 SOS") {
 		$f1= '<span>1 SOS</span>';
 	} else {
 		$f1 = $time1;
 	}
-	if($time2 == 5) {
+	if($time2 == "1 SOS") {
 		$f2= '<span>1 SOS</span>';
 	} else {
 		$f2 = $time2;
-	}	if($time3 == 5) {
+	}	if($time3 == "1 SOS") {
 		$f3= '<span>1 SOS</span>';
 	} else {
 		$f3 = $time3;
@@ -319,16 +319,16 @@ $qtyz = str_replace(".00", "", (string)number_format ($pres['dosage'], 2, ".", "
 	} else {
 		$f3 = $time3;
 	}
-	if($time1 == 5) {
+	if($time1 == "1 SOS") {
 		$f1= '<span>1 SOS</span>';
 	} else {
 		$f1 = $time1;
 	}
-	if($time2 == 5) {
+	if($time2 == "1 SOS") {
 		$f2= '<span>1 SOS</span>';
 	} else {
 		$f2 = $time2;
-	}	if($time3 == 5) {
+	}	if($time3 == "1 SOS") {
 		$f3= '<span>1 SOS</span>';
 	} else {
 		$f3 = $time3;
@@ -548,7 +548,7 @@ function calc(type){
 		$HTML .='
 	>4</option>
 	 <option value="1 SOS"';
-	if($time1 == 5) {
+	if($time1 == "1 SOS") {
 		$HTML .= 'selected';
 	}
 		$HTML .='
@@ -592,7 +592,7 @@ function calc(type){
 		$HTML .='
 	>4</option>
 	<option value="1 SOS"';
-	if($time2 == 5) {
+	if($time2 == "1 SOS") {
 		$HTML .= 'selected';
 	}
 		$HTML .='
@@ -637,7 +637,7 @@ function calc(type){
 		$HTML .='
 	>4</option>
 	<option value="1 SOS"';
-	if($time3 == 5) {
+	if($time3 == "1 SOS") {
 		$HTML .= 'selected';
 	}
 		$HTML .='
