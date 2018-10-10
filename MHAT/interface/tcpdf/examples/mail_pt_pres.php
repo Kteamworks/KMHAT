@@ -72,7 +72,9 @@ $facility = $result_patient['facility_id'];
 $pgender = $result_patient['sex'];
 
 $pstreet = $result_patient['street'];
-
+	$visit_pres=sqlStatement("select prescriber from form_encounter where encounter='".$ent."'");
+			$visit_pres1=sqlFetchArray($visit_pres);
+			$visit_pres2=$visit_pres1['prescriber'];
   while ($row = sqlFetchArray($prescription)) { 
 	  $prescriptions[] = $row;
   }
@@ -159,8 +161,15 @@ $message .= '<tr>
 		  
 $message .='
 </tbody>
-</table><br><br><div class="signdiv">
-Signature:         ________________________________<br><br>Dispensed By: &nbsp;&nbsp;&nbsp;<br><br>Date of Dispensing: &nbsp;&nbsp;&nbsp;'.$strip.'</div></div>';
+</table><br><br><div class="signdiv">';
+if($visit_pres2==51)
+{
+ echo (xl('Signature').":"."<img src='images/Parmez_sig.jpg' />"." <br><br>");
+}else
+{
+ echo (xl('Signature').":"."<img src='images/Manoj_sig.jpeg' />"." <br><br>");	
+}
+'<br><br>Dispensed By: &nbsp;&nbsp;&nbsp;<br><br>Date of Dispensing: &nbsp;&nbsp;&nbsp;'.$strip.'</div></div>';
 		$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false, true);
 
 	// set document information
