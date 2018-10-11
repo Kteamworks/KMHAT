@@ -79,6 +79,94 @@ $pstreet = $result_patient['street'];
 	  $prescriptions[] = $row;
   }
 $logo = '<img class="pull-left" style="width: 100%" src="images/image.jpg"  alt="image">';
+if($visit_pres2==51)
+{
+$message .= '<div style="  font: 87.5%/1.5em "Lato", sans-serif;
+  margin: 0;">
+<div style="   display: block;
+  margin: auto;
+  max-width: 600px;
+  padding:5px;
+  width: 100%;">
+<p style=" display: inline-block;vertical-align: top;"><b>Serial No:</b> '.$pserial.'</p>
+<p style=" display: inline-block;vertical-align: top;float:right"><b>Date:</b> '.$strip.'</p>
+<p style="text-align: center">Dr. Parvez Thekkumpurath MBBS; MRCPsych</p>
+<p style="text-align: center">Registration No: 28550 (T C Medical Council)</p>
+<p style=" display: inline-block;vertical-align: top;"><b>Patient Full Name:</b> '.$pfname.' '.$plname.' '.$pmname.'</p>
+<p  style=" display: inline-block;vertical-align: top;float:right" ><b>Gender:</b> '.$pgender.'</p>
+<p style=" display: inline-block;vertical-align: top;"><b>Patient’s Address and Phone number:</b> '.$pstreet.', '.$pmob.'</p><p  style=" display: inline-block;vertical-align: top;float:right"><b>Age:</b> '.$page.' Years</p>
+</div>
+<table style="  border-radius:3px;
+  border-collapse: collapse;
+  height: 320px;
+  margin: auto;
+  max-width: 600px;
+  padding:5px;
+  width: 100%;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  animation: float 5s infinite;">
+<thead>
+<tr style="  border-top: 1px solid #C1C3D1;
+  border-bottom-: 1px solid #C1C3D1;
+  color:#666B85;
+  font-size:16px;
+  font-weight:normal;
+  text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);">
+<th class="text-left" style="  color:#D5DDE5;
+  background:#1b1e24;
+  border-bottom:4px solid #9ea7af;
+  border-right: 1px solid #343a45;
+  font-size:23px;
+  font-weight: 100;
+  padding:24px;
+  text-align:left;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  vertical-align:middle;">Drug</th>
+<th class="text-left" style="  color:#D5DDE5;
+  background:#1b1e24;
+  border-bottom:4px solid #9ea7af;
+  border-right: 1px solid #343a45;
+  font-size:23px;
+  font-weight: 100;
+  padding:24px;
+  text-align:left;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  vertical-align:middle;">Prescription</th>
+</tr>
+</thead>
+<tbody class="table-hover">';
+ 		  foreach($prescriptions as $pres) {
+			  
+		 if($pres['form'] == 1) { $drug_form = 'TAB'; }
+			else if($pres['form'] == 2) { $drug_form = 'SYR'; }
+			else if($pres['form'] == 3) { $drug_form = 'INJ'; }
+			$qtyz = str_replace(".00", "", (string)number_format ($pres['dosage'], 2, ".", ""));
+$message .= '<tr>
+<td class="text-left" style="  background:#FFFFFF;
+  padding:20px;
+  text-align:left;
+  vertical-align:middle;
+  font-weight:300;
+  font-size:18px;
+  text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #C1C3D1;">'.$drug_form.'.&nbsp; '.$pres['drug'].'&nbsp; '.$qtyz.' mg</td>
+<td class="text-left" style="  background:#FFFFFF;
+  padding:20px;
+  text-align:left;
+  vertical-align:middle;
+  font-weight:300;
+  font-size:18px;
+  text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #C1C3D1;">'.$pres['drug_intervals'].' ('. $pres['drug_meal_time'] .') for '.$pres['duration'].' Weeks</td>
+</tr>';
+		  }
+		  
+$message .='
+</tbody>
+</table><br><br>
+<div class="signdiv">
+Signature:<img src="images/Parmez_sig.jpg" /><br><br>Dispensed By: &nbsp;&nbsp;&nbsp;<br><br>Date of Dispensing: &nbsp;&nbsp;&nbsp;'.$strip.'</div></div>';
+}else{
 $message .= '<div style="  font: 87.5%/1.5em "Lato", sans-serif;
   margin: 0;">
 <div style="   display: block;
@@ -161,15 +249,15 @@ $message .= '<tr>
 		  
 $message .='
 </tbody>
-</table><br><br><div class="signdiv">';
-if($visit_pres2==51)
-{
- echo (xl('Signature').":"."<img src='images/Parmez_sig.jpg' />"." <br><br>");
-}else
-{
- echo (xl('Signature').":"."<img src='images/Manoj_sig.jpeg' />"." <br><br>");	
+</table><br><br><div class="signdiv">
+Signature: <img src="images/Manoj_sig.jpeg" /><br><br>Dispensed By: &nbsp;&nbsp;&nbsp;<br><br>Date of Dispensing: &nbsp;&nbsp;&nbsp;'.$strip.'</div></div>';	
+	
+	
+	
+	
+	
 }
-'<br><br>Dispensed By: &nbsp;&nbsp;&nbsp;<br><br>Date of Dispensing: &nbsp;&nbsp;&nbsp;'.$strip.'</div></div>';
+
 		$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false, true);
 
 	// set document information
