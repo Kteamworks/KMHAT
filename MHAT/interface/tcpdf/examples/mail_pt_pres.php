@@ -140,7 +140,23 @@ $message .= '<div style="  font: 87.5%/1.5em "Lato", sans-serif;
 		 if($pres['form'] == 1) { $drug_form = 'TAB'; }
 			else if($pres['form'] == 2) { $drug_form = 'SYR'; }
 			else if($pres['form'] == 3) { $drug_form = 'INJ'; }
+			if($pres['time_frame']==1)
+		{
+			$time_frame1="Day(s)";
+	}else if($pres['time_frame']==2)
+		{
+			$time_frame1="Week(s)";
+		}else  if($pres['time_frame']==3)
+		{
+		$time_frame1="Month(s)";
+		}
+		else  if($pres['time_frame']==4)
+		{
+		$time_frame1="Year(s)";
+		}
 			$qtyz = str_replace(".00", "", (string)number_format ($pres['dosage'], 2, ".", ""));
+if($pres['form'] == 3)
+{
 $message .= '<tr>
 <td class="text-left" style="  background:#FFFFFF;
   padding:20px;
@@ -157,8 +173,32 @@ $message .= '<tr>
   font-weight:300;
   font-size:18px;
   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
-  border-right: 1px solid #C1C3D1;">'.$pres['drug_intervals'].' ('. $pres['drug_meal_time'] .') for '.$pres['duration'].' Weeks</td>
+  border-right: 1px solid #C1C3D1;"> deep i/m once in every '.$pres['duration'].' '.$time_frame1.'</td>
 </tr>';
+}else
+{
+	
+$message .= '<tr>
+<td class="text-left" style="  background:#FFFFFF;
+  padding:20px;
+  text-align:left;
+  vertical-align:middle;
+  font-weight:300;
+  font-size:18px;
+  text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #C1C3D1;">'.$drug_form.'.&nbsp; '.$pres['drug'].'&nbsp; '.$qtyz.' mg</td>
+<td class="text-left" style="  background:#FFFFFF;
+  padding:20px;
+  text-align:left;
+  vertical-align:middle;
+  font-weight:300;
+  font-size:18px;
+  text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #C1C3D1;">'.$pres['drug_intervals'].' ('. $pres['drug_meal_time'] .') for '.$pres['duration'].' '.$time_frame1.'</td>
+</tr>';	
+	
+	
+}
 		  }
 		  
 $message .='
@@ -226,7 +266,24 @@ $message .= '<div style="  font: 87.5%/1.5em "Lato", sans-serif;
 		 if($pres['form'] == 1) { $drug_form = 'TAB'; }
 			else if($pres['form'] == 2) { $drug_form = 'SYR'; }
 			else if($pres['form'] == 3) { $drug_form = 'INJ'; }
+			if($pres['time_frame']==1)
+		{
+			$time_frame1="Day(s)";
+	}else if($pres['time_frame']==2)
+		{
+			$time_frame1="Week(s)";
+		}else  if($pres['time_frame']==3)
+		{
+		$time_frame1="Month(s)";
+		}
+		else  if($pres['time_frame']==4)
+		{
+		$time_frame1="Year(s)";
+		}
+			
 			$qtyz = str_replace(".00", "", (string)number_format ($pres['dosage'], 2, ".", ""));
+if($pres['form'] == 3)
+{
 $message .= '<tr>
 <td class="text-left" style="  background:#FFFFFF;
   padding:20px;
@@ -243,8 +300,32 @@ $message .= '<tr>
   font-weight:300;
   font-size:18px;
   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
-  border-right: 1px solid #C1C3D1;">'.$pres['drug_intervals'].' ('. $pres['drug_meal_time'] .') for '.$pres['duration'].' Weeks</td>
+  border-right: 1px solid #C1C3D1;"> deep i/m once in every '.$pres['duration'].' '.$time_frame1.'</td>
 </tr>';
+}else
+{
+	
+$message .= '<tr>
+<td class="text-left" style="  background:#FFFFFF;
+  padding:20px;
+  text-align:left;
+  vertical-align:middle;
+  font-weight:300;
+  font-size:18px;
+  text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #C1C3D1;">'.$drug_form.'.&nbsp; '.$pres['drug'].'&nbsp; '.$qtyz.' mg</td>
+<td class="text-left" style="  background:#FFFFFF;
+  padding:20px;
+  text-align:left;
+  vertical-align:middle;
+  font-weight:300;
+  font-size:18px;
+  text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #C1C3D1;">'.$pres['drug_intervals'].' ('. $pres['drug_meal_time'] .') for '.$pres['duration'].' '.$time_frame1.'</td>
+</tr>';	
+	
+	
+}
 		  }
 		  
 $message .='
