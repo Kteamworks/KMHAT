@@ -52,7 +52,7 @@ $ent = $_POST['ent'];
  $qry2 = "SELECT *
 FROM prescriptions
 WHERE patient_id = ?
-AND encounter = ?";
+AND encounter = ? AND deleted=0";
           $prescription = sqlStatement($qry2, array($pid,$ent));
  if(sqlNumRows($prescription)!=0) {
 
