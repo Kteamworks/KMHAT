@@ -154,6 +154,8 @@ $message .= '<div style="  font: 87.5%/1.5em "Lato", sans-serif;
 		{
 		$time_frame1="Year(s)";
 		}
+		if($pres['unit']==7){ $units= 'mcg';}
+else {$units='mg';}
 			$qtyz = str_replace(".00", "", (string)number_format ($pres['dosage'], 2, ".", ""));
 if($pres['form'] == 3)
 {
@@ -165,7 +167,7 @@ $message .= '<tr>
   font-weight:300;
   font-size:18px;
   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
-  border-right: 1px solid #C1C3D1;">'.$drug_form.'.&nbsp; '.$pres['drug'].'&nbsp; '.$qtyz.' mg</td>
+  border-right: 1px solid #C1C3D1;">'.$drug_form.'.&nbsp; '.$pres['drug'].'&nbsp; '.$qtyz.''.$units.'</td>
 <td class="text-left" style="  background:#FFFFFF;
   padding:20px;
   text-align:left;
@@ -186,7 +188,7 @@ $message .= '<tr>
   font-weight:300;
   font-size:18px;
   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
-  border-right: 1px solid #C1C3D1;">'.$drug_form.'.&nbsp; '.$pres['drug'].'&nbsp; '.$qtyz.' mg</td>
+  border-right: 1px solid #C1C3D1;">'.$drug_form.'.&nbsp; '.$pres['drug'].'&nbsp; '.$qtyz.''.$units.'</td>
 <td class="text-left" style="  background:#FFFFFF;
   padding:20px;
   text-align:left;
@@ -266,6 +268,7 @@ $message .= '<div style="  font: 87.5%/1.5em "Lato", sans-serif;
 		 if($pres['form'] == 1) { $drug_form = 'TAB'; }
 			else if($pres['form'] == 2) { $drug_form = 'SYR'; }
 			else if($pres['form'] == 3) { $drug_form = 'INJ'; }
+			
 			if($pres['time_frame']==1)
 		{
 			$time_frame1="Day(s)";
@@ -280,7 +283,8 @@ $message .= '<div style="  font: 87.5%/1.5em "Lato", sans-serif;
 		{
 		$time_frame1="Year(s)";
 		}
-			
+			if($pres['unit']==7){ $units= 'mcg';}
+else {$units='mg';}
 			$qtyz = str_replace(".00", "", (string)number_format ($pres['dosage'], 2, ".", ""));
 if($pres['form'] == 3)
 {
@@ -292,7 +296,7 @@ $message .= '<tr>
   font-weight:300;
   font-size:18px;
   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
-  border-right: 1px solid #C1C3D1;">'.$drug_form.'.&nbsp; '.$pres['drug'].'&nbsp; '.$qtyz.' mg</td>
+  border-right: 1px solid #C1C3D1;">'.$drug_form.'.&nbsp; '.$pres['drug'].'&nbsp; '.$qtyz.''.$units.'</td>
 <td class="text-left" style="  background:#FFFFFF;
   padding:20px;
   text-align:left;
@@ -313,7 +317,7 @@ $message .= '<tr>
   font-weight:300;
   font-size:18px;
   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
-  border-right: 1px solid #C1C3D1;">'.$drug_form.'.&nbsp; '.$pres['drug'].'&nbsp; '.$qtyz.' mg</td>
+  border-right: 1px solid #C1C3D1;">'.$drug_form.'.&nbsp; '.$pres['drug'].'&nbsp; '.$qtyz.''.$units.'</td>
 <td class="text-left" style="  background:#FFFFFF;
   padding:20px;
   text-align:left;

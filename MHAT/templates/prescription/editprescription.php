@@ -17,8 +17,11 @@ $drug_units = explode('-',$_POST['units']);
 $drug_dosage = $drug_units[0];
 $drug_unit = $drug_units[1];
 $time_frame = $_POST['time_frame'];
+$drug = 'select * from drugs where drug_id ="' . $drug_id . '"  limit 1';
+	$drugs1 =  sqlStatement($drug);
+	$drugs = mysql_fetch_object($drugs1);
 // mysql_select_db('mhat', $con);
-$qry = 'UPDATE prescriptions SET note="'.$note.'",date_modified="'. date('Y-m-d h:i:s').'", drug_intervals="'.$drug_intervals.'",drug_meal_time="'.$quantity.'",form="'.$dosage.'",dosage="'.$drug_dosage.'",unit="1",duration="'.$duration.'",time_frame="'.$time_frame.'" where (id ="'. $pres_id .'" AND drug_id ="' . $drug_id . '" AND patient_id = "' . $ptid . '" AND encounter= "'.$ent.'")';
+$qry = 'UPDATE prescriptions SET note="'.$note.'",date_modified="'. date('Y-m-d h:i:s').'", drug_intervals="'.$drug_intervals.'",drug_meal_time="'.$quantity.'",form="'.$dosage.'",dosage="'.$drug_dosage.'",unit="'.$drugs->unit.'",duration="'.$duration.'",time_frame="'.$time_frame.'" where (id ="'. $pres_id .'" AND drug_id ="' . $drug_id . '" AND patient_id = "' . $ptid . '" AND encounter= "'.$ent.'")';
     $qry_res = sqlStatement($qry);
 	
     if ($qry_res) {

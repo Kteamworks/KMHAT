@@ -140,12 +140,14 @@ AND encounter = ? AND deleted=0";
 <tbody class="table-hover">';
  		  foreach($prescription as $pres) {
 			  if($pres['stp'] == 1) continue;
+			  if($pres['unit']==7){ $units= 'mcg';}
+else {$units='mg';}
 		 if($pres['form'] == 1) { $drug_form = 'TAB'; }
 			else if($pres['form'] == 2) { $drug_form = 'SYR'; }
 			else if($pres['form'] == 3) { $drug_form = 'INJ'; }
 			$qtyz = str_replace(".00", "", (string)number_format ($pres['dosage'], 2, ".", ""));
 $HTML .= '<tr>
-<td class="text-left">'. $drug_form.'.&nbsp; '.$pres['drug'].'&nbsp; '.$qtyz.' mg</td>
+<td class="text-left">'. $drug_form.'.&nbsp; '.$pres['drug'].'&nbsp; '.$qtyz.' '.$units.'</td>
 <td class="text-left">';
   $times = explode('-',$pres['drug_intervals']);
   $time1 = $times[0];
@@ -291,15 +293,17 @@ $(".bs-example-modal-sm .modal-content:first").remove();
  		  foreach($prescription as $pres) {
 		  $results_dr = sqlStatement($qry_dr, array($pres['drug_id']));
 $qtyz = str_replace(".00", "", (string)number_format ($pres['dosage'], 2, ".", ""));
+if($pres['unit']==7){ $units= 'mcg';}
+else {$units='mg';}
  if($pres['form'] == 1) { $drug_form = 'TAB'; }
 			else if($pres['form'] == 2) { $drug_form = 'SYR'; }
 			else if($pres['form'] == 3) { $drug_form = 'INJ'; }
 			if($pres['form'] == 3)
 			{
-		  $HTML .= $drug_form.'.&nbsp;'. $pres['drug'] .' &nbsp;'.$qtyz.'mg &nbsp;&nbsp;';
+		  $HTML .= $drug_form.'.&nbsp;'. $pres['drug'] .' &nbsp;'.$qtyz.' &nbsp;'.$units.' &nbsp;&nbsp;';
 			}else
 			{
-			$HTML .= $drug_form.'.&nbsp;'. $pres['drug'] .' &nbsp;'.$qtyz.'mg &nbsp;:&nbsp;';	
+			$HTML .= $drug_form.'.&nbsp;'. $pres['drug'] .' &nbsp;'.$qtyz.' &nbsp;'.$units.' &nbsp;:&nbsp;';	
 			}
   $times = explode('-',$pres['drug_intervals']);
   $time1 = $times[0];
